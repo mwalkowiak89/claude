@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wyniki z QC - Podgląd zakładki</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #f5f7fa;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f8fafc;
+            --bg-header: #eef2f6;
+            --accent-blue: #2563eb;
+            --accent-blue-light: #dbeafe;
+            --accent-orange: #ea580c;
+            --accent-orange-light: #fff7ed;
+            --accent-green: #16a34a;
+            --accent-green-light: #dcfce7;
+            --accent-red: #dc2626;
+            --accent-red-light: #fef2f2;
+            --accent-purple: #7c3aed;
+            --accent-purple-light: #f3e8ff;
+            --accent-yellow: #ca8a04;
+            --accent-yellow-light: #fef9c3;
+            --accent-cyan: #0891b2;
+            --accent-cyan-light: #cffafe;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container { max-width: 1800px; margin: 0 auto; }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 14px;
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .logo h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo span { color: var(--accent-cyan); }
+
+        .badge {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .badge-cyan {
+            background: var(--accent-cyan-light);
+            color: var(--accent-cyan);
+        }
+
+        .main-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            background: var(--bg-card);
+            padding: 6px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .main-tab {
+            padding: 12px 24px;
+            border: none;
+            background: transparent;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .main-tab:hover { background: var(--bg-main); color: var(--text-primary); }
+        .main-tab.active { background: var(--accent-cyan); color: white; }
+
+        .upload-zone {
+            background: var(--bg-card);
+            border: 2px dashed var(--border-color);
+            border-radius: 16px;
+            padding: 36px;
+            text-align: center;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .upload-zone:hover {
+            border-color: var(--accent-cyan);
+            background: var(--accent-cyan-light);
+        }
+
+        .upload-icon { font-size: 42px; margin-bottom: 12px; }
+        .upload-zone h3 { font-size: 17px; margin-bottom: 6px; font-weight: 600; }
+        .upload-zone p { color: var(--text-secondary); font-size: 14px; }
+
+        .qc-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 24px;
+        }
+
+        .sidebar {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            height: fit-content;
+            max-height: calc(100vh - 250px);
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .sidebar h2 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .report-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .report-item {
+            background: var(--bg-main);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .report-item:hover {
+            border-color: var(--accent-cyan);
+            transform: translateX(4px);
+        }
+
+        .report-item.active {
+            border-color: var(--accent-cyan);
+            background: var(--accent-cyan-light);
+        }
+
+        .report-item .model-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 4px;
+        }
+
+        .report-item .report-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .report-item .sample-count {
+            font-size: 11px;
+            color: var(--accent-purple);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            padding: 18px 24px;
+            background: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            padding: 20px 24px;
+        }
+
+        .info-item {
+            background: var(--bg-main);
+            padding: 14px;
+            border-radius: 10px;
+        }
+
+        .info-item .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .info-item .value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .info-item .value.highlight-cyan { color: var(--accent-cyan); }
+        .info-item .value.highlight-green { color: var(--accent-green); }
+        .info-item .value.highlight-orange { color: var(--accent-orange); }
+
+        .table-wrapper { overflow-x: auto; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+
+        th {
+            text-align: center;
+            padding: 12px 8px;
+            background: var(--bg-header);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        tr:hover td { background: var(--bg-main); }
+
+        .col-reb { background: rgba(22, 163, 74, 0.05); }
+        .col-comp { background: rgba(234, 88, 12, 0.05); }
+        .col-reb-header { background: var(--accent-green-light) !important; color: var(--accent-green) !important; }
+        .col-comp-header { background: var(--accent-orange-light) !important; color: var(--accent-orange) !important; }
+
+        .cell-ok { background: rgba(22, 163, 74, 0.15) !important; color: var(--accent-green); font-weight: 600; }
+        .cell-warning { background: rgba(202, 138, 4, 0.15) !important; color: var(--accent-yellow); font-weight: 600; }
+        .cell-error { background: rgba(220, 38, 38, 0.15) !important; color: var(--accent-red); font-weight: 600; }
+
+        .velocity-cell {
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .spec-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .spec-target { font-size: 14px; font-weight: 700; }
+        .spec-tol { font-size: 10px; color: var(--text-secondary); }
+
+        .sample-header {
+            font-size: 10px;
+            min-width: 50px;
+        }
+
+        .stats-row td {
+            background: var(--accent-blue-light) !important;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding: 20px 24px;
+        }
+
+        .stat-card {
+            background: var(--bg-main);
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-card .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        .stat-card .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .stat-card.green .stat-value { color: var(--accent-green); }
+        .stat-card.orange .stat-value { color: var(--accent-orange); }
+        .stat-card.red .stat-value { color: var(--accent-red); }
+
+        .btn-export {
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-export:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .metadata-section {
+            padding: 20px 24px;
+        }
+
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+        }
+
+        .metadata-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: var(--bg-main);
+            border-radius: 8px;
+        }
+
+        .metadata-item .key {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .metadata-item .val {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .chart-placeholder {
+            height: 200px;
+            background: linear-gradient(135deg, var(--bg-main), var(--accent-cyan-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin: 20px 24px;
+        }
+
+        .date-range-picker {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 16px 24px;
+            background: var(--bg-main);
+            border-radius: 12px;
+            margin: 0 24px 20px;
+        }
+
+        .date-range-picker label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .date-range-picker input {
+            padding: 8px 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+        }
+
+        .date-range-picker input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">QC</div>
+                <h1>Wyniki z <span>QC</span> - Podgląd</h1>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <button class="btn-export">📥 Eksportuj dane</button>
+                <button class="btn-export">📤 Importuj CSV</button>
+                <span class="badge badge-cyan">20 próbek</span>
+            </div>
+        </header>
+
+        <!-- Tabs symulacja -->
+        <div class="main-tabs">
+            <button class="main-tab">📁 Konfiguracja INI</button>
+            <button class="main-tab">📋 Specyfikacja Modeli</button>
+            <button class="main-tab">⚖️ Porównanie INI vs Spec</button>
+            <button class="main-tab active">📊 Wyniki z QC</button>
+        </div>
+
+        <!-- Upload zone -->
+        <div class="upload-zone">
+            <div class="upload-icon">📊</div>
+            <h3>Przeciągnij pliki CSV z wynikami QC lub kliknij aby wybrać</h3>
+            <p>Format: raporty D/F (Damping Force) z maszyny testowej</p>
+        </div>
+
+        <!-- Main layout -->
+        <div class="qc-layout">
+            <!-- Sidebar z listą raportów -->
+            <aside class="sidebar">
+                <h2>📋 Zaimportowane raporty</h2>
+                <div class="report-list">
+                    <div class="report-item active">
+                        <div class="model-number">3WA 413 031 R</div>
+                        <div class="report-meta">VW | FRT (przedni)</div>
+                        <div class="sample-count">20 próbek | 01.10 - 08.12.2025</div>
+                    </div>
+                    <div class="report-item">
+                        <div class="model-number">1EA 413 031 AE</div>
+                        <div class="report-meta">VW | FRT</div>
+                        <div class="sample-count">15 próbek | 15.11 - 05.12.2025</div>
+                    </div>
+                    <div class="report-item">
+                        <div class="model-number">5Q0 413 031 GL</div>
+                        <div class="report-meta">VW | RR (tylny)</div>
+                        <div class="sample-count">12 próbek | 20.11 - 01.12.2025</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Content area -->
+            <div class="content-area">
+                <!-- Info header -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3>📊 3WA 413 031 R - Wyniki testów D/F</h3>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-export" style="font-size: 12px; padding: 6px 12px;">🗑️ Usuń raport</button>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="label">Model</div>
+                            <div class="value highlight-cyan">3WA 413 031 R</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Producent / Typ</div>
+                            <div class="value">VW / FRT</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Liczba próbek</div>
+                            <div class="value highlight-green">20</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Zakres dat</div>
+                            <div class="value">01.10 - 08.12.2025</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Avg Gas Reaction</div>
+                            <div class="value">211.0 N</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Avg Seal Friction</div>
+                            <div class="value">33.6 N</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Avg Temperature</div>
+                            <div class="value">18.5°C</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Operatorzy</div>
+                            <div class="value" style="font-size: 11px;">LABA, KAPTUR, A.NADOLNA...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statystyki -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3>📈 Statystyki ogólne</h3>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card green">
+                            <div class="stat-value">94%</div>
+                            <div class="stat-label">W tolerancji</div>
+                        </div>
+                        <div class="stat-card orange">
+                            <div class="stat-value">4%</div>
+                            <div class="stat-label">Na granicy</div>
+                        </div>
+                        <div class="stat-card red">
+                            <div class="stat-value">2%</div>
+                            <div class="stat-label">Poza tolerancją</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">1.42</div>
+                            <div class="stat-label">Cpk (średni)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtr dat -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3>🔍 Filtrowanie</h3>
+                    </div>
+                    <div class="date-range-picker">
+                        <label>Od:</label>
+                        <input type="date" value="2025-10-01">
+                        <label>Do:</label>
+                        <input type="date" value="2025-12-08">
+                        <button class="btn-export" style="margin-left: auto;">Zastosuj filtr</button>
+                    </div>
+                </div>
+
+                <!-- Tabela REBOUND -->
+                <div class="section">
+                    <div class="section-header" style="background: var(--accent-green-light);">
+                        <h3 style="color: var(--accent-green);">⬆️ REBOUND (Odbicie)</h3>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Velocity</th>
+                                    <th>SPEC</th>
+                                    <th>TOL</th>
+                                    <th class="sample-header">1</th>
+                                    <th class="sample-header">2</th>
+                                    <th class="sample-header">3</th>
+                                    <th class="sample-header">4</th>
+                                    <th class="sample-header">5</th>
+                                    <th class="sample-header">...</th>
+                                    <th class="sample-header">20</th>
+                                    <th style="background: var(--accent-blue-light); color: var(--accent-blue);">AVE</th>
+                                    <th style="background: var(--accent-green-light); color: var(--accent-green);">MAX</th>
+                                    <th style="background: var(--accent-red-light); color: var(--accent-red);">MIN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="velocity-cell">0.050</td>
+                                    <td><div class="spec-cell"><span class="spec-target">135</span></div></td>
+                                    <td><span class="spec-tol">±40</span></td>
+                                    <td class="cell-ok">123.2</td>
+                                    <td class="cell-ok">126.4</td>
+                                    <td class="cell-ok">127.4</td>
+                                    <td class="cell-ok">136.6</td>
+                                    <td class="cell-ok">129.2</td>
+                                    <td>...</td>
+                                    <td class="cell-ok">124.4</td>
+                                    <td class="stats-row">130.6</td>
+                                    <td class="cell-ok">138.4</td>
+                                    <td class="cell-ok">119.3</td>
+                                </tr>
+                                <tr>
+                                    <td class="velocity-cell">0.090</td>
+                                    <td><div class="spec-cell"><span class="spec-target">255</span></div></td>
+                                    <td><span class="spec-tol">±45</span></td>
+                                    <td class="cell-ok">244.1</td>
+                                    <td class="cell-ok">238.2</td>
+                                    <td class="cell-ok">241.5</td>
+                                    <td class="cell-ok">255.3</td>
+                                    <td class="cell-ok">245.9</td>
+                                    <td>...</td>
+                                    <td class="cell-ok">240.4</td>
+                                    <td class="stats-row">248.9</td>
+                                    <td class="cell-ok">261.0</td>
+                                    <td class="cell-warning">215.0</td>
+                                </tr>
+                                <tr>
+                                    <td class="velocity-cell">0.130</td>
+                                    <td><div class="spec-cell"><span class="spec-target">410</span></div></td>
+                                    <td><span class="spec-tol">±65</span></td>
+                                    <td class="cell-ok">395.9</td>
+                                    <td class="cell-ok">377.3</td>
+                                    <td class="cell-ok">387.5</td>
+                                    <td class="cell-ok">394.3</td>
+                                    <td class="cell-ok">389.8</td>
+                                    <td>...</td>
+                                    <td class="cell-ok">377.1</td>
+                                    <td class="stats-row">395.7</td>
+                                    <td class="cell-ok">408.0</td>
+                                    <td class="cell-error">339.0</td>
+                                </tr>
+                                <tr>
+                                    <td class="velocity-cell">0.260</td>
+                                    <td><div class="spec-cell"><span class="spec-target">695</span></div></td>
+                                    <td><span class="spec-tol">±70</span></td>
+                                    <td class="cell-ok">665.2</td>
+                                    <td class="cell-ok">670.3</td>
+                                    <td class="cell-ok">662.6</td>
+                                    <td class="cell-ok">648.0</td>
+                                    <td class="cell-ok">655.1</td>
+                                    <td>...</td>
+                                    <td class="cell-ok">638.9</td>
+                                    <td class="stats-row">670.1</td>
+                                    <td class="cell-ok">684.5</td>
+                                    <td class="cell-warning">624.0</td>
+                                </tr>
+                                <tr>
+                                    <td class="velocity-cell">0.390</td>
+                                    <td><div class="spec-cell"><span class="spec-target">830</span></div></td>
+                                    <td><span class="spec-tol">±85</span></td>
+                                    <td class="cell-ok">811.2</td>
+                                    <td class="cell-ok">819.4</td>
+                                    <td class="cell-ok">806.6</td>
+                                    <td class="cell-ok">779.2</td>
+                                    <td class="cell-ok">791.7</td>
+                                    <td>...</td>
+                                    <td class="cell-ok">768.8</td>
+                                    <td class="stats-row">811.3</td>
+                                    <td class="cell-ok">832.5</td>
+                                    <td class="cell-warning">766.6</td>
+                                </tr>
+                                <tr>
+                                    <td class="velocity-cell">0.520</td>
+                                    <td><div class="spec-cell"><span class="spec-target">950</span></div></td>
+                                    <td><span class="spec-tol">±95</span></td>
+                                    <td class="cell-ok">943.8</td>
+                                    <td class="cell-ok">947.4</td>
+                                    <td class="cell-ok">933.3</td>
+                                    <td class="cell-ok">902.9</td>
+                                    <td class="cell-ok">917.3</td>
+                                    <td>...</td>
+                                    <td class="cell-ok">889.5</td>
+                                    <td class="stats-row">940.5</td>
+                                    <td class="cell-ok">963.7</td>
+                                    <td class="cell-ok">899.6</td>
+                                </tr>
+                                <tr>
+                                    <td class="velocity-cell">1.040</td>
+                                    <td><div class="spec-cell"><span class="spec-target">1515</span></div></td>
+                                    <td><span class="spec-tol">±155</span></td>
+                                    <td class="cell-ok">1516.1</td>
+                                    <td class="cell-ok">1521.3</td>
+                                    <td class="cell-ok">1468.8</td>
+                                    <td class="cell-ok">1457.5</td>
+                                    <td class="cell-ok">1462.5</td>
+                                    <td>...</td>
+                                    <td class="cell-ok">1434.4</td>
+                                    <td class="stats-row">1498.2</td>
+                                    <td class="cell-ok">1524.2</td>
+                                    <td class="cell-ok">1452.5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tabela COMPRESSION -->
+                <div class="section">
+                    <div class="section-header" style="background: var(--accent-orange-light);">
+                        <h3 style="color: var(--accent-orange);">⬇️ COMPRESSION (Ściskanie)</h3>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Velocity</th>
+                                    <th>SPEC</th>
+                                    <th>TOL</th>
+                                    <th class="sample-header">1</th>
+                                    <th class="sample-header">2</th>
+                                    <th class="sample-header">3</th>
+                                    <th class="sample-header">4</th>
+                                    <th class="sample-header">5</th>
+                                    <th class="sample-header">...</th>
+                                    <th class="sample-header">20</th>
+                                    <th style="background: var(--accent-blue-light); color: var(--accent-blue);">AVE</th>
+                                    <th style="background: var(--accent-green-light); color: var(--accent-green);">MAX</th>
+                                    <th style="background: var(--accent-red-light); color: var(--accent-red);">MIN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="velocity-cell">0.050</td>
+                                    <td><div class="spec-cell"><span class="spec-target">270</span></div></td>
+                                    <td><span class="spec-tol">±50</span></td>
+                                    <td class="cell-ok">263.2</td>
+                                    <td class="cell-ok">255.3</td>
+                                    <td class="cell-ok">262.2</td>
+                                    <td class="cell-ok">257.9</td>
+                                    <td class="cell-ok">266.3</td>
+                                    <td>...</td>
+                                    <td class="cell-warning">226.9</td>
+                                    <td class="stats-row">264.0</td>
+                                    <td class="cell-ok">281.3</td>
+                                    <td class="cell-warning">226.9</td>
+                                </tr>
+                                <tr>
+                                    <td class="velocity-cell">0.090</td>
+                                    <td><div class="spec-cell"><span class="spec-target">375</span></div></td>
+                                    <td><span class="spec-tol">±65</span></td>
+                                    <td class="cell-ok">419.9</td>
+                                    <td class="cell-ok">343.9</td>
+                                    <td class="cell-ok">391.5</td>
+                                    <td class="cell-ok">424.9</td>
+                                    <td class="cell-ok">412.3</td>
+                                    <td>...</td>
+                                    <td class="cell-error">165.5</td>
+                                    <td class="stats-row">406.3</td>
+                                    <td class="cell-ok">430.0</td>
+                                    <td class="cell-error">165.5</td>
+                                </tr>
+                                <tr>
+                                    <td class="velocity-cell">0.130</td>
+                                    <td><div class="spec-cell"><span class="spec-target">430</span></div></td>
+                                    <td><span class="spec-tol">±65</span></td>
+                                    <td class="cell-ok">473.9</td>
+                                    <td class="cell-ok">395.3</td>
+                                    <td class="cell-ok">451.4</td>
+                                    <td class="cell-ok">478.9</td>
+                                    <td class="cell-ok">468.3</td>
+                                    <td>...</td>
+                                    <td class="cell-ok">422.8</td>
+                                    <td class="stats-row">462.1</td>
+                                    <td class="cell-ok">484.2</td>
+                                    <td class="cell-ok">394.2</td>
+                                </tr>
+                                <tr>
+                                    <td class="velocity-cell">0.260</td>
+                                    <td><div class="spec-cell"><span class="spec-target">540</span></div></td>
+                                    <td><span class="spec-tol">±55</span></td>
+                                    <td class="cell-ok">588.6</td>
+                                    <td class="cell-ok">535.5</td>
+                                    <td class="cell-ok">573.5</td>
+                                    <td class="cell-ok">586.0</td>
+                                    <td class="cell-ok">579.7</td>
+                                    <td>...</td>
+                                    <td class="cell-ok">545.8</td>
+                                    <td class="stats-row">581.1</td>
+                                    <td class="cell-warning">596.9</td>
+                                    <td class="cell-warning">506.8</td>
+                                </tr>
+                                <tr>
+                                    <td class="velocity-cell">0.390</td>
+                                    <td><div class="spec-cell"><span class="spec-target">635</span></div></td>
+                                    <td><span class="spec-tol">±65</span></td>
+                                    <td class="cell-ok">682.8</td>
+                                    <td class="cell-ok">639.6</td>
+                                    <td class="cell-ok">666.7</td>
+                                    <td class="cell-ok">672.6</td>
+                                    <td class="cell-ok">667.5</td>
+                                    <td>...</td>
+                                    <td class="cell-ok">648.5</td>
+                                    <td class="stats-row">673.7</td>
+                                    <td class="cell-warning">689.4</td>
+                                    <td class="cell-ok">602.8</td>
+                                </tr>
+                                <tr>
+                                    <td class="velocity-cell">0.520</td>
+                                    <td><div class="spec-cell"><span class="spec-target">725</span></div></td>
+                                    <td><span class="spec-tol">±75</span></td>
+                                    <td class="cell-ok">776.3</td>
+                                    <td class="cell-ok">729.6</td>
+                                    <td class="cell-ok">752.8</td>
+                                    <td class="cell-ok">770.5</td>
+                                    <td class="cell-ok">754.6</td>
+                                    <td>...</td>
+                                    <td class="cell-ok">738.5</td>
+                                    <td class="stats-row">763.1</td>
+                                    <td class="cell-ok">776.3</td>
+                                    <td class="cell-ok">689.0</td>
+                                </tr>
+                                <tr>
+                                    <td class="velocity-cell">1.040</td>
+                                    <td><div class="spec-cell"><span class="spec-target">1110</span></div></td>
+                                    <td><span class="spec-tol">±115</span></td>
+                                    <td class="cell-ok">1163.8</td>
+                                    <td class="cell-ok">1104.3</td>
+                                    <td class="cell-ok">1137.0</td>
+                                    <td class="cell-ok">1156.8</td>
+                                    <td class="cell-ok">1135.3</td>
+                                    <td>...</td>
+                                    <td class="cell-ok">1118.1</td>
+                                    <td class="stats-row">1143.4</td>
+                                    <td class="cell-ok">1163.8</td>
+                                    <td class="cell-ok">1062.0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Wykres placeholder -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3>📉 Wykres trendu (opcjonalnie)</h3>
+                    </div>
+                    <div class="chart-placeholder">
+                        [Tu będzie wykres: Siła vs Prędkość lub Trend czasowy]
+                    </div>
+                </div>
+
+                <!-- Metadane próbek -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3>📋 Metadane próbek</h3>
+                    </div>
+                    <div class="metadata-section">
+                        <div class="metadata-grid">
+                            <div class="metadata-item">
+                                <span class="key">Próbka #1</span>
+                                <span class="val">03.12.2025 | I ZM | LABA</span>
+                            </div>
+                            <div class="metadata-item">
+                                <span class="key">Próbka #2</span>
+                                <span class="val">04.12.2025 | III ZM | KAPTUR</span>
+                            </div>
+                            <div class="metadata-item">
+                                <span class="key">Próbka #3</span>
+                                <span class="val">08.12.2025 | II ZM | A.NADOLNA</span>
+                            </div>
+                            <div class="metadata-item">
+                                <span class="key">Próbka #4</span>
+                                <span class="val">24.11.2025 | II ZM | FUS</span>
+                            </div>
+                            <div class="metadata-item">
+                                <span class="key">Próbka #5</span>
+                                <span class="val">11.11.2025 | III ZM | KAPTUR</span>
+                            </div>
+                            <div class="metadata-item">
+                                <span class="key">...</span>
+                                <span class="val">kolejne próbki...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
