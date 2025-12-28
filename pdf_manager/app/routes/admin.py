@@ -2,7 +2,7 @@ import os
 import uuid
 from datetime import datetime
 from functools import wraps
-from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app, abort
+from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app, abort, jsonify
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 from app.models import db, User, File, UserFileAccess
@@ -288,25 +288,92 @@ def manage_access(file_id):
     )
 
 
-@admin_bp.route('/access')
+@admin_bp.route('/access', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def access_overview():
-    """Overview of all file access permissions."""
+    """Bulk access management interface."""
+    if request.method == 'POST':
+        # Get selected users and files
+        user_ids = request.form.getlist('users', type=int)
+        file_ids = request.form.getlist('files', type=int)
+
+        if not user_ids or not file_ids:
+            flash('Musisz wybrać co najmniej jednego użytkownika i jeden plik.', 'warning')
+            return redirect(url_for('admin.access_overview'))
+
+        # Count how many new permissions were added
+        added_count = 0
+        skipped_count = 0
+
+        for user_id in user_ids:
+            for file_id in file_ids:
+                # Check if access already exists
+                existing = UserFileAccess.query.filter_by(
+                    user_id=user_id,
+                    file_id=file_id
+                ).first()
+
+                if existing:
+                    skipped_count += 1
+                else:
+                    access = UserFileAccess(user_id=user_id, file_id=file_id)
+                    db.session.add(access)
+                    added_count += 1
+
+        db.session.commit()
+
+        if added_count > 0:
+            flash(f'Dodano {added_count} nowych uprawnień.', 'success')
+        if skipped_count > 0:
+            flash(f'Pominięto {skipped_count} istniejących uprawnień.', 'info')
+
+        return redirect(url_for('admin.access_overview'))
+
+    # GET request - display the form
     files = File.query.order_by(File.filename).all()
     users = User.query.filter_by(is_admin=False).order_by(User.email).all()
 
-    # Create access matrix
-    access_matrix = {}
+    # Add file count for each user
+    user_file_counts = {}
+    for user in users:
+        user_file_counts[user.id] = user.file_access.count()
+
+    # Add user count for each file
+    file_user_counts = {}
     for file in files:
-        access_matrix[file.id] = set()
-        for access in file.user_access:
-            access_matrix[file.id].add(access.user_id)
+        file_user_counts[file.id] = file.user_access.count()
 
     return render_template(
         'admin/access_overview.html',
-        title='Przegląd uprawnień',
+        title='Zarządzaj uprawnieniami',
         files=files,
         users=users,
-        access_matrix=access_matrix
+        user_file_counts=user_file_counts,
+        file_user_counts=file_user_counts
     )
+
+
+@admin_bp.route('/api/users/search')
+@login_required
+@admin_required
+def api_search_users():
+    """API endpoint for live user search."""
+    query = request.args.get('q', '').strip().lower()
+
+    users_query = User.query.filter_by(is_admin=False)
+
+    if query:
+        users_query = users_query.filter(User.email.ilike(f'%{query}%'))
+
+    users = users_query.order_by(User.email).all()
+
+    result = []
+    for user in users:
+        result.append({
+            'id': user.id,
+            'email': user.email,
+            'file_count': user.file_access.count()
+        })
+
+    return jsonify(result)
