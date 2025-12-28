@@ -1,8 +1,8 @@
 import os
 import logging
 from datetime import datetime
-from flask import Flask, request
-from flask_login import LoginManager
+from flask import Flask, request, redirect, url_for
+from flask_login import LoginManager, current_user
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from config import Config
@@ -69,6 +69,29 @@ def create_app(config_class=Config):
     @app.context_processor
     def utility_processor():
         return {'now': datetime.utcnow}
+
+    # Enforce 2FA setup for admins
+    @app.before_request
+    def enforce_2fa_for_admins():
+        # Skip for static files and certain endpoints
+        if request.endpoint and request.endpoint.startswith('static'):
+            return None
+
+        # Allow these endpoints without 2FA enforcement
+        allowed_endpoints = [
+            'auth.setup_2fa',
+            'auth.logout',
+            'auth.login',
+            'auth.verify_2fa',
+            'auth.cancel_2fa_login'
+        ]
+
+        if request.endpoint in allowed_endpoints:
+            return None
+
+        # Check if logged in admin needs to set up 2FA
+        if current_user.is_authenticated and current_user.requires_2fa_setup():
+            return redirect(url_for('auth.setup_2fa'))
 
     # Create database tables
     with app.app_context():

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card login-card">
+            <div class="card-header text-center text-white">
+                <i class="bi bi-shield-lock display-4"></i>
+                <h3 class="mt-2 mb-0">Weryfikacja dwuskładnikowa</h3>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-center text-muted mb-4">
+                    Wpisz 6-cyfrowy kod z aplikacji uwierzytelniającej dla konta:<br>
+                    <strong>{{ user_email }}</strong>
+                </p>
+
+                <form method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-3">
+                        <label for="code" class="form-label">
+                            <i class="bi bi-key me-1"></i> Kod weryfikacyjny
+                        </label>
+                        {{ form.code(class="form-control form-control-lg text-center font-monospace" + (" is-invalid" if form.code.errors else ""),
+                                     placeholder="000 000",
+                                     autocomplete="one-time-code",
+                                     autofocus=true,
+                                     maxlength=8) }}
+                        {% if form.code.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.code.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="form-check">
+                            {{ form.use_backup(class="form-check-input") }}
+                            <label class="form-check-label" for="use_backup">
+                                Użyj kodu zapasowego
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        {{ form.submit(class="btn btn-primary btn-lg") }}
+                        <a href="{{ url_for('auth.cancel_2fa_login') }}" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1"></i> Wróć do logowania
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <small class="text-muted">
+                <i class="bi bi-info-circle me-1"></i>
+                Nie masz dostępu do aplikacji? Użyj jednego z kodów zapasowych.
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}

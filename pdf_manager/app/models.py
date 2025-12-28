@@ -1,7 +1,10 @@
+import json
+import secrets
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+import pyotp
 
 db = SQLAlchemy()
 
@@ -35,6 +38,11 @@ class User(UserMixin, db.Model):
     preferred_language = db.Column(db.String(5), default='pl', nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
+    # Two-Factor Authentication fields
+    otp_secret = db.Column(db.String(32), nullable=True)
+    otp_enabled = db.Column(db.Boolean, default=False, nullable=False)
+    backup_codes = db.Column(db.Text, nullable=True)  # JSON array of hashed codes
+
     # Relationship to files through access table
     accessible_files = db.relationship(
         'File',
@@ -66,6 +74,89 @@ class User(UserMixin, db.Model):
             if code == self.preferred_language:
                 return name
         return 'Polski'
+
+    # ===== Two-Factor Authentication Methods =====
+
+    def generate_otp_secret(self):
+        """Generate a new OTP secret for 2FA setup."""
+        self.otp_secret = pyotp.random_base32()
+        return self.otp_secret
+
+    def get_totp(self):
+        """Get TOTP object for this user."""
+        if not self.otp_secret:
+            return None
+        return pyotp.TOTP(self.otp_secret)
+
+    def get_otp_uri(self):
+        """Get the OTP provisioning URI for QR code generation."""
+        totp = self.get_totp()
+        if not totp:
+            return None
+        return totp.provisioning_uri(
+            name=self.email,
+            issuer_name='PDF Manager'
+        )
+
+    def verify_otp(self, code):
+        """Verify an OTP code."""
+        totp = self.get_totp()
+        if not totp:
+            return False
+        # Allow 1 window before and after for clock skew
+        return totp.verify(code, valid_window=1)
+
+    def enable_2fa(self):
+        """Enable 2FA for this user."""
+        if self.otp_secret:
+            self.otp_enabled = True
+            return True
+        return False
+
+    def disable_2fa(self):
+        """Disable 2FA for this user."""
+        self.otp_enabled = False
+        self.otp_secret = None
+        self.backup_codes = None
+
+    def generate_backup_codes(self, count=10):
+        """Generate backup codes for 2FA recovery."""
+        codes = []
+        hashed_codes = []
+        for _ in range(count):
+            # Generate 8-character alphanumeric code
+            code = secrets.token_hex(4).upper()
+            codes.append(code)
+            hashed_codes.append(generate_password_hash(code))
+
+        self.backup_codes = json.dumps(hashed_codes)
+        return codes  # Return plain codes for display to user
+
+    def verify_backup_code(self, code):
+        """Verify and consume a backup code."""
+        if not self.backup_codes:
+            return False
+
+        hashed_codes = json.loads(self.backup_codes)
+        code = code.upper().replace('-', '').replace(' ', '')
+
+        for i, hashed in enumerate(hashed_codes):
+            if check_password_hash(hashed, code):
+                # Remove used code
+                hashed_codes.pop(i)
+                self.backup_codes = json.dumps(hashed_codes)
+                return True
+        return False
+
+    def get_backup_codes_count(self):
+        """Get the number of remaining backup codes."""
+        if not self.backup_codes:
+            return 0
+        return len(json.loads(self.backup_codes))
+
+    def requires_2fa_setup(self):
+        """Check if admin user needs to set up 2FA."""
+        return self.is_admin and not self.otp_enabled
 
     def __repr__(self):
         return f'<User {self.email}>'

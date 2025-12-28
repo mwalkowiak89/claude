@@ -109,3 +109,36 @@ class EmailTemplateForm(FlaskForm):
         DataRequired(message='Treść jest wymagana')
     ])
     submit = SubmitField('Zapisz szablon')
+
+
+# ===== Two-Factor Authentication Forms =====
+
+class TwoFactorVerifyForm(FlaskForm):
+    """Form for verifying 2FA code during login."""
+    code = StringField('Kod weryfikacyjny', validators=[
+        DataRequired(message='Kod jest wymagany'),
+        Length(min=6, max=8, message='Kod musi mieć 6-8 znaków')
+    ])
+    use_backup = BooleanField('Użyj kodu zapasowego')
+    submit = SubmitField('Weryfikuj')
+
+
+class TwoFactorSetupForm(FlaskForm):
+    """Form for setting up 2FA."""
+    code = StringField('Kod z aplikacji', validators=[
+        DataRequired(message='Kod jest wymagany'),
+        Length(min=6, max=6, message='Kod musi mieć 6 cyfr')
+    ])
+    submit = SubmitField('Włącz 2FA')
+
+
+class TwoFactorDisableForm(FlaskForm):
+    """Form for disabling 2FA."""
+    password = PasswordField('Hasło', validators=[
+        DataRequired(message='Hasło jest wymagane')
+    ])
+    code = StringField('Kod z aplikacji', validators=[
+        DataRequired(message='Kod jest wymagany'),
+        Length(min=6, max=6, message='Kod musi mieć 6 cyfr')
+    ])
+    submit = SubmitField('Wyłącz 2FA')
