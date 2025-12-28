@@ -377,3 +377,52 @@ def api_search_users():
         })
 
     return jsonify(result)
+
+
+@admin_bp.route('/api/user/<int:user_id>/files')
+@login_required
+@admin_required
+def api_user_files(user_id):
+    """API endpoint to get files a user has access to."""
+    user = User.query.get_or_404(user_id)
+
+    file_ids = [access.file_id for access in user.file_access]
+
+    return jsonify({'file_ids': file_ids})
+
+
+@admin_bp.route('/api/users/files')
+@login_required
+@admin_required
+def api_users_files():
+    """API endpoint to get files for multiple users (intersection)."""
+    user_ids = request.args.getlist('user_ids', type=int)
+
+    if not user_ids:
+        return jsonify({'file_ids': [], 'common_file_ids': [], 'user_file_map': {}})
+
+    # Get file access for each user
+    user_file_map = {}
+    all_file_sets = []
+
+    for user_id in user_ids:
+        user = User.query.get(user_id)
+        if user:
+            file_ids = set(access.file_id for access in user.file_access)
+            user_file_map[user_id] = list(file_ids)
+            all_file_sets.append(file_ids)
+
+    # Find common files (intersection of all users' files)
+    if all_file_sets:
+        common_file_ids = list(set.intersection(*all_file_sets)) if len(all_file_sets) > 1 else list(all_file_sets[0])
+    else:
+        common_file_ids = []
+
+    # All files any selected user has access to (union)
+    all_file_ids = list(set.union(*all_file_sets)) if all_file_sets else []
+
+    return jsonify({
+        'file_ids': all_file_ids,
+        'common_file_ids': common_file_ids,
+        'user_file_map': user_file_map
+    })

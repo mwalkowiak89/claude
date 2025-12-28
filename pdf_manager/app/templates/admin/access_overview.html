@@ -15,12 +15,13 @@
 <form method="POST" id="accessForm">
     <div class="row g-4">
         <!-- Users Section -->
-        <div class="col-lg-6">
+        <div class="col-12 col-md-6">
             <div class="card h-100">
                 <div class="card-header bg-white">
                     <h5 class="mb-0">
                         <i class="bi bi-people me-2"></i>
                         Użytkownicy
+                        <span class="badge bg-secondary ms-2" id="usersTotal">{{ users|length }}</span>
                     </h5>
                 </div>
                 <div class="card-body">
@@ -35,14 +36,14 @@
                                    id="userSearch"
                                    placeholder="Szukaj użytkownika po email..."
                                    autocomplete="off">
-                            <button type="button" class="btn btn-outline-secondary" id="clearSearch">
+                            <button type="button" class="btn btn-outline-secondary" id="clearSearch" title="Wyczyść">
                                 <i class="bi bi-x-lg"></i>
                             </button>
                         </div>
                     </div>
 
                     <!-- Selection Buttons -->
-                    <div class="mb-3 d-flex gap-2">
+                    <div class="mb-3 d-flex gap-2 flex-wrap">
                         <button type="button" class="btn btn-sm btn-outline-primary" id="selectAllUsers">
                             <i class="bi bi-check-all me-1"></i> Zaznacz wszystkich
                         </button>
@@ -52,21 +53,21 @@
                     </div>
 
                     <!-- Users List -->
-                    <div class="users-list border rounded p-2" style="max-height: 400px; overflow-y: auto;">
+                    <div class="users-list border rounded" style="max-height: 400px; overflow-y: auto; overflow-x: auto;">
                         <div id="usersContainer">
                             {% for user in users %}
-                            <div class="form-check user-item py-2 px-2 border-bottom" data-email="{{ user.email.lower() }}">
-                                <input class="form-check-input user-checkbox"
+                            <div class="user-item d-flex align-items-center p-2 border-bottom" data-email="{{ user.email.lower() }}" data-user-id="{{ user.id }}">
+                                <input class="form-check-input user-checkbox me-3"
                                        type="checkbox"
                                        name="users"
                                        value="{{ user.id }}"
                                        id="user_{{ user.id }}">
-                                <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="user_{{ user.id }}">
-                                    <span>
+                                <label class="form-check-label flex-grow-1 d-flex justify-content-between align-items-center cursor-pointer" for="user_{{ user.id }}">
+                                    <span class="text-truncate me-2">
                                         <i class="bi bi-person me-1 text-muted"></i>
                                         {{ user.email }}
                                     </span>
-                                    <span class="badge bg-info">{{ user_file_counts[user.id] }} plików</span>
+                                    <span class="badge bg-info flex-shrink-0">{{ user_file_counts[user.id] }} plików</span>
                                 </label>
                             </div>
                             {% endfor %}
@@ -79,19 +80,20 @@
 
                     <!-- Selected Count -->
                     <div class="mt-2 text-muted small">
-                        Zaznaczono: <span id="selectedUsersCount" class="fw-bold">0</span> użytkowników
+                        Zaznaczono: <span id="selectedUsersCount" class="fw-bold text-primary">0</span> użytkowników
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Files Section -->
-        <div class="col-lg-6">
+        <div class="col-12 col-md-6">
             <div class="card h-100">
                 <div class="card-header bg-white">
                     <h5 class="mb-0">
                         <i class="bi bi-file-earmark-pdf me-2"></i>
                         Pliki PDF
+                        <span class="badge bg-secondary ms-2" id="filesTotal">{{ files|length }}</span>
                     </h5>
                 </div>
                 <div class="card-body">
@@ -106,14 +108,14 @@
                                    id="fileSearch"
                                    placeholder="Szukaj pliku..."
                                    autocomplete="off">
-                            <button type="button" class="btn btn-outline-secondary" id="clearFileSearch">
+                            <button type="button" class="btn btn-outline-secondary" id="clearFileSearch" title="Wyczyść">
                                 <i class="bi bi-x-lg"></i>
                             </button>
                         </div>
                     </div>
 
                     <!-- Selection Buttons -->
-                    <div class="mb-3 d-flex gap-2">
+                    <div class="mb-3 d-flex gap-2 flex-wrap">
                         <button type="button" class="btn btn-sm btn-outline-primary" id="selectAllFiles">
                             <i class="bi bi-check-all me-1"></i> Zaznacz wszystkie
                         </button>
@@ -122,23 +124,32 @@
                         </button>
                     </div>
 
+                    <!-- Legend -->
+                    <div class="mb-2 small">
+                        <span class="badge bg-success me-2"><i class="bi bi-check-circle me-1"></i>Istniejący dostęp</span>
+                        <span class="badge bg-primary"><i class="bi bi-plus-circle me-1"></i>Nowe uprawnienie</span>
+                    </div>
+
                     <!-- Files List -->
-                    <div class="files-list border rounded p-2" style="max-height: 400px; overflow-y: auto;">
+                    <div class="files-list border rounded" style="max-height: 400px; overflow-y: auto; overflow-x: auto;">
                         <div id="filesContainer">
                             {% for file in files %}
-                            <div class="form-check file-item py-2 px-2 border-bottom" data-filename="{{ file.filename.lower() }}">
-                                <input class="form-check-input file-checkbox"
+                            <div class="file-item d-flex align-items-center p-2 border-bottom" data-filename="{{ file.filename.lower() }}" data-file-id="{{ file.id }}">
+                                <input class="form-check-input file-checkbox me-3"
                                        type="checkbox"
                                        name="files"
                                        value="{{ file.id }}"
                                        id="file_{{ file.id }}">
-                                <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="file_{{ file.id }}">
-                                    <span>
+                                <label class="form-check-label flex-grow-1 d-flex justify-content-between align-items-center cursor-pointer" for="file_{{ file.id }}">
+                                    <span class="text-truncate me-2">
                                         <i class="bi bi-file-earmark-pdf-fill text-danger me-1"></i>
                                         {{ file.filename }}
                                         <span class="badge bg-secondary ms-1">v{{ file.version }}</span>
+                                        <span class="existing-badge d-none">
+                                            <i class="bi bi-check-circle-fill text-success ms-1" title="Użytkownik ma już dostęp"></i>
+                                        </span>
                                     </span>
-                                    <span class="badge bg-success">{{ file_user_counts[file.id] }} użytkowników</span>
+                                    <span class="badge bg-success flex-shrink-0">{{ file_user_counts[file.id] }} użytk.</span>
                                 </label>
                             </div>
                             {% endfor %}
@@ -151,7 +162,10 @@
 
                     <!-- Selected Count -->
                     <div class="mt-2 text-muted small">
-                        Zaznaczono: <span id="selectedFilesCount" class="fw-bold">0</span> plików
+                        Zaznaczono: <span id="selectedFilesCount" class="fw-bold text-primary">0</span> plików
+                        <span id="existingAccessInfo" class="ms-2 d-none">
+                            (<span id="existingAccessCount" class="text-success fw-bold">0</span> istniejących)
+                        </span>
                     </div>
                 </div>
             </div>
@@ -162,14 +176,14 @@
     <div class="card mt-4">
         <div class="card-body">
             <div class="row align-items-center">
-                <div class="col-md-8">
+                <div class="col-12 col-md-8 mb-3 mb-md-0">
                     <div id="summaryText" class="text-muted">
                         <i class="bi bi-info-circle me-1"></i>
                         Wybierz użytkowników i pliki, aby nadać uprawnienia.
                     </div>
                 </div>
-                <div class="col-md-4 text-end">
-                    <button type="submit" class="btn btn-primary btn-lg" id="submitBtn" disabled>
+                <div class="col-12 col-md-4 text-md-end">
+                    <button type="submit" class="btn btn-primary btn-lg w-100 w-md-auto" id="submitBtn" disabled>
                         <i class="bi bi-shield-plus me-2"></i>
                         Zapisz uprawnienia
                     </button>
@@ -198,6 +212,92 @@
 {% endif %}
 {% endblock %}
 
+{% block extra_css %}
+<style>
+.user-item, .file-item {
+    transition: background-color 0.15s ease;
+}
+
+.user-item:hover, .file-item:hover {
+    background-color: #f8f9fa;
+}
+
+.user-item:last-child, .file-item:last-child {
+    border-bottom: none !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.form-check-input:checked + .form-check-label {
+    font-weight: 500;
+}
+
+.users-list, .files-list {
+    background-color: #fff;
+}
+
+#summaryText strong {
+    color: #0d6efd;
+}
+
+/* Existing access styling */
+.file-item.has-existing-access {
+    background-color: rgba(25, 135, 84, 0.1);
+}
+
+.file-item.has-existing-access .existing-badge {
+    display: inline !important;
+}
+
+/* New access styling */
+.file-item.new-access {
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+.file-item.new-access::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #0d6efd;
+}
+
+.file-item {
+    position: relative;
+}
+
+/* Responsive fixes */
+@media (max-width: 767.98px) {
+    .users-list, .files-list {
+        max-height: 300px !important;
+    }
+
+    .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+/* Loading indicator */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+</style>
+{% endblock %}
+
 {% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -210,10 +310,121 @@ document.addEventListener('DOMContentLoaded', function() {
     const fileItems = document.querySelectorAll('.file-item');
     const selectedUsersCount = document.getElementById('selectedUsersCount');
     const selectedFilesCount = document.getElementById('selectedFilesCount');
+    const existingAccessCount = document.getElementById('existingAccessCount');
+    const existingAccessInfo = document.getElementById('existingAccessInfo');
     const summaryText = document.getElementById('summaryText');
     const submitBtn = document.getElementById('submitBtn');
     const noUsersMessage = document.getElementById('noUsersMessage');
     const noFilesMessage = document.getElementById('noFilesMessage');
+
+    // Store user file access data
+    let userFileMap = {};
+    let isLoading = false;
+
+    // Fetch existing permissions for selected users
+    async function fetchUserFiles() {
+        const selectedUserIds = Array.from(document.querySelectorAll('.user-checkbox:checked'))
+            .map(cb => cb.value);
+
+        if (selectedUserIds.length === 0) {
+            userFileMap = {};
+            updateFileHighlighting();
+            return;
+        }
+
+        try {
+            const params = selectedUserIds.map(id => `user_ids=${id}`).join('&');
+            const response = await fetch(`{{ url_for('admin.api_users_files') }}?${params}`);
+            const data = await response.json();
+            userFileMap = data.user_file_map;
+            updateFileHighlighting();
+        } catch (error) {
+            console.error('Error fetching user files:', error);
+        }
+    }
+
+    // Update file highlighting based on existing access
+    function updateFileHighlighting() {
+        const selectedUserIds = Array.from(document.querySelectorAll('.user-checkbox:checked'))
+            .map(cb => parseInt(cb.value));
+
+        // Collect all files that any selected user has access to
+        const existingFileIds = new Set();
+        selectedUserIds.forEach(userId => {
+            if (userFileMap[userId]) {
+                userFileMap[userId].forEach(fileId => existingFileIds.add(fileId));
+            }
+        });
+
+        let existingCount = 0;
+        let newCount = 0;
+
+        fileItems.forEach(item => {
+            const fileId = parseInt(item.dataset.fileId);
+            const checkbox = item.querySelector('.file-checkbox');
+            const isChecked = checkbox.checked;
+            const hasExistingAccess = existingFileIds.has(fileId);
+
+            // Remove all state classes
+            item.classList.remove('has-existing-access', 'new-access');
+
+            if (selectedUserIds.length > 0 && hasExistingAccess) {
+                item.classList.add('has-existing-access');
+                if (isChecked) {
+                    existingCount++;
+                }
+            }
+
+            if (isChecked && !hasExistingAccess && selectedUserIds.length > 0) {
+                item.classList.add('new-access');
+                newCount++;
+            }
+        });
+
+        // Update existing access counter
+        if (existingCount > 0) {
+            existingAccessCount.textContent = existingCount;
+            existingAccessInfo.classList.remove('d-none');
+        } else {
+            existingAccessInfo.classList.add('d-none');
+        }
+
+        return { existingCount, newCount };
+    }
+
+    // Auto-check files that users already have access to
+    function autoCheckExistingFiles() {
+        const selectedUserIds = Array.from(document.querySelectorAll('.user-checkbox:checked'))
+            .map(cb => parseInt(cb.value));
+
+        if (selectedUserIds.length === 0) {
+            return;
+        }
+
+        // Collect files that ALL selected users have access to (intersection)
+        let commonFileIds = null;
+        selectedUserIds.forEach(userId => {
+            if (userFileMap[userId]) {
+                const userFiles = new Set(userFileMap[userId]);
+                if (commonFileIds === null) {
+                    commonFileIds = userFiles;
+                } else {
+                    commonFileIds = new Set([...commonFileIds].filter(x => userFiles.has(x)));
+                }
+            }
+        });
+
+        // Auto-check common files
+        if (commonFileIds) {
+            fileItems.forEach(item => {
+                const fileId = parseInt(item.dataset.fileId);
+                const checkbox = item.querySelector('.file-checkbox');
+                if (commonFileIds.has(fileId)) {
+                    checkbox.checked = true;
+                }
+            });
+        }
+    }
 
     // Update counts and summary
     function updateCounts() {
@@ -223,13 +434,24 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedUsersCount.textContent = selectedUsers;
         selectedFilesCount.textContent = selectedFiles;
 
+        const { existingCount, newCount } = updateFileHighlighting();
+
         // Update summary text
         if (selectedUsers > 0 && selectedFiles > 0) {
-            const totalPermissions = selectedUsers * selectedFiles;
-            summaryText.innerHTML = `<i class="bi bi-check-circle text-success me-1"></i>
-                Nadasz dostęp <strong>${selectedUsers}</strong> użytkownikom do <strong>${selectedFiles}</strong> plików
-                (maks. <strong>${totalPermissions}</strong> nowych uprawnień).`;
-            submitBtn.disabled = false;
+            const maxNewPermissions = selectedUsers * selectedFiles - existingCount;
+            const actualNew = Math.max(0, maxNewPermissions);
+
+            if (actualNew > 0) {
+                summaryText.innerHTML = `<i class="bi bi-check-circle text-success me-1"></i>
+                    Nadasz dostęp <strong>${selectedUsers}</strong> użytkownikom do <strong>${selectedFiles}</strong> plików.
+                    <br><small class="text-muted">Nowych uprawnień: <strong class="text-primary">${actualNew}</strong>
+                    ${existingCount > 0 ? `, istniejących (pominiętych): <strong class="text-success">${existingCount}</strong>` : ''}</small>`;
+                submitBtn.disabled = false;
+            } else {
+                summaryText.innerHTML = `<i class="bi bi-info-circle text-warning me-1"></i>
+                    Wszyscy wybrani użytkownicy mają już dostęp do wybranych plików.`;
+                submitBtn.disabled = true;
+            }
         } else {
             summaryText.innerHTML = '<i class="bi bi-info-circle me-1"></i> Wybierz użytkowników i pliki, aby nadać uprawnienia.';
             submitBtn.disabled = true;
@@ -251,7 +473,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Show/hide no results message
         if (visibleCount === 0) {
             noUsersMessage.classList.remove('d-none');
         } else {
@@ -274,7 +495,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Show/hide no results message
         if (visibleCount === 0) {
             noFilesMessage.classList.remove('d-none');
         } else {
@@ -298,18 +518,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Select all users (only visible ones)
-    document.getElementById('selectAllUsers').addEventListener('click', function() {
+    document.getElementById('selectAllUsers').addEventListener('click', async function() {
         userItems.forEach(item => {
             if (!item.classList.contains('d-none')) {
                 item.querySelector('.user-checkbox').checked = true;
             }
         });
+        await fetchUserFiles();
+        autoCheckExistingFiles();
         updateCounts();
     });
 
     // Clear user selection
     document.getElementById('clearUsers').addEventListener('click', function() {
         userCheckboxes.forEach(cb => cb.checked = false);
+        userFileMap = {};
+        updateFileHighlighting();
         updateCounts();
     });
 
@@ -329,11 +553,19 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCounts();
     });
 
-    // Update counts when checkboxes change
-    userCheckboxes.forEach(cb => cb.addEventListener('change', updateCounts));
+    // Update on user checkbox change (with AJAX)
+    userCheckboxes.forEach(cb => {
+        cb.addEventListener('change', async function() {
+            await fetchUserFiles();
+            autoCheckExistingFiles();
+            updateCounts();
+        });
+    });
+
+    // Update on file checkbox change
     fileCheckboxes.forEach(cb => cb.addEventListener('change', updateCounts));
 
-    // Form submission confirmation
+    // Form submission
     document.getElementById('accessForm').addEventListener('submit', function(e) {
         const selectedUsers = document.querySelectorAll('.user-checkbox:checked').length;
         const selectedFiles = document.querySelectorAll('.file-checkbox:checked').length;
@@ -349,32 +581,4 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCounts();
 });
 </script>
-{% endblock %}
-
-{% block extra_css %}
-<style>
-.user-item, .file-item {
-    transition: background-color 0.15s ease;
-}
-
-.user-item:hover, .file-item:hover {
-    background-color: #f8f9fa;
-}
-
-.user-item:last-child, .file-item:last-child {
-    border-bottom: none !important;
-}
-
-.form-check-input:checked + .form-check-label {
-    font-weight: 500;
-}
-
-.users-list, .files-list {
-    background-color: #fff;
-}
-
-#summaryText strong {
-    color: #0d6efd;
-}
-</style>
 {% endblock %}
