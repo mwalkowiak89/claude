@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="login-container py-5">
+    <div class="card login-card">
+        <div class="card-header text-center text-white">
+            <i class="bi bi-file-earmark-pdf-fill display-4 mb-3"></i>
+            <h3 class="mb-0">PDF Manager</h3>
+            <p class="mb-0 opacity-75">Zaloguj się do systemu</p>
+        </div>
+        <div class="card-body p-4">
+            <form method="POST" action="{{ url_for('auth.login') }}" novalidate>
+                {{ form.hidden_tag() }}
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">
+                        <i class="bi bi-envelope me-1"></i> Email
+                    </label>
+                    {{ form.email(class="form-control form-control-lg" + (" is-invalid" if form.email.errors else ""),
+                                  placeholder="twoj@email.pl", autofocus=true) }}
+                    {% if form.email.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}{{ error }}{% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">
+                        <i class="bi bi-lock me-1"></i> Hasło
+                    </label>
+                    {{ form.password(class="form-control form-control-lg" + (" is-invalid" if form.password.errors else ""),
+                                     placeholder="********") }}
+                    {% if form.password.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}{{ error }}{% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <div class="form-check">
+                        {{ form.remember_me(class="form-check-input") }}
+                        <label class="form-check-label" for="remember_me">
+                            Zapamiętaj mnie
+                        </label>
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    {{ form.submit(class="btn btn-primary btn-lg") }}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <p class="text-center text-muted mt-4">
+        <small>
+            <i class="bi bi-shield-lock me-1"></i>
+            Bezpieczne logowanie
+        </small>
+    </p>
+</div>
+{% endblock %}

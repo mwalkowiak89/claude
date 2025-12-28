@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ url_for('admin.dashboard') }}">
+                <i class="bi bi-speedometer2 me-1"></i> Panel administracyjny
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{ url_for('admin.users') }}">Użytkownicy</a>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ 'Edytuj' if user is defined else 'Dodaj' }}
+        </li>
+    </ol>
+</nav>
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-person-{{ 'gear' if user is defined else 'plus' }} me-2"></i>
+                    {{ 'Edytuj użytkownika' if user is defined else 'Dodaj użytkownika' }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">
+                            <i class="bi bi-envelope me-1"></i> Email
+                        </label>
+                        {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""),
+                                      placeholder="uzytkownik@email.pl") }}
+                        {% if form.email.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    {% if not user is defined %}
+                    <div class="mb-3">
+                        <label for="password" class="form-label">
+                            <i class="bi bi-lock me-1"></i> Hasło
+                        </label>
+                        {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""),
+                                         placeholder="Minimum 8 znaków") }}
+                        {% if form.password.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password2" class="form-label">
+                            <i class="bi bi-lock-fill me-1"></i> Potwierdź hasło
+                        </label>
+                        {{ form.password2(class="form-control" + (" is-invalid" if form.password2.errors else ""),
+                                          placeholder="Powtórz hasło") }}
+                        {% if form.password2.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.password2.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    <div class="mb-4">
+                        <div class="form-check form-switch">
+                            {{ form.is_admin(class="form-check-input") }}
+                            <label class="form-check-label" for="is_admin">
+                                <i class="bi bi-shield me-1"></i> Administrator
+                            </label>
+                        </div>
+                        <small class="text-muted">
+                            Administratorzy mają dostęp do wszystkich plików i mogą zarządzać systemem.
+                        </small>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        {{ form.submit(class="btn btn-primary") }}
+                        <a href="{{ url_for('admin.users') }}" class="btn btn-outline-secondary">
+                            Anuluj
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

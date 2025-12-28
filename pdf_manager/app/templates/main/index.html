@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-1">
+            <i class="bi bi-folder2-open text-primary me-2"></i>
+            Moje pliki
+        </h2>
+        <p class="text-muted mb-0">
+            {% if current_user.is_admin %}
+            Wszystkie pliki w systemie
+            {% else %}
+            Pliki, do których masz dostęp
+            {% endif %}
+        </p>
+    </div>
+    {% if current_user.is_admin %}
+    <a href="{{ url_for('admin.upload_file') }}" class="btn btn-primary">
+        <i class="bi bi-cloud-upload me-1"></i> Prześlij plik
+    </a>
+    {% endif %}
+</div>
+
+{% if files %}
+<div class="row g-4">
+    {% for file in files %}
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card card-file h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-start">
+                    <div class="file-icon me-3">
+                        <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h5 class="card-title mb-1 text-truncate" title="{{ file.filename }}">
+                            {{ file.filename }}
+                        </h5>
+                        <div class="mb-2">
+                            <span class="badge bg-secondary version-badge">
+                                v{{ file.version }}
+                            </span>
+                            <small class="text-muted ms-2">
+                                <i class="bi bi-calendar3 me-1"></i>
+                                {{ file.upload_date.strftime('%d.%m.%Y') }}
+                            </small>
+                        </div>
+                        {% if file.description %}
+                        <p class="file-description mb-0 text-truncate" title="{{ file.description }}">
+                            {{ file.description }}
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent border-top-0">
+                <div class="action-buttons d-flex gap-2">
+                    <a href="{{ url_for('main.view_file', file_id=file.id) }}"
+                       class="btn btn-outline-primary btn-sm flex-grow-1">
+                        <i class="bi bi-eye me-1"></i> Podgląd
+                    </a>
+                    <a href="{{ url_for('main.download_file', file_id=file.id) }}"
+                       class="btn btn-primary btn-sm flex-grow-1">
+                        <i class="bi bi-download me-1"></i> Pobierz
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card">
+    <div class="card-body empty-state">
+        <i class="bi bi-folder2"></i>
+        <h4>Brak plików</h4>
+        <p class="mb-0">
+            {% if current_user.is_admin %}
+            Nie przesłano jeszcze żadnych plików. Kliknij "Prześlij plik", aby dodać pierwszy.
+            {% else %}
+            Nie masz jeszcze dostępu do żadnych plików. Skontaktuj się z administratorem.
+            {% endif %}
+        </p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-1">
+            <i class="bi bi-shield-lock text-primary me-2"></i>
+            Przegląd uprawnień
+        </h2>
+        <p class="text-muted mb-0">Macierz dostępu użytkowników do plików</p>
+    </div>
+</div>
+
+{% if files and users %}
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-bordered access-table mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="file-name">Plik</th>
+                        {% for user in users %}
+                        <th class="text-center" style="min-width: 100px;">
+                            <small title="{{ user.email }}">
+                                {{ user.email.split('@')[0][:10] }}{% if user.email.split('@')[0]|length > 10 %}...{% endif %}
+                            </small>
+                        </th>
+                        {% endfor %}
+                        <th class="text-center">Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in files %}
+                    <tr>
+                        <td class="file-name">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
+                                <span title="{{ file.filename }}">{{ file.filename[:25] }}{% if file.filename|length > 25 %}...{% endif %}</span>
+                            </div>
+                        </td>
+                        {% for user in users %}
+                        <td class="text-center">
+                            {% if user.id in access_matrix[file.id] %}
+                            <i class="bi bi-check-circle-fill text-success fs-5" title="Ma dostęp"></i>
+                            {% else %}
+                            <i class="bi bi-x-circle text-muted" title="Brak dostępu"></i>
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                        <td class="text-center">
+                            <a href="{{ url_for('admin.manage_access', file_id=file.id) }}"
+                               class="btn btn-sm btn-outline-primary" title="Zarządzaj">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <h6 class="card-title mb-3">
+            <i class="bi bi-bar-chart me-2"></i>
+            Statystyki
+        </h6>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <h4 class="text-primary">{{ files|length }}</h4>
+                <small class="text-muted">Plików</small>
+            </div>
+            <div class="col-md-4">
+                <h4 class="text-success">{{ users|length }}</h4>
+                <small class="text-muted">Użytkowników</small>
+            </div>
+            <div class="col-md-4">
+                <h4 class="text-info">
+                    {% set total_access = namespace(count=0) %}
+                    {% for file_id, user_ids in access_matrix.items() %}
+                        {% set total_access.count = total_access.count + user_ids|length %}
+                    {% endfor %}
+                    {{ total_access.count }}
+                </h4>
+                <small class="text-muted">Przyznanych dostępów</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="card">
+    <div class="card-body empty-state">
+        <i class="bi bi-shield-lock"></i>
+        <h4>Brak danych</h4>
+        <p class="mb-0">
+            {% if not files %}
+            Nie ma jeszcze żadnych plików w systemie.
+            <a href="{{ url_for('admin.upload_file') }}">Prześlij pierwszy plik</a>.
+            {% elif not users %}
+            Nie ma jeszcze żadnych zwykłych użytkowników w systemie.
+            <a href="{{ url_for('admin.add_user') }}">Dodaj użytkownika</a>.
+            {% endif %}
+        </p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-1">
+            <i class="bi bi-file-earmark-pdf text-primary me-2"></i>
+            Pliki PDF
+        </h2>
+        <p class="text-muted mb-0">Zarządzanie plikami w systemie</p>
+    </div>
+    <a href="{{ url_for('admin.upload_file') }}" class="btn btn-primary">
+        <i class="bi bi-cloud-upload me-1"></i> Prześlij plik
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        {% if files %}
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Nazwa pliku</th>
+                        <th class="text-center">Wersja</th>
+                        <th class="text-center">Użytkownicy z dostępem</th>
+                        <th>Data uploadu</th>
+                        <th class="text-end">Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in files %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-file-earmark-pdf-fill text-danger me-2 fs-5"></i>
+                                <div>
+                                    <span class="fw-medium">{{ file.filename }}</span>
+                                    {% if file.description %}
+                                    <br><small class="text-muted">{{ file.description[:50] }}{% if file.description|length > 50 %}...{% endif %}</small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-secondary">v{{ file.version }}</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-info">{{ file.user_access.count() }}</span>
+                        </td>
+                        <td>
+                            <small class="text-muted">
+                                {{ file.upload_date.strftime('%d.%m.%Y %H:%M') }}
+                            </small>
+                        </td>
+                        <td class="text-end">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ url_for('main.view_file', file_id=file.id) }}"
+                                   class="btn btn-outline-primary" title="Podgląd">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a href="{{ url_for('main.download_file', file_id=file.id) }}"
+                                   class="btn btn-outline-secondary" title="Pobierz">
+                                    <i class="bi bi-download"></i>
+                                </a>
+                                <a href="{{ url_for('admin.update_file', file_id=file.id) }}"
+                                   class="btn btn-outline-warning" title="Aktualizuj">
+                                    <i class="bi bi-upload"></i>
+                                </a>
+                                <a href="{{ url_for('admin.manage_access', file_id=file.id) }}"
+                                   class="btn btn-outline-success" title="Uprawnienia">
+                                    <i class="bi bi-shield-lock"></i>
+                                </a>
+                                <button type="button" class="btn btn-outline-danger"
+                                        title="Usuń"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal{{ file.id }}">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+
+                            <!-- Delete Modal -->
+                            <div class="modal fade" id="deleteModal{{ file.id }}" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Potwierdź usunięcie</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Czy na pewno chcesz usunąć plik <strong>{{ file.filename }}</strong>?</p>
+                                            <p class="text-muted mb-0">Ta operacja jest nieodwracalna. Wszyscy użytkownicy stracą dostęp do tego pliku.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Anuluj
+                                            </button>
+                                            <form action="{{ url_for('admin.delete_file', file_id=file.id) }}"
+                                                  method="POST" class="d-inline">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="bi bi-trash me-1"></i> Usuń
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="bi bi-file-earmark-pdf"></i>
+            <h4>Brak plików</h4>
+            <p class="mb-3">Nie przesłano jeszcze żadnych plików PDF.</p>
+            <a href="{{ url_for('admin.upload_file') }}" class="btn btn-primary">
+                <i class="bi bi-cloud-upload me-1"></i> Prześlij pierwszy plik
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

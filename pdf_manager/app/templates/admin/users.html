@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-1">
+            <i class="bi bi-people text-primary me-2"></i>
+            Użytkownicy
+        </h2>
+        <p class="text-muted mb-0">Zarządzanie kontami użytkowników</p>
+    </div>
+    <a href="{{ url_for('admin.add_user') }}" class="btn btn-primary">
+        <i class="bi bi-person-plus me-1"></i> Dodaj użytkownika
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        {% if users %}
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Email</th>
+                        <th class="text-center">Rola</th>
+                        <th class="text-center">Dostęp do plików</th>
+                        <th>Data utworzenia</th>
+                        <th class="text-end">Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-person-circle text-secondary me-2 fs-5"></i>
+                                <span>{{ user.email }}</span>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            {% if user.is_admin %}
+                            <span class="badge bg-warning text-dark">
+                                <i class="bi bi-shield-fill me-1"></i> Administrator
+                            </span>
+                            {% else %}
+                            <span class="badge bg-secondary">
+                                <i class="bi bi-person-fill me-1"></i> Użytkownik
+                            </span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            {% if user.is_admin %}
+                            <span class="text-muted">Wszystkie</span>
+                            {% else %}
+                            <span class="badge bg-info">{{ user.file_access.count() }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <small class="text-muted">
+                                {{ user.created_at.strftime('%d.%m.%Y %H:%M') }}
+                            </small>
+                        </td>
+                        <td class="text-end">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ url_for('admin.edit_user', user_id=user.id) }}"
+                                   class="btn btn-outline-primary" title="Edytuj">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="{{ url_for('admin.change_user_password', user_id=user.id) }}"
+                                   class="btn btn-outline-secondary" title="Zmień hasło">
+                                    <i class="bi bi-key"></i>
+                                </a>
+                                {% if user.id != current_user.id %}
+                                <button type="button" class="btn btn-outline-danger"
+                                        title="Usuń"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal{{ user.id }}">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                                {% endif %}
+                            </div>
+
+                            <!-- Delete Modal -->
+                            {% if user.id != current_user.id %}
+                            <div class="modal fade" id="deleteModal{{ user.id }}" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Potwierdź usunięcie</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Czy na pewno chcesz usunąć użytkownika <strong>{{ user.email }}</strong>?</p>
+                                            <p class="text-muted mb-0">Ta operacja jest nieodwracalna.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Anuluj
+                                            </button>
+                                            <form action="{{ url_for('admin.delete_user', user_id=user.id) }}"
+                                                  method="POST" class="d-inline">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="bi bi-trash me-1"></i> Usuń
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="bi bi-people"></i>
+            <h4>Brak użytkowników</h4>
+            <p class="mb-3">Nie ma jeszcze żadnych użytkowników w systemie.</p>
+            <a href="{{ url_for('admin.add_user') }}" class="btn btn-primary">
+                <i class="bi bi-person-plus me-1"></i> Dodaj pierwszego użytkownika
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

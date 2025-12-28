@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center py-5">
+    <div class="mb-4">
+        <i class="bi bi-shield-exclamation text-warning" style="font-size: 5rem;"></i>
+    </div>
+    <h1 class="display-4 fw-bold">403</h1>
+    <h2 class="mb-4">Brak dostępu</h2>
+    <p class="lead text-muted mb-4">
+        Nie masz uprawnień do wyświetlenia tej strony.
+    </p>
+    <a href="{{ url_for('main.index') }}" class="btn btn-primary btn-lg">
+        <i class="bi bi-house me-2"></i> Wróć do strony głównej
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,202 @@
+/* Custom styles for PDF Manager */
+
+/* Body */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Cards */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.card-file {
+    border-left: 4px solid #0d6efd;
+}
+
+/* Stats cards */
+.stats-card {
+    border: none;
+    border-radius: 0.75rem;
+}
+
+.stats-card .stats-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+}
+
+/* File list */
+.file-item {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.file-item:hover {
+    border-color: #0d6efd;
+    background-color: #f8f9fa;
+}
+
+.file-icon {
+    font-size: 2.5rem;
+    color: #dc3545;
+}
+
+/* Version badge */
+.version-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Table styling */
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+/* Login page */
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.login-card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
+}
+
+.login-card .card-header {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    border-radius: 1rem 1rem 0 0 !important;
+    padding: 2rem;
+}
+
+/* Form styling */
+.form-control:focus,
+.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+}
+
+/* Action buttons group */
+.action-buttons .btn {
+    margin-right: 0.25rem;
+}
+
+.action-buttons .btn:last-child {
+    margin-right: 0;
+}
+
+/* Access matrix */
+.access-table th,
+.access-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.access-table .file-name {
+    text-align: left;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Empty state */
+.empty-state {
+    padding: 3rem;
+    text-align: center;
+    color: #6c757d;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stats-card .stats-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .action-buttons .btn {
+        margin-right: 0;
+    }
+}
+
+/* Multi-select styling */
+.form-select[multiple] {
+    min-height: 200px;
+}
+
+/* PDF preview iframe */
+.pdf-preview {
+    width: 100%;
+    height: 600px;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+}
+
+/* Description text */
+.file-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Breadcrumb custom */
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+/* Confirm delete modal */
+.modal-confirm .modal-header {
+    border-bottom: none;
+}
+
+.modal-confirm .modal-footer {
+    border-top: none;
+}
