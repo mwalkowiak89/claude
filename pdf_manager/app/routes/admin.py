@@ -11,8 +11,12 @@ from app.forms import (
     FileAccessForm, EditUserForm, ChangePasswordForm, EmailTemplateForm
 )
 from app.email import send_file_update_notification, send_bulk_access_notifications
+from app import limiter
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
+
+# Apply rate limiting to all admin routes
+admin_limiter = limiter.shared_limit("100 per minute", scope="admin")
 
 
 def admin_required(f):
@@ -28,6 +32,7 @@ def admin_required(f):
 @admin_bp.route('/')
 @login_required
 @admin_required
+@admin_limiter
 def dashboard():
     """Admin dashboard."""
     stats = {
@@ -52,6 +57,7 @@ def dashboard():
 @admin_bp.route('/users')
 @login_required
 @admin_required
+@admin_limiter
 def users():
     """List all users."""
     users = User.query.order_by(User.created_at.desc()).all()
@@ -61,6 +67,7 @@ def users():
 @admin_bp.route('/users/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
+@limiter.limit("20 per hour")
 def add_user():
     """Add a new user."""
     form = RegistrationForm()
@@ -143,6 +150,7 @@ def delete_user(user_id):
 @admin_bp.route('/files')
 @login_required
 @admin_required
+@admin_limiter
 def files():
     """List all files."""
     files = File.query.order_by(File.upload_date.desc()).all()
@@ -152,6 +160,7 @@ def files():
 @admin_bp.route('/files/upload', methods=['GET', 'POST'])
 @login_required
 @admin_required
+@limiter.limit("30 per hour")
 def upload_file():
     """Upload a new file."""
     form = FileUploadForm()
@@ -293,6 +302,7 @@ def manage_access(file_id):
 @admin_bp.route('/access', methods=['GET', 'POST'])
 @login_required
 @admin_required
+@admin_limiter
 def access_overview():
     """Bulk access management interface."""
     if request.method == 'POST':

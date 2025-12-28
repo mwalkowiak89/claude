@@ -3,11 +3,13 @@ from flask_login import login_user, logout_user, login_required, current_user
 from urllib.parse import urlparse
 from app.models import db, User
 from app.forms import LoginForm
+from app import limiter
 
 auth_bp = Blueprint('auth', __name__)
 
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
+@limiter.limit("5 per minute", error_message="Zbyt wiele prób logowania. Spróbuj za minutę.")
 def login():
     """Handle user login."""
     if current_user.is_authenticated:

@@ -1,15 +1,30 @@
 import os
+import logging
 from datetime import datetime
-from flask import Flask
+from flask import Flask, request
 from flask_login import LoginManager
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from config import Config
 from app.models import db, User, seed_email_templates
 from app.email import mail
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.login_message = 'Zaloguj się, aby uzyskać dostęp do tej strony.'
 login_manager.login_message_category = 'info'
+
+# Initialize limiter (will be configured in create_app)
+limiter = Limiter(
+    key_func=get_remote_address,
+    default_limits=["200 per day", "100 per hour"],
+    storage_uri="memory://",
+    strategy="fixed-window"
+)
 
 
 @login_manager.user_loader
@@ -30,6 +45,16 @@ def create_app(config_class=Config):
     db.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
+
+    # Initialize rate limiter
+    limiter.init_app(app)
+
+    # Configure limiter whitelist (exempt IPs)
+    whitelist = app.config.get('RATELIMIT_WHITELIST', [])
+    if whitelist:
+        @limiter.request_filter
+        def ip_whitelist():
+            return request.remote_addr in whitelist
 
     # Register blueprints
     from app.routes.auth import auth_bp
@@ -72,6 +97,22 @@ def create_app(config_class=Config):
     def not_found(error):
         from flask import render_template
         return render_template('errors/404.html', title='Nie znaleziono'), 404
+
+    @app.errorhandler(429)
+    def ratelimit_handler(error):
+        from flask import render_template, jsonify
+        ip = request.remote_addr
+        logger.warning(f'Rate limit exceeded for IP: {ip} on {request.path}')
+
+        # Check if request expects JSON
+        if request.is_json or request.headers.get('Accept') == 'application/json':
+            return jsonify({
+                'error': 'Too Many Requests',
+                'message': f'Zbyt wiele prób. Spróbuj za chwilę.',
+                'retry_after': error.description
+            }), 429
+
+        return render_template('errors/429.html', title='Zbyt wiele żądań', error=error), 429
 
     @app.errorhandler(500)
     def internal_error(error):

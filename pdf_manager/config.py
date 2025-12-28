@@ -26,3 +26,11 @@ class Config:
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER', 'noreply@pdfmanager.com')
+
+    # Rate limiting settings
+    RATELIMIT_STORAGE_URI = os.environ.get('RATELIMIT_STORAGE_URL', 'memory://')
+    RATELIMIT_STRATEGY = 'fixed-window'
+    RATELIMIT_DEFAULT = "200 per day, 100 per hour"
+    RATELIMIT_HEADERS_ENABLED = True
+    # IPs that are exempt from rate limiting (localhost for development)
+    RATELIMIT_WHITELIST = os.environ.get('RATELIMIT_WHITELIST', '').split(',') if os.environ.get('RATELIMIT_WHITELIST') else []

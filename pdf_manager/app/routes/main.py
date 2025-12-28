@@ -2,12 +2,14 @@ import os
 from flask import Blueprint, render_template, send_file, abort, current_app
 from flask_login import login_required, current_user
 from app.models import File, UserFileAccess
+from app import limiter
 
 main_bp = Blueprint('main', __name__)
 
 
 @main_bp.route('/')
 @login_required
+@limiter.limit("60 per minute")
 def index():
     """Display user's accessible files."""
     if current_user.is_admin:
@@ -24,6 +26,7 @@ def index():
 
 @main_bp.route('/file/<int:file_id>')
 @login_required
+@limiter.limit("60 per minute")
 def view_file(file_id):
     """View file details."""
     file = File.query.get_or_404(file_id)
@@ -37,6 +40,7 @@ def view_file(file_id):
 
 @main_bp.route('/download/<int:file_id>')
 @login_required
+@limiter.limit("50 per hour", error_message="Przekroczono limit pobrań. Spróbuj za godzinę.")
 def download_file(file_id):
     """Download a PDF file."""
     file = File.query.get_or_404(file_id)
@@ -59,6 +63,7 @@ def download_file(file_id):
 
 @main_bp.route('/preview/<int:file_id>')
 @login_required
+@limiter.limit("100 per hour")
 def preview_file(file_id):
     """Preview PDF file in browser."""
     file = File.query.get_or_404(file_id)
