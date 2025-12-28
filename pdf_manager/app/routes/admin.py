@@ -10,7 +10,7 @@ from app.forms import (
     RegistrationForm, FileUploadForm, FileUpdateForm,
     FileAccessForm, EditUserForm, ChangePasswordForm
 )
-from app.email import send_file_update_notification
+from app.email import send_file_update_notification, send_bulk_access_notifications
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -306,6 +306,13 @@ def access_overview():
         added_count = 0
         skipped_count = 0
 
+        # Track new permissions for email notifications: {user: [files]}
+        new_access_map = {}
+
+        # Pre-fetch users and files for efficiency
+        users_dict = {u.id: u for u in User.query.filter(User.id.in_(user_ids)).all()}
+        files_dict = {f.id: f for f in File.query.filter(File.id.in_(file_ids)).all()}
+
         for user_id in user_ids:
             for file_id in file_ids:
                 # Check if access already exists
@@ -321,10 +328,28 @@ def access_overview():
                     db.session.add(access)
                     added_count += 1
 
+                    # Track for email notification
+                    user = users_dict.get(user_id)
+                    file = files_dict.get(file_id)
+                    if user and file:
+                        if user not in new_access_map:
+                            new_access_map[user] = []
+                        new_access_map[user].append(file)
+
         db.session.commit()
 
+        # Send email notifications for new access
+        notified_count = 0
+        if new_access_map:
+            login_url = url_for('auth.login', _external=True)
+            notified_count = send_bulk_access_notifications(new_access_map, login_url)
+
+        # Flash messages
         if added_count > 0:
-            flash(f'Dodano {added_count} nowych uprawnień.', 'success')
+            if notified_count > 0:
+                flash(f'Dodano {added_count} nowych uprawnień. Wysłano powiadomienia do {notified_count} użytkowników.', 'success')
+            else:
+                flash(f'Dodano {added_count} nowych uprawnień.', 'success')
         if skipped_count > 0:
             flash(f'Pominięto {skipped_count} istniejących uprawnień.', 'info')
 
