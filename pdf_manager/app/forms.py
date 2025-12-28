@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, PasswordField, BooleanField, TextAreaField, SubmitField, SelectMultipleField
+from wtforms import StringField, PasswordField, BooleanField, TextAreaField, SubmitField, SelectMultipleField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
-from app.models import User
+from app.models import User, LANGUAGES, TEMPLATE_TYPES
 
 
 class LoginForm(FlaskForm):
@@ -33,6 +33,7 @@ class RegistrationForm(FlaskForm):
         DataRequired(message='Potwierdzenie hasła jest wymagane'),
         EqualTo('password', message='Hasła muszą być identyczne')
     ])
+    preferred_language = SelectField('Preferowany język', choices=LANGUAGES, default='pl')
     is_admin = BooleanField('Administrator')
     submit = SubmitField('Utwórz konto')
 
@@ -80,6 +81,7 @@ class EditUserForm(FlaskForm):
         Email(message='Nieprawidłowy format email'),
         Length(max=120)
     ])
+    preferred_language = SelectField('Preferowany język', choices=LANGUAGES)
     is_admin = BooleanField('Administrator')
     submit = SubmitField('Zapisz zmiany')
 
@@ -95,3 +97,15 @@ class ChangePasswordForm(FlaskForm):
         EqualTo('new_password', message='Hasła muszą być identyczne')
     ])
     submit = SubmitField('Zmień hasło')
+
+
+class EmailTemplateForm(FlaskForm):
+    """Form for editing email templates."""
+    subject = StringField('Temat', validators=[
+        DataRequired(message='Temat jest wymagany'),
+        Length(max=255)
+    ])
+    body = TextAreaField('Treść', validators=[
+        DataRequired(message='Treść jest wymagana')
+    ])
+    submit = SubmitField('Zapisz szablon')

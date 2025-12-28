@@ -5,10 +5,10 @@ from functools import wraps
 from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app, abort, jsonify
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
-from app.models import db, User, File, UserFileAccess
+from app.models import db, User, File, UserFileAccess, EmailTemplate, LANGUAGES, TEMPLATE_TYPES
 from app.forms import (
     RegistrationForm, FileUploadForm, FileUpdateForm,
-    FileAccessForm, EditUserForm, ChangePasswordForm
+    FileAccessForm, EditUserForm, ChangePasswordForm, EmailTemplateForm
 )
 from app.email import send_file_update_notification, send_bulk_access_notifications
 
@@ -67,7 +67,8 @@ def add_user():
     if form.validate_on_submit():
         user = User(
             email=form.email.data.lower(),
-            is_admin=form.is_admin.data
+            is_admin=form.is_admin.data,
+            preferred_language=form.preferred_language.data
         )
         user.set_password(form.password.data)
         db.session.add(user)
@@ -95,6 +96,7 @@ def edit_user(user_id):
 
         user.email = form.email.data.lower()
         user.is_admin = form.is_admin.data
+        user.preferred_language = form.preferred_language.data
         db.session.commit()
         flash('Dane użytkownika zostały zaktualizowane.', 'success')
         return redirect(url_for('admin.users'))
@@ -451,3 +453,192 @@ def api_users_files():
         'common_file_ids': common_file_ids,
         'user_file_map': user_file_map
     })
+
+
+# ===== EMAIL TEMPLATES =====
+
+@admin_bp.route('/email-templates')
+@login_required
+@admin_required
+def email_templates():
+    """List and manage email templates."""
+    template_type = request.args.get('type', 'new_access')
+    language = request.args.get('lang', 'pl')
+
+    # Get current template
+    template = EmailTemplate.query.filter_by(
+        template_type=template_type,
+        language=language
+    ).first()
+
+    # Get all templates for counts
+    all_templates = EmailTemplate.query.all()
+    template_counts = {}
+    for t in all_templates:
+        key = f"{t.template_type}:{t.language}"
+        template_counts[key] = True
+
+    return render_template(
+        'admin/email_templates.html',
+        title='Szablony Email',
+        template=template,
+        current_type=template_type,
+        current_language=language,
+        languages=LANGUAGES,
+        template_types=TEMPLATE_TYPES,
+        template_counts=template_counts
+    )
+
+
+@admin_bp.route('/email-templates/edit', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def edit_email_template():
+    """Edit a specific email template."""
+    template_type = request.args.get('type', 'new_access')
+    language = request.args.get('lang', 'pl')
+
+    # Get or create template
+    template = EmailTemplate.query.filter_by(
+        template_type=template_type,
+        language=language
+    ).first()
+
+    form = EmailTemplateForm()
+
+    if request.method == 'GET' and template:
+        form.subject.data = template.subject
+        form.body.data = template.body
+
+    if form.validate_on_submit():
+        if template:
+            template.subject = form.subject.data
+            template.body = form.body.data
+        else:
+            # Get variables from default template
+            default_vars = '{user_name}, {file_list}, {file_count}, {login_url}'
+            if template_type == 'file_update':
+                default_vars = '{user_name}, {file_name}, {file_version}, {file_description}, {login_url}'
+
+            template = EmailTemplate(
+                template_type=template_type,
+                language=language,
+                subject=form.subject.data,
+                body=form.body.data,
+                variables=default_vars
+            )
+            db.session.add(template)
+
+        db.session.commit()
+        flash('Szablon został zapisany.', 'success')
+        return redirect(url_for('admin.email_templates', type=template_type, lang=language))
+
+    # Get type and language display names
+    type_display = dict(TEMPLATE_TYPES).get(template_type, template_type)
+    lang_display = dict(LANGUAGES).get(language, language)
+
+    # Get variables info
+    variables = '{user_name}, {file_list}, {file_count}, {login_url}'
+    if template_type == 'file_update':
+        variables = '{user_name}, {file_name}, {file_version}, {file_description}, {login_url}'
+    if template:
+        variables = template.variables or variables
+
+    return render_template(
+        'admin/email_template_edit.html',
+        title=f'Edytuj szablon - {type_display} ({lang_display})',
+        form=form,
+        template=template,
+        template_type=template_type,
+        language=language,
+        type_display=type_display,
+        lang_display=lang_display,
+        variables=variables
+    )
+
+
+@admin_bp.route('/email-templates/preview')
+@login_required
+@admin_required
+def preview_email_template():
+    """Preview email template with sample data."""
+    template_type = request.args.get('type', 'new_access')
+    language = request.args.get('lang', 'pl')
+
+    template = EmailTemplate.query.filter_by(
+        template_type=template_type,
+        language=language
+    ).first()
+
+    if not template:
+        return jsonify({'error': 'Template not found'}), 404
+
+    # Sample data for preview
+    if template_type == 'new_access':
+        context = {
+            'user_name': 'jan.kowalski@example.com',
+            'file_count': '3',
+            'file_list': '''<ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 10px;">• <strong>Instrukcja_obslugi.pdf</strong> (v2.1) - Instrukcja obsługi systemu</li>
+                <li style="margin-bottom: 10px;">• <strong>Raport_Q4_2024.pdf</strong> (v1.0) - Raport kwartalny</li>
+                <li style="margin-bottom: 10px;">• <strong>Procedury_BHP.pdf</strong> (v3.2) - Procedury bezpieczeństwa</li>
+            </ul>''',
+            'login_url': 'https://example.com/login'
+        }
+    else:  # file_update
+        context = {
+            'user_name': 'jan.kowalski@example.com',
+            'file_name': 'Instrukcja_obslugi.pdf',
+            'file_version': '2.1',
+            'file_description': '<p><em>Opis zmian:</em> Zaktualizowano rozdział 3 dotyczący nowych funkcji.</p>',
+            'login_url': 'https://example.com/login'
+        }
+
+    subject, body = template.render(context)
+
+    # Wrap body in email HTML structure
+    html_preview = f'''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 20px auto; padding: 20px; background: #f5f5f5; }}
+            .email-container {{ background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
+            .email-subject {{ background: #0d6efd; color: white; padding: 15px; border-radius: 8px 8px 0 0; margin: -20px -20px 20px -20px; }}
+        </style>
+    </head>
+    <body>
+        <div class="email-container">
+            <div class="email-subject"><strong>Temat:</strong> {subject}</div>
+            {body}
+        </div>
+    </body>
+    </html>
+    '''
+
+    return html_preview
+
+
+@admin_bp.route('/email-templates/reset', methods=['POST'])
+@login_required
+@admin_required
+def reset_email_template():
+    """Reset template to default."""
+    from app.models import seed_email_templates
+
+    template_type = request.form.get('type', 'new_access')
+    language = request.form.get('lang', 'pl')
+
+    # Delete existing template
+    EmailTemplate.query.filter_by(
+        template_type=template_type,
+        language=language
+    ).delete()
+    db.session.commit()
+
+    # Seed will recreate the default
+    seed_email_templates()
+
+    flash('Szablon został przywrócony do domyślnego.', 'success')
+    return redirect(url_for('admin.email_templates', type=template_type, lang=language))

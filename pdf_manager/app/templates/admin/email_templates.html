@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ url_for('admin.dashboard') }}">
+                <i class="bi bi-speedometer2 me-1"></i> Panel administracyjny
+            </a>
+        </li>
+        <li class="breadcrumb-item active">Szablony Email</li>
+    </ol>
+</nav>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>
+        <i class="bi bi-envelope me-2"></i>
+        Szablony Email
+    </h2>
+</div>
+
+<!-- Template Type Tabs -->
+<ul class="nav nav-tabs mb-4" role="tablist">
+    {% for type_code, type_name in template_types %}
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if current_type == type_code %}active{% endif %}"
+           href="{{ url_for('admin.email_templates', type=type_code, lang=current_language) }}">
+            {% if type_code == 'new_access' %}
+            <i class="bi bi-key me-1"></i>
+            {% else %}
+            <i class="bi bi-arrow-repeat me-1"></i>
+            {% endif %}
+            {{ type_name }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+
+<div class="card">
+    <div class="card-header bg-white">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <h5 class="mb-0">
+                <i class="bi bi-translate me-2"></i>
+                Wybierz wersje jezykowa
+            </h5>
+            <!-- Language Buttons -->
+            <div class="btn-group" role="group">
+                {% for lang_code, lang_name in languages %}
+                <a href="{{ url_for('admin.email_templates', type=current_type, lang=lang_code) }}"
+                   class="btn btn-sm {% if current_language == lang_code %}btn-primary{% else %}btn-outline-primary{% endif %}">
+                    {% if lang_code == 'pl' %}<span class="fi fi-pl me-1"></span>{% endif %}
+                    {% if lang_code == 'en' %}<span class="fi fi-gb me-1"></span>{% endif %}
+                    {% if lang_code == 'de' %}<span class="fi fi-de me-1"></span>{% endif %}
+                    {% if lang_code == 'pt' %}<span class="fi fi-pt me-1"></span>{% endif %}
+                    {% if lang_code == 'fr' %}<span class="fi fi-fr me-1"></span>{% endif %}
+                    {% if lang_code == 'es' %}<span class="fi fi-es me-1"></span>{% endif %}
+                    {{ lang_name }}
+                    {% if template_counts.get(current_type + ':' + lang_code) %}
+                    <i class="bi bi-check-circle-fill text-success ms-1"></i>
+                    {% endif %}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        {% if template %}
+        <!-- Template Preview -->
+        <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="mb-0">
+                    <i class="bi bi-eye me-1"></i> Podglad szablonu
+                </h6>
+                <small class="text-muted">
+                    Ostatnia aktualizacja: {{ template.updated_at.strftime('%Y-%m-%d %H:%M') if template.updated_at else 'N/A' }}
+                </small>
+            </div>
+
+            <div class="border rounded p-3 bg-light">
+                <div class="mb-3">
+                    <strong class="text-muted">Temat:</strong>
+                    <div class="mt-1 p-2 bg-white border rounded">
+                        {{ template.subject }}
+                    </div>
+                </div>
+
+                <div>
+                    <strong class="text-muted">Tresc (HTML):</strong>
+                    <div class="mt-1 p-2 bg-white border rounded" style="max-height: 300px; overflow-y: auto;">
+                        <pre class="mb-0" style="white-space: pre-wrap; word-wrap: break-word; font-size: 0.85em;">{{ template.body }}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Available Variables -->
+        <div class="mb-4">
+            <h6>
+                <i class="bi bi-braces me-1"></i> Dostepne zmienne
+            </h6>
+            <p class="text-muted small mb-2">
+                Uzyj tych zmiennych w szablonie. Zostana automatycznie zamienione na rzeczywiste wartosci.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                {% for var in (template.variables or '').split(', ') %}
+                {% if var %}
+                <span class="badge bg-secondary font-monospace">{{ var }}</span>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex gap-2 flex-wrap">
+            <a href="{{ url_for('admin.edit_email_template', type=current_type, lang=current_language) }}"
+               class="btn btn-primary">
+                <i class="bi bi-pencil me-1"></i> Edytuj szablon
+            </a>
+            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#previewModal">
+                <i class="bi bi-eye me-1"></i> Podglad z danymi
+            </button>
+            <form action="{{ url_for('admin.reset_email_template') }}" method="POST" class="d-inline"
+                  onsubmit="return confirm('Czy na pewno chcesz przywrocic domyslny szablon? Twoje zmiany zostana utracone.');">
+                <input type="hidden" name="type" value="{{ current_type }}">
+                <input type="hidden" name="lang" value="{{ current_language }}">
+                <button type="submit" class="btn btn-outline-danger">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i> Przywroc domyslny
+                </button>
+            </form>
+        </div>
+
+        {% else %}
+        <!-- No Template -->
+        <div class="text-center py-5">
+            <i class="bi bi-envelope-x display-4 text-muted mb-3 d-block"></i>
+            <h5>Brak szablonu dla tej konfiguracji</h5>
+            <p class="text-muted">
+                Nie znaleziono szablonu typu <strong>{{ dict(template_types).get(current_type, current_type) }}</strong>
+                dla jezyka <strong>{{ dict(languages).get(current_language, current_language) }}</strong>.
+            </p>
+            <a href="{{ url_for('admin.edit_email_template', type=current_type, lang=current_language) }}"
+               class="btn btn-primary">
+                <i class="bi bi-plus-circle me-1"></i> Utworz szablon
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Info Card -->
+<div class="card mt-4">
+    <div class="card-body">
+        <h6 class="card-title">
+            <i class="bi bi-info-circle me-1"></i> Informacje
+        </h6>
+        <ul class="mb-0 small text-muted">
+            <li>Szablony email sa wysylane w jezyku preferowanym przez uzytkownika.</li>
+            <li>Jesli szablon dla danego jezyka nie istnieje, system uzyje angielskiego lub polskiego jako zapasowego.</li>
+            <li>Mozesz uzyc zmiennych w formacie <code>{nazwa_zmiennej}</code> - zostana automatycznie zamienione na rzeczywiste dane.</li>
+            <li>Tresc szablonu powinna byc w formacie HTML dla poprawnego wyswietlania w klientach email.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-eye me-2"></i> Podglad emaila
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-0">
+                <iframe id="previewFrame"
+                        src="{{ url_for('admin.preview_email_template', type=current_type, lang=current_language) }}"
+                        style="width: 100%; height: 500px; border: none;"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

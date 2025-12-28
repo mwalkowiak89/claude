@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ url_for('admin.dashboard') }}">
+                <i class="bi bi-speedometer2 me-1"></i> Panel administracyjny
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{ url_for('admin.email_templates') }}">Szablony Email</a>
+        </li>
+        <li class="breadcrumb-item active">Edytuj</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-pencil me-2"></i>
+                    Edytuj szablon: {{ type_display }} ({{ lang_display }})
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">
+                            <i class="bi bi-type me-1"></i> Temat emaila
+                        </label>
+                        {{ form.subject(class="form-control" + (" is-invalid" if form.subject.errors else ""),
+                                        placeholder="Wpisz temat emaila...") }}
+                        {% if form.subject.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.subject.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                        <small class="text-muted">Mozesz uzyc zmiennych np. <code>{file_name}</code></small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="body" class="form-label">
+                            <i class="bi bi-file-earmark-code me-1"></i> Tresc emaila (HTML)
+                        </label>
+                        {{ form.body(class="form-control font-monospace" + (" is-invalid" if form.body.errors else ""),
+                                     rows="15",
+                                     placeholder="<html>\n<body>\n  Tresc emaila...\n</body>\n</html>") }}
+                        {% if form.body.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.body.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        {{ form.submit(class="btn btn-primary") }}
+                        <a href="{{ url_for('admin.email_templates', type=template_type, lang=language) }}"
+                           class="btn btn-outline-secondary">
+                            Anuluj
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <!-- Variables Reference -->
+        <div class="card mb-4">
+            <div class="card-header bg-white">
+                <h6 class="mb-0">
+                    <i class="bi bi-braces me-1"></i> Dostepne zmienne
+                </h6>
+            </div>
+            <div class="card-body">
+                <p class="small text-muted mb-3">
+                    Kliknij na zmienna aby skopiowac do schowka:
+                </p>
+                <div class="d-flex flex-column gap-2">
+                    {% for var in variables.split(', ') %}
+                    {% if var %}
+                    <button type="button"
+                            class="btn btn-outline-secondary btn-sm text-start font-monospace copy-var"
+                            data-var="{{ var }}">
+                        <i class="bi bi-clipboard me-2"></i>{{ var }}
+                    </button>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Variable Descriptions -->
+        <div class="card mb-4">
+            <div class="card-header bg-white">
+                <h6 class="mb-0">
+                    <i class="bi bi-question-circle me-1"></i> Opis zmiennych
+                </h6>
+            </div>
+            <div class="card-body small">
+                <dl class="mb-0">
+                    {% if template_type == 'new_access' %}
+                    <dt><code>{user_name}</code></dt>
+                    <dd class="text-muted mb-2">Email uzytkownika</dd>
+
+                    <dt><code>{file_list}</code></dt>
+                    <dd class="text-muted mb-2">Lista plikow w formacie HTML</dd>
+
+                    <dt><code>{file_count}</code></dt>
+                    <dd class="text-muted mb-2">Liczba plikow</dd>
+
+                    <dt><code>{login_url}</code></dt>
+                    <dd class="text-muted mb-0">Link do logowania</dd>
+                    {% else %}
+                    <dt><code>{user_name}</code></dt>
+                    <dd class="text-muted mb-2">Email uzytkownika</dd>
+
+                    <dt><code>{file_name}</code></dt>
+                    <dd class="text-muted mb-2">Nazwa pliku</dd>
+
+                    <dt><code>{file_version}</code></dt>
+                    <dd class="text-muted mb-2">Numer wersji</dd>
+
+                    <dt><code>{file_description}</code></dt>
+                    <dd class="text-muted mb-2">Opis zmian (HTML)</dd>
+
+                    <dt><code>{login_url}</code></dt>
+                    <dd class="text-muted mb-0">Link do logowania</dd>
+                    {% endif %}
+                </dl>
+            </div>
+        </div>
+
+        <!-- Tips -->
+        <div class="card">
+            <div class="card-header bg-white">
+                <h6 class="mb-0">
+                    <i class="bi bi-lightbulb me-1"></i> Wskazowki
+                </h6>
+            </div>
+            <div class="card-body small text-muted">
+                <ul class="mb-0 ps-3">
+                    <li class="mb-2">Uzyj inline CSS dla lepszej kompatybilnosci z klientami email.</li>
+                    <li class="mb-2">Testuj szablony na roznych klientach (Gmail, Outlook, itp.).</li>
+                    <li class="mb-2">Zachowaj proste formatowanie - niektore klienty nie obsluguja zaawansowanego CSS.</li>
+                    <li>Pamietaj o wersji tekstowej dla starszych klientow.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Copy variable to clipboard
+document.querySelectorAll('.copy-var').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const varText = this.getAttribute('data-var');
+        navigator.clipboard.writeText(varText).then(() => {
+            const icon = this.querySelector('i');
+            icon.className = 'bi bi-check me-2 text-success';
+            setTimeout(() => {
+                icon.className = 'bi bi-clipboard me-2';
+            }, 1500);
+        });
+    });
+});
+
+// Insert at cursor position
+function insertAtCursor(textarea, text) {
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const before = textarea.value.substring(0, start);
+    const after = textarea.value.substring(end);
+    textarea.value = before + text + after;
+    textarea.selectionStart = textarea.selectionEnd = start + text.length;
+    textarea.focus();
+}
+</script>
+{% endblock %}

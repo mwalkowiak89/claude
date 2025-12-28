@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Flask
 from flask_login import LoginManager
 from config import Config
-from app.models import db, User
+from app.models import db, User, seed_email_templates
 from app.email import mail
 
 login_manager = LoginManager()
@@ -58,6 +58,9 @@ def create_app(config_class=Config):
             db.session.add(admin)
             db.session.commit()
             print('Created default admin user: admin@example.com / admin123')
+
+        # Seed default email templates
+        seed_email_templates()
 
     # Error handlers
     @app.errorhandler(403)
