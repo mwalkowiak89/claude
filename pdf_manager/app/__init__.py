@@ -1,11 +1,12 @@
 import os
 import logging
 from datetime import datetime
-from flask import Flask, request, redirect, url_for
+from flask import Flask, request, redirect, url_for, session
 from flask_login import LoginManager, current_user
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_migrate import Migrate
+from flask_babel import Babel, gettext as _
 from config import Config
 from app.models import db, User, seed_email_templates
 from app.email import mail
@@ -26,6 +27,24 @@ limiter = Limiter(
     storage_uri="memory://",
     strategy="fixed-window"
 )
+
+# Initialize Babel
+babel = Babel()
+
+
+def get_locale():
+    """Get the best matching locale for the user."""
+    # Check if user has set a language preference in session
+    if 'language' in session:
+        return session['language']
+    # Check cookie for non-authenticated users
+    lang_cookie = request.cookies.get('language')
+    if lang_cookie:
+        return lang_cookie
+    # Fall back to browser's preferred language
+    return request.accept_languages.best_match(
+        ['pl', 'en', 'de', 'pt', 'fr', 'es']
+    ) or 'pl'
 
 
 @login_manager.user_loader
@@ -51,6 +70,9 @@ def create_app(config_class=Config):
     # Initialize rate limiter
     limiter.init_app(app)
 
+    # Initialize Babel for i18n
+    babel.init_app(app, locale_selector=get_locale)
+
     # Configure limiter whitelist (exempt IPs)
     whitelist = app.config.get('RATELIMIT_WHITELIST', [])
     if whitelist:
@@ -70,7 +92,11 @@ def create_app(config_class=Config):
     # Context processor for templates
     @app.context_processor
     def utility_processor():
-        return {'now': datetime.utcnow}
+        return {
+            'now': datetime.utcnow,
+            'get_locale': get_locale,
+            'languages': app.config.get('LANGUAGES', {})
+        }
 
     # Enforce 2FA setup for admins
     @app.before_request
@@ -85,7 +111,8 @@ def create_app(config_class=Config):
             'auth.logout',
             'auth.login',
             'auth.verify_2fa',
-            'auth.cancel_2fa_login'
+            'auth.cancel_2fa_login',
+            'main.set_language'
         ]
 
         if request.endpoint in allowed_endpoints:

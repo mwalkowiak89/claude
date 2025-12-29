@@ -1,0 +1,234 @@
+# French translations for PDF Manager.
+# Copyright (C) 2024 PDF Manager
+# This file is distributed under the same license as the PDF Manager project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PDF Manager 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language: fr\n"
+"Language-Team: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel\n"
+
+# Navigation
+msgid "Moje pliki"
+msgstr "Mes Fichiers"
+
+msgid "Administracja"
+msgstr "Administration"
+
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+msgid "Użytkownicy"
+msgstr "Utilisateurs"
+
+msgid "Pliki"
+msgstr "Fichiers"
+
+msgid "Uprawnienia"
+msgstr "Permissions"
+
+msgid "Szablony Email"
+msgstr "Modèles d'Email"
+
+msgid "Kopie zapasowe"
+msgstr "Sauvegardes"
+
+msgid "Bezpieczeństwo"
+msgstr "Sécurité"
+
+msgid "Wyloguj"
+msgstr "Déconnexion"
+
+msgid "Zmień język"
+msgstr "Changer de langue"
+
+msgid "Przełącz tryb ciemny/jasny"
+msgstr "Basculer mode sombre/clair"
+
+msgid "Przełącz tryb ciemny"
+msgstr "Basculer mode sombre"
+
+msgid "Wszystkie prawa zastrzeżone."
+msgstr "Tous droits réservés."
+
+# Authentication
+msgid "Zaloguj się"
+msgstr "Se connecter"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Hasło"
+msgstr "Mot de passe"
+
+msgid "Pamiętaj mnie"
+msgstr "Se souvenir de moi"
+
+msgid "Nie masz konta?"
+msgstr "Pas de compte ?"
+
+msgid "Zarejestruj się"
+msgstr "S'inscrire"
+
+msgid "Nieprawidłowy email lub hasło."
+msgstr "Email ou mot de passe invalide."
+
+msgid "Zalogowano pomyślnie."
+msgstr "Connexion réussie."
+
+msgid "Wylogowano pomyślnie."
+msgstr "Déconnexion réussie."
+
+# Common actions
+msgid "Zapisz"
+msgstr "Enregistrer"
+
+msgid "Anuluj"
+msgstr "Annuler"
+
+msgid "Usuń"
+msgstr "Supprimer"
+
+msgid "Edytuj"
+msgstr "Modifier"
+
+msgid "Dodaj"
+msgstr "Ajouter"
+
+msgid "Pobierz"
+msgstr "Télécharger"
+
+msgid "Prześlij"
+msgstr "Envoyer"
+
+msgid "Szukaj"
+msgstr "Rechercher"
+
+msgid "Powrót"
+msgstr "Retour"
+
+msgid "Potwierdź"
+msgstr "Confirmer"
+
+# Files
+msgid "Prześlij plik"
+msgstr "Envoyer un fichier"
+
+msgid "Nazwa pliku"
+msgstr "Nom du fichier"
+
+msgid "Rozmiar"
+msgstr "Taille"
+
+msgid "Data przesłania"
+msgstr "Date d'envoi"
+
+msgid "Akcje"
+msgstr "Actions"
+
+msgid "Podgląd"
+msgstr "Aperçu"
+
+msgid "Brak plików"
+msgstr "Aucun fichier"
+
+msgid "Plik został przesłany pomyślnie."
+msgstr "Fichier envoyé avec succès."
+
+msgid "Plik został usunięty."
+msgstr "Fichier supprimé."
+
+# Users
+msgid "Nowy użytkownik"
+msgstr "Nouvel Utilisateur"
+
+msgid "Edytuj użytkownika"
+msgstr "Modifier l'Utilisateur"
+
+msgid "Administrator"
+msgstr "Administrateur"
+
+msgid "Aktywny"
+msgstr "Actif"
+
+msgid "Użytkownik został dodany."
+msgstr "Utilisateur ajouté."
+
+msgid "Użytkownik został zaktualizowany."
+msgstr "Utilisateur mis à jour."
+
+msgid "Użytkownik został usunięty."
+msgstr "Utilisateur supprimé."
+
+# Permissions
+msgid "Zarządzaj uprawnieniami"
+msgstr "Gérer les Permissions"
+
+msgid "Przyznaj dostęp"
+msgstr "Accorder l'Accès"
+
+msgid "Usuń dostęp"
+msgstr "Retirer l'Accès"
+
+msgid "Uprawnienia zostały zaktualizowane."
+msgstr "Permissions mises à jour."
+
+# Backups
+msgid "Utwórz backup"
+msgstr "Créer une Sauvegarde"
+
+msgid "Przywróć"
+msgstr "Restaurer"
+
+msgid "Backup został utworzony."
+msgstr "Sauvegarde créée."
+
+msgid "Backup został przywrócony."
+msgstr "Sauvegarde restaurée."
+
+msgid "Backup został usunięty."
+msgstr "Sauvegarde supprimée."
+
+# 2FA
+msgid "Weryfikacja dwuetapowa"
+msgstr "Authentification à Deux Facteurs"
+
+msgid "Kod weryfikacyjny"
+msgstr "Code de Vérification"
+
+msgid "Włącz 2FA"
+msgstr "Activer 2FA"
+
+msgid "Wyłącz 2FA"
+msgstr "Désactiver 2FA"
+
+msgid "2FA zostało włączone."
+msgstr "2FA activé."
+
+msgid "2FA zostało wyłączone."
+msgstr "2FA désactivé."
+
+# Errors
+msgid "Brak dostępu"
+msgstr "Accès Refusé"
+
+msgid "Nie znaleziono"
+msgstr "Non Trouvé"
+
+msgid "Zbyt wiele żądań"
+msgstr "Trop de Requêtes"
+
+msgid "Błąd serwera"
+msgstr "Erreur Serveur"
+
+msgid "Wystąpił błąd. Spróbuj ponownie."
+msgstr "Une erreur s'est produite. Veuillez réessayer."

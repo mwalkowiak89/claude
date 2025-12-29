@@ -1,0 +1,234 @@
+# Polish translations for PDF Manager.
+# Copyright (C) 2024 PDF Manager
+# This file is distributed under the same license as the PDF Manager project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PDF Manager 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language: pl\n"
+"Language-Team: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel\n"
+
+# Navigation
+msgid "Moje pliki"
+msgstr "Moje pliki"
+
+msgid "Administracja"
+msgstr "Administracja"
+
+msgid "Dashboard"
+msgstr "Panel sterowania"
+
+msgid "Użytkownicy"
+msgstr "Użytkownicy"
+
+msgid "Pliki"
+msgstr "Pliki"
+
+msgid "Uprawnienia"
+msgstr "Uprawnienia"
+
+msgid "Szablony Email"
+msgstr "Szablony Email"
+
+msgid "Kopie zapasowe"
+msgstr "Kopie zapasowe"
+
+msgid "Bezpieczeństwo"
+msgstr "Bezpieczeństwo"
+
+msgid "Wyloguj"
+msgstr "Wyloguj"
+
+msgid "Zmień język"
+msgstr "Zmień język"
+
+msgid "Przełącz tryb ciemny/jasny"
+msgstr "Przełącz tryb ciemny/jasny"
+
+msgid "Przełącz tryb ciemny"
+msgstr "Przełącz tryb ciemny"
+
+msgid "Wszystkie prawa zastrzeżone."
+msgstr "Wszystkie prawa zastrzeżone."
+
+# Authentication
+msgid "Zaloguj się"
+msgstr "Zaloguj się"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Hasło"
+msgstr "Hasło"
+
+msgid "Pamiętaj mnie"
+msgstr "Pamiętaj mnie"
+
+msgid "Nie masz konta?"
+msgstr "Nie masz konta?"
+
+msgid "Zarejestruj się"
+msgstr "Zarejestruj się"
+
+msgid "Nieprawidłowy email lub hasło."
+msgstr "Nieprawidłowy email lub hasło."
+
+msgid "Zalogowano pomyślnie."
+msgstr "Zalogowano pomyślnie."
+
+msgid "Wylogowano pomyślnie."
+msgstr "Wylogowano pomyślnie."
+
+# Common actions
+msgid "Zapisz"
+msgstr "Zapisz"
+
+msgid "Anuluj"
+msgstr "Anuluj"
+
+msgid "Usuń"
+msgstr "Usuń"
+
+msgid "Edytuj"
+msgstr "Edytuj"
+
+msgid "Dodaj"
+msgstr "Dodaj"
+
+msgid "Pobierz"
+msgstr "Pobierz"
+
+msgid "Prześlij"
+msgstr "Prześlij"
+
+msgid "Szukaj"
+msgstr "Szukaj"
+
+msgid "Powrót"
+msgstr "Powrót"
+
+msgid "Potwierdź"
+msgstr "Potwierdź"
+
+# Files
+msgid "Prześlij plik"
+msgstr "Prześlij plik"
+
+msgid "Nazwa pliku"
+msgstr "Nazwa pliku"
+
+msgid "Rozmiar"
+msgstr "Rozmiar"
+
+msgid "Data przesłania"
+msgstr "Data przesłania"
+
+msgid "Akcje"
+msgstr "Akcje"
+
+msgid "Podgląd"
+msgstr "Podgląd"
+
+msgid "Brak plików"
+msgstr "Brak plików"
+
+msgid "Plik został przesłany pomyślnie."
+msgstr "Plik został przesłany pomyślnie."
+
+msgid "Plik został usunięty."
+msgstr "Plik został usunięty."
+
+# Users
+msgid "Nowy użytkownik"
+msgstr "Nowy użytkownik"
+
+msgid "Edytuj użytkownika"
+msgstr "Edytuj użytkownika"
+
+msgid "Administrator"
+msgstr "Administrator"
+
+msgid "Aktywny"
+msgstr "Aktywny"
+
+msgid "Użytkownik został dodany."
+msgstr "Użytkownik został dodany."
+
+msgid "Użytkownik został zaktualizowany."
+msgstr "Użytkownik został zaktualizowany."
+
+msgid "Użytkownik został usunięty."
+msgstr "Użytkownik został usunięty."
+
+# Permissions
+msgid "Zarządzaj uprawnieniami"
+msgstr "Zarządzaj uprawnieniami"
+
+msgid "Przyznaj dostęp"
+msgstr "Przyznaj dostęp"
+
+msgid "Usuń dostęp"
+msgstr "Usuń dostęp"
+
+msgid "Uprawnienia zostały zaktualizowane."
+msgstr "Uprawnienia zostały zaktualizowane."
+
+# Backups
+msgid "Utwórz backup"
+msgstr "Utwórz backup"
+
+msgid "Przywróć"
+msgstr "Przywróć"
+
+msgid "Backup został utworzony."
+msgstr "Backup został utworzony."
+
+msgid "Backup został przywrócony."
+msgstr "Backup został przywrócony."
+
+msgid "Backup został usunięty."
+msgstr "Backup został usunięty."
+
+# 2FA
+msgid "Weryfikacja dwuetapowa"
+msgstr "Weryfikacja dwuetapowa"
+
+msgid "Kod weryfikacyjny"
+msgstr "Kod weryfikacyjny"
+
+msgid "Włącz 2FA"
+msgstr "Włącz 2FA"
+
+msgid "Wyłącz 2FA"
+msgstr "Wyłącz 2FA"
+
+msgid "2FA zostało włączone."
+msgstr "2FA zostało włączone."
+
+msgid "2FA zostało wyłączone."
+msgstr "2FA zostało wyłączone."
+
+# Errors
+msgid "Brak dostępu"
+msgstr "Brak dostępu"
+
+msgid "Nie znaleziono"
+msgstr "Nie znaleziono"
+
+msgid "Zbyt wiele żądań"
+msgstr "Zbyt wiele żądań"
+
+msgid "Błąd serwera"
+msgstr "Błąd serwera"
+
+msgid "Wystąpił błąd. Spróbuj ponownie."
+msgstr "Wystąpił błąd. Spróbuj ponownie."

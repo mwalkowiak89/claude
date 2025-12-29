@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, render_template, send_file, abort, current_app
+from flask import Blueprint, render_template, send_file, abort, current_app, redirect, request, session, make_response
 from flask_login import login_required, current_user
 from app.models import File, UserFileAccess
 from app import limiter
@@ -81,3 +81,26 @@ def preview_file(file_id):
         file_path,
         mimetype='application/pdf'
     )
+
+
+@main_bp.route('/set-language/<language>')
+def set_language(language):
+    """Set the user's preferred language."""
+    supported_languages = current_app.config.get('BABEL_SUPPORTED_LOCALES', ['pl', 'en', 'de', 'pt', 'fr', 'es'])
+
+    if language not in supported_languages:
+        language = 'pl'
+
+    # Store in session
+    session['language'] = language
+
+    # Get the redirect URL (referrer or index)
+    next_page = request.referrer or '/'
+
+    # Create response with redirect
+    response = make_response(redirect(next_page))
+
+    # Also set a cookie for non-authenticated users (30 days)
+    response.set_cookie('language', language, max_age=30*24*60*60, samesite='Lax')
+
+    return response

@@ -1,0 +1,234 @@
+# Portuguese translations for PDF Manager.
+# Copyright (C) 2024 PDF Manager
+# This file is distributed under the same license as the PDF Manager project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PDF Manager 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language: pt\n"
+"Language-Team: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel\n"
+
+# Navigation
+msgid "Moje pliki"
+msgstr "Meus Arquivos"
+
+msgid "Administracja"
+msgstr "Administração"
+
+msgid "Dashboard"
+msgstr "Painel"
+
+msgid "Użytkownicy"
+msgstr "Usuários"
+
+msgid "Pliki"
+msgstr "Arquivos"
+
+msgid "Uprawnienia"
+msgstr "Permissões"
+
+msgid "Szablony Email"
+msgstr "Modelos de Email"
+
+msgid "Kopie zapasowe"
+msgstr "Backups"
+
+msgid "Bezpieczeństwo"
+msgstr "Segurança"
+
+msgid "Wyloguj"
+msgstr "Sair"
+
+msgid "Zmień język"
+msgstr "Alterar idioma"
+
+msgid "Przełącz tryb ciemny/jasny"
+msgstr "Alternar modo escuro/claro"
+
+msgid "Przełącz tryb ciemny"
+msgstr "Alternar modo escuro"
+
+msgid "Wszystkie prawa zastrzeżone."
+msgstr "Todos os direitos reservados."
+
+# Authentication
+msgid "Zaloguj się"
+msgstr "Entrar"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Hasło"
+msgstr "Senha"
+
+msgid "Pamiętaj mnie"
+msgstr "Lembrar-me"
+
+msgid "Nie masz konta?"
+msgstr "Não tem conta?"
+
+msgid "Zarejestruj się"
+msgstr "Cadastre-se"
+
+msgid "Nieprawidłowy email lub hasło."
+msgstr "Email ou senha inválidos."
+
+msgid "Zalogowano pomyślnie."
+msgstr "Login realizado com sucesso."
+
+msgid "Wylogowano pomyślnie."
+msgstr "Logout realizado com sucesso."
+
+# Common actions
+msgid "Zapisz"
+msgstr "Salvar"
+
+msgid "Anuluj"
+msgstr "Cancelar"
+
+msgid "Usuń"
+msgstr "Excluir"
+
+msgid "Edytuj"
+msgstr "Editar"
+
+msgid "Dodaj"
+msgstr "Adicionar"
+
+msgid "Pobierz"
+msgstr "Baixar"
+
+msgid "Prześlij"
+msgstr "Enviar"
+
+msgid "Szukaj"
+msgstr "Pesquisar"
+
+msgid "Powrót"
+msgstr "Voltar"
+
+msgid "Potwierdź"
+msgstr "Confirmar"
+
+# Files
+msgid "Prześlij plik"
+msgstr "Enviar Arquivo"
+
+msgid "Nazwa pliku"
+msgstr "Nome do arquivo"
+
+msgid "Rozmiar"
+msgstr "Tamanho"
+
+msgid "Data przesłania"
+msgstr "Data de envio"
+
+msgid "Akcje"
+msgstr "Ações"
+
+msgid "Podgląd"
+msgstr "Visualizar"
+
+msgid "Brak plików"
+msgstr "Nenhum arquivo"
+
+msgid "Plik został przesłany pomyślnie."
+msgstr "Arquivo enviado com sucesso."
+
+msgid "Plik został usunięty."
+msgstr "Arquivo excluído."
+
+# Users
+msgid "Nowy użytkownik"
+msgstr "Novo Usuário"
+
+msgid "Edytuj użytkownika"
+msgstr "Editar Usuário"
+
+msgid "Administrator"
+msgstr "Administrador"
+
+msgid "Aktywny"
+msgstr "Ativo"
+
+msgid "Użytkownik został dodany."
+msgstr "Usuário adicionado."
+
+msgid "Użytkownik został zaktualizowany."
+msgstr "Usuário atualizado."
+
+msgid "Użytkownik został usunięty."
+msgstr "Usuário excluído."
+
+# Permissions
+msgid "Zarządzaj uprawnieniami"
+msgstr "Gerenciar Permissões"
+
+msgid "Przyznaj dostęp"
+msgstr "Conceder Acesso"
+
+msgid "Usuń dostęp"
+msgstr "Remover Acesso"
+
+msgid "Uprawnienia zostały zaktualizowane."
+msgstr "Permissões atualizadas."
+
+# Backups
+msgid "Utwórz backup"
+msgstr "Criar Backup"
+
+msgid "Przywróć"
+msgstr "Restaurar"
+
+msgid "Backup został utworzony."
+msgstr "Backup criado."
+
+msgid "Backup został przywrócony."
+msgstr "Backup restaurado."
+
+msgid "Backup został usunięty."
+msgstr "Backup excluído."
+
+# 2FA
+msgid "Weryfikacja dwuetapowa"
+msgstr "Autenticação de Dois Fatores"
+
+msgid "Kod weryfikacyjny"
+msgstr "Código de Verificação"
+
+msgid "Włącz 2FA"
+msgstr "Ativar 2FA"
+
+msgid "Wyłącz 2FA"
+msgstr "Desativar 2FA"
+
+msgid "2FA zostało włączone."
+msgstr "2FA ativado."
+
+msgid "2FA zostało wyłączone."
+msgstr "2FA desativado."
+
+# Errors
+msgid "Brak dostępu"
+msgstr "Acesso Negado"
+
+msgid "Nie znaleziono"
+msgstr "Não Encontrado"
+
+msgid "Zbyt wiele żądań"
+msgstr "Muitas Requisições"
+
+msgid "Błąd serwera"
+msgstr "Erro do Servidor"
+
+msgid "Wystąpił błąd. Spróbuj ponownie."
+msgstr "Ocorreu um erro. Tente novamente."

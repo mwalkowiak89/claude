@@ -1,0 +1,234 @@
+# German translations for PDF Manager.
+# Copyright (C) 2024 PDF Manager
+# This file is distributed under the same license as the PDF Manager project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PDF Manager 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language: de\n"
+"Language-Team: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel\n"
+
+# Navigation
+msgid "Moje pliki"
+msgstr "Meine Dateien"
+
+msgid "Administracja"
+msgstr "Verwaltung"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Użytkownicy"
+msgstr "Benutzer"
+
+msgid "Pliki"
+msgstr "Dateien"
+
+msgid "Uprawnienia"
+msgstr "Berechtigungen"
+
+msgid "Szablony Email"
+msgstr "E-Mail-Vorlagen"
+
+msgid "Kopie zapasowe"
+msgstr "Backups"
+
+msgid "Bezpieczeństwo"
+msgstr "Sicherheit"
+
+msgid "Wyloguj"
+msgstr "Abmelden"
+
+msgid "Zmień język"
+msgstr "Sprache ändern"
+
+msgid "Przełącz tryb ciemny/jasny"
+msgstr "Dunkel-/Hellmodus umschalten"
+
+msgid "Przełącz tryb ciemny"
+msgstr "Dunkelmodus umschalten"
+
+msgid "Wszystkie prawa zastrzeżone."
+msgstr "Alle Rechte vorbehalten."
+
+# Authentication
+msgid "Zaloguj się"
+msgstr "Anmelden"
+
+msgid "Email"
+msgstr "E-Mail"
+
+msgid "Hasło"
+msgstr "Passwort"
+
+msgid "Pamiętaj mnie"
+msgstr "Angemeldet bleiben"
+
+msgid "Nie masz konta?"
+msgstr "Kein Konto?"
+
+msgid "Zarejestruj się"
+msgstr "Registrieren"
+
+msgid "Nieprawidłowy email lub hasło."
+msgstr "Ungültige E-Mail oder Passwort."
+
+msgid "Zalogowano pomyślnie."
+msgstr "Erfolgreich angemeldet."
+
+msgid "Wylogowano pomyślnie."
+msgstr "Erfolgreich abgemeldet."
+
+# Common actions
+msgid "Zapisz"
+msgstr "Speichern"
+
+msgid "Anuluj"
+msgstr "Abbrechen"
+
+msgid "Usuń"
+msgstr "Löschen"
+
+msgid "Edytuj"
+msgstr "Bearbeiten"
+
+msgid "Dodaj"
+msgstr "Hinzufügen"
+
+msgid "Pobierz"
+msgstr "Herunterladen"
+
+msgid "Prześlij"
+msgstr "Hochladen"
+
+msgid "Szukaj"
+msgstr "Suchen"
+
+msgid "Powrót"
+msgstr "Zurück"
+
+msgid "Potwierdź"
+msgstr "Bestätigen"
+
+# Files
+msgid "Prześlij plik"
+msgstr "Datei hochladen"
+
+msgid "Nazwa pliku"
+msgstr "Dateiname"
+
+msgid "Rozmiar"
+msgstr "Größe"
+
+msgid "Data przesłania"
+msgstr "Hochgeladen am"
+
+msgid "Akcje"
+msgstr "Aktionen"
+
+msgid "Podgląd"
+msgstr "Vorschau"
+
+msgid "Brak plików"
+msgstr "Keine Dateien"
+
+msgid "Plik został przesłany pomyślnie."
+msgstr "Datei erfolgreich hochgeladen."
+
+msgid "Plik został usunięty."
+msgstr "Datei gelöscht."
+
+# Users
+msgid "Nowy użytkownik"
+msgstr "Neuer Benutzer"
+
+msgid "Edytuj użytkownika"
+msgstr "Benutzer bearbeiten"
+
+msgid "Administrator"
+msgstr "Administrator"
+
+msgid "Aktywny"
+msgstr "Aktiv"
+
+msgid "Użytkownik został dodany."
+msgstr "Benutzer hinzugefügt."
+
+msgid "Użytkownik został zaktualizowany."
+msgstr "Benutzer aktualisiert."
+
+msgid "Użytkownik został usunięty."
+msgstr "Benutzer gelöscht."
+
+# Permissions
+msgid "Zarządzaj uprawnieniami"
+msgstr "Berechtigungen verwalten"
+
+msgid "Przyznaj dostęp"
+msgstr "Zugriff gewähren"
+
+msgid "Usuń dostęp"
+msgstr "Zugriff entfernen"
+
+msgid "Uprawnienia zostały zaktualizowane."
+msgstr "Berechtigungen aktualisiert."
+
+# Backups
+msgid "Utwórz backup"
+msgstr "Backup erstellen"
+
+msgid "Przywróć"
+msgstr "Wiederherstellen"
+
+msgid "Backup został utworzony."
+msgstr "Backup erstellt."
+
+msgid "Backup został przywrócony."
+msgstr "Backup wiederhergestellt."
+
+msgid "Backup został usunięty."
+msgstr "Backup gelöscht."
+
+# 2FA
+msgid "Weryfikacja dwuetapowa"
+msgstr "Zwei-Faktor-Authentifizierung"
+
+msgid "Kod weryfikacyjny"
+msgstr "Verifizierungscode"
+
+msgid "Włącz 2FA"
+msgstr "2FA aktivieren"
+
+msgid "Wyłącz 2FA"
+msgstr "2FA deaktivieren"
+
+msgid "2FA zostało włączone."
+msgstr "2FA aktiviert."
+
+msgid "2FA zostało wyłączone."
+msgstr "2FA deaktiviert."
+
+# Errors
+msgid "Brak dostępu"
+msgstr "Zugriff verweigert"
+
+msgid "Nie znaleziono"
+msgstr "Nicht gefunden"
+
+msgid "Zbyt wiele żądań"
+msgstr "Zu viele Anfragen"
+
+msgid "Błąd serwera"
+msgstr "Serverfehler"
+
+msgid "Wystąpił błąd. Spróbuj ponownie."
+msgstr "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."

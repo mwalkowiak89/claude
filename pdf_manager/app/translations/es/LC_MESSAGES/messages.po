@@ -1,0 +1,234 @@
+# Spanish translations for PDF Manager.
+# Copyright (C) 2024 PDF Manager
+# This file is distributed under the same license as the PDF Manager project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PDF Manager 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language: es\n"
+"Language-Team: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel\n"
+
+# Navigation
+msgid "Moje pliki"
+msgstr "Mis Archivos"
+
+msgid "Administracja"
+msgstr "Administración"
+
+msgid "Dashboard"
+msgstr "Panel de Control"
+
+msgid "Użytkownicy"
+msgstr "Usuarios"
+
+msgid "Pliki"
+msgstr "Archivos"
+
+msgid "Uprawnienia"
+msgstr "Permisos"
+
+msgid "Szablony Email"
+msgstr "Plantillas de Email"
+
+msgid "Kopie zapasowe"
+msgstr "Copias de Seguridad"
+
+msgid "Bezpieczeństwo"
+msgstr "Seguridad"
+
+msgid "Wyloguj"
+msgstr "Cerrar Sesión"
+
+msgid "Zmień język"
+msgstr "Cambiar idioma"
+
+msgid "Przełącz tryb ciemny/jasny"
+msgstr "Alternar modo oscuro/claro"
+
+msgid "Przełącz tryb ciemny"
+msgstr "Alternar modo oscuro"
+
+msgid "Wszystkie prawa zastrzeżone."
+msgstr "Todos los derechos reservados."
+
+# Authentication
+msgid "Zaloguj się"
+msgstr "Iniciar Sesión"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Hasło"
+msgstr "Contraseña"
+
+msgid "Pamiętaj mnie"
+msgstr "Recordarme"
+
+msgid "Nie masz konta?"
+msgstr "¿No tienes cuenta?"
+
+msgid "Zarejestruj się"
+msgstr "Regístrate"
+
+msgid "Nieprawidłowy email lub hasło."
+msgstr "Email o contraseña inválidos."
+
+msgid "Zalogowano pomyślnie."
+msgstr "Sesión iniciada correctamente."
+
+msgid "Wylogowano pomyślnie."
+msgstr "Sesión cerrada correctamente."
+
+# Common actions
+msgid "Zapisz"
+msgstr "Guardar"
+
+msgid "Anuluj"
+msgstr "Cancelar"
+
+msgid "Usuń"
+msgstr "Eliminar"
+
+msgid "Edytuj"
+msgstr "Editar"
+
+msgid "Dodaj"
+msgstr "Añadir"
+
+msgid "Pobierz"
+msgstr "Descargar"
+
+msgid "Prześlij"
+msgstr "Subir"
+
+msgid "Szukaj"
+msgstr "Buscar"
+
+msgid "Powrót"
+msgstr "Volver"
+
+msgid "Potwierdź"
+msgstr "Confirmar"
+
+# Files
+msgid "Prześlij plik"
+msgstr "Subir Archivo"
+
+msgid "Nazwa pliku"
+msgstr "Nombre del archivo"
+
+msgid "Rozmiar"
+msgstr "Tamaño"
+
+msgid "Data przesłania"
+msgstr "Fecha de subida"
+
+msgid "Akcje"
+msgstr "Acciones"
+
+msgid "Podgląd"
+msgstr "Vista previa"
+
+msgid "Brak plików"
+msgstr "Sin archivos"
+
+msgid "Plik został przesłany pomyślnie."
+msgstr "Archivo subido correctamente."
+
+msgid "Plik został usunięty."
+msgstr "Archivo eliminado."
+
+# Users
+msgid "Nowy użytkownik"
+msgstr "Nuevo Usuario"
+
+msgid "Edytuj użytkownika"
+msgstr "Editar Usuario"
+
+msgid "Administrator"
+msgstr "Administrador"
+
+msgid "Aktywny"
+msgstr "Activo"
+
+msgid "Użytkownik został dodany."
+msgstr "Usuario añadido."
+
+msgid "Użytkownik został zaktualizowany."
+msgstr "Usuario actualizado."
+
+msgid "Użytkownik został usunięty."
+msgstr "Usuario eliminado."
+
+# Permissions
+msgid "Zarządzaj uprawnieniami"
+msgstr "Gestionar Permisos"
+
+msgid "Przyznaj dostęp"
+msgstr "Conceder Acceso"
+
+msgid "Usuń dostęp"
+msgstr "Revocar Acceso"
+
+msgid "Uprawnienia zostały zaktualizowane."
+msgstr "Permisos actualizados."
+
+# Backups
+msgid "Utwórz backup"
+msgstr "Crear Copia de Seguridad"
+
+msgid "Przywróć"
+msgstr "Restaurar"
+
+msgid "Backup został utworzony."
+msgstr "Copia de seguridad creada."
+
+msgid "Backup został przywrócony."
+msgstr "Copia de seguridad restaurada."
+
+msgid "Backup został usunięty."
+msgstr "Copia de seguridad eliminada."
+
+# 2FA
+msgid "Weryfikacja dwuetapowa"
+msgstr "Autenticación de Dos Factores"
+
+msgid "Kod weryfikacyjny"
+msgstr "Código de Verificación"
+
+msgid "Włącz 2FA"
+msgstr "Activar 2FA"
+
+msgid "Wyłącz 2FA"
+msgstr "Desactivar 2FA"
+
+msgid "2FA zostało włączone."
+msgstr "2FA activado."
+
+msgid "2FA zostało wyłączone."
+msgstr "2FA desactivado."
+
+# Errors
+msgid "Brak dostępu"
+msgstr "Acceso Denegado"
+
+msgid "Nie znaleziono"
+msgstr "No Encontrado"
+
+msgid "Zbyt wiele żądań"
+msgstr "Demasiadas Solicitudes"
+
+msgid "Błąd serwera"
+msgstr "Error del Servidor"
+
+msgid "Wystąpił błąd. Spróbuj ponownie."
+msgstr "Ocurrió un error. Inténtelo de nuevo."

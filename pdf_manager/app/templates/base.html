@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" data-bs-theme="light">
+<html lang="{{ get_locale() }}" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,46 +33,46 @@
                     <li class="nav-item">
                         <a class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}"
                            href="{{ url_for('main.index') }}">
-                            <i class="bi bi-folder2-open me-1"></i> Moje pliki
+                            <i class="bi bi-folder2-open me-1"></i> {{ _('Moje pliki') }}
                         </a>
                     </li>
                     {% if current_user.is_admin %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {% if 'admin' in request.endpoint %}active{% endif %}"
                            href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="bi bi-gear-fill me-1"></i> Administracja
+                            <i class="bi bi-gear-fill me-1"></i> {{ _('Administracja') }}
                         </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('admin.dashboard') }}">
-                                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                                    <i class="bi bi-speedometer2 me-2"></i> {{ _('Dashboard') }}
                                 </a>
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('admin.users') }}">
-                                    <i class="bi bi-people me-2"></i> Użytkownicy
+                                    <i class="bi bi-people me-2"></i> {{ _('Użytkownicy') }}
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('admin.files') }}">
-                                    <i class="bi bi-file-earmark-pdf me-2"></i> Pliki
+                                    <i class="bi bi-file-earmark-pdf me-2"></i> {{ _('Pliki') }}
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('admin.access_overview') }}">
-                                    <i class="bi bi-shield-lock me-2"></i> Uprawnienia
+                                    <i class="bi bi-shield-lock me-2"></i> {{ _('Uprawnienia') }}
                                 </a>
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('admin.email_templates') }}">
-                                    <i class="bi bi-envelope me-2"></i> Szablony Email
+                                    <i class="bi bi-envelope me-2"></i> {{ _('Szablony Email') }}
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('admin.backups') }}">
-                                    <i class="bi bi-archive me-2"></i> Kopie zapasowe
+                                    <i class="bi bi-archive me-2"></i> {{ _('Kopie zapasowe') }}
                                 </a>
                             </li>
                         </ul>
@@ -81,10 +81,28 @@
                 </ul>
 
                 <ul class="navbar-nav align-items-center">
+                    <!-- Language Switcher -->
+                    <li class="nav-item dropdown me-2">
+                        <a class="nav-link dropdown-toggle py-1 px-2" href="#" role="button" data-bs-toggle="dropdown"
+                           title="{{ _('Zmień język') }}">
+                            <span class="me-1">{{ languages[get_locale()].flag }}</span>
+                            <span class="d-none d-md-inline">{{ get_locale()|upper }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            {% for code, lang in languages.items() %}
+                            <li>
+                                <a class="dropdown-item {% if get_locale() == code %}active{% endif %}"
+                                   href="{{ url_for('main.set_language', language=code) }}">
+                                    <span class="me-2">{{ lang.flag }}</span> {{ lang.name }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
                     <!-- Dark Mode Toggle -->
                     <li class="nav-item me-2">
                         <button type="button" class="dark-mode-toggle" id="darkModeToggle"
-                                title="Przełącz tryb ciemny/jasny" aria-label="Przełącz tryb ciemny">
+                                title="{{ _('Przełącz tryb ciemny/jasny') }}" aria-label="{{ _('Przełącz tryb ciemny') }}">
                             <i class="bi bi-moon-stars-fill" id="darkModeIcon"></i>
                         </button>
                     </li>
@@ -99,7 +117,7 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('auth.security_settings') }}">
-                                    <i class="bi bi-shield-lock me-2"></i> Bezpieczeństwo
+                                    <i class="bi bi-shield-lock me-2"></i> {{ _('Bezpieczeństwo') }}
                                     {% if current_user.is_admin and not current_user.otp_enabled %}
                                     <span class="badge bg-danger ms-2">!</span>
                                     {% endif %}
@@ -108,18 +126,36 @@
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('auth.logout') }}">
-                                    <i class="bi bi-box-arrow-right me-2"></i> Wyloguj
+                                    <i class="bi bi-box-arrow-right me-2"></i> {{ _('Wyloguj') }}
                                 </a>
                             </li>
                         </ul>
                     </li>
                 </ul>
                 {% else %}
-                <!-- Dark Mode Toggle for non-authenticated users -->
-                <ul class="navbar-nav ms-auto">
+                <!-- Language and Dark Mode Toggle for non-authenticated users -->
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <!-- Language Switcher -->
+                    <li class="nav-item dropdown me-2">
+                        <a class="nav-link dropdown-toggle py-1 px-2" href="#" role="button" data-bs-toggle="dropdown"
+                           title="{{ _('Zmień język') }}">
+                            <span class="me-1">{{ languages[get_locale()].flag }}</span>
+                            <span class="d-none d-md-inline">{{ get_locale()|upper }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            {% for code, lang in languages.items() %}
+                            <li>
+                                <a class="dropdown-item {% if get_locale() == code %}active{% endif %}"
+                                   href="{{ url_for('main.set_language', language=code) }}">
+                                    <span class="me-2">{{ lang.flag }}</span> {{ lang.name }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <button type="button" class="dark-mode-toggle" id="darkModeToggle"
-                                title="Przełącz tryb ciemny/jasny" aria-label="Przełącz tryb ciemny">
+                                title="{{ _('Przełącz tryb ciemny/jasny') }}" aria-label="{{ _('Przełącz tryb ciemny') }}">
                             <i class="bi bi-moon-stars-fill" id="darkModeIcon"></i>
                         </button>
                     </li>
@@ -160,7 +196,7 @@
     <!-- Footer -->
     <footer class="bg-light py-4 mt-auto border-top">
         <div class="container text-center text-muted">
-            <small>&copy; {{ now().year if now is defined else '2024' }} PDF Manager. Wszystkie prawa zastrzeżone.</small>
+            <small>&copy; {{ now().year if now is defined else '2024' }} PDF Manager. {{ _('Wszystkie prawa zastrzeżone.') }}</small>
         </div>
     </footer>
 

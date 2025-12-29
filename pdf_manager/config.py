@@ -34,3 +34,15 @@ class Config:
     RATELIMIT_HEADERS_ENABLED = True
     # IPs that are exempt from rate limiting (localhost for development)
     RATELIMIT_WHITELIST = os.environ.get('RATELIMIT_WHITELIST', '').split(',') if os.environ.get('RATELIMIT_WHITELIST') else []
+
+    # Babel / Internationalization settings
+    BABEL_DEFAULT_LOCALE = 'pl'
+    BABEL_SUPPORTED_LOCALES = ['pl', 'en', 'de', 'pt', 'fr', 'es']
+    LANGUAGES = {
+        'pl': {'name': 'Polski', 'flag': '🇵🇱'},
+        'en': {'name': 'English', 'flag': '🇬🇧'},
+        'de': {'name': 'Deutsch', 'flag': '🇩🇪'},
+        'pt': {'name': 'Português', 'flag': '🇵🇹'},
+        'fr': {'name': 'Français', 'flag': '🇫🇷'},
+        'es': {'name': 'Español', 'flag': '🇪🇸'}
+    }
