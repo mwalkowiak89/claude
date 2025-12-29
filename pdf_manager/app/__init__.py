@@ -5,6 +5,7 @@ from flask import Flask, request, redirect, url_for
 from flask_login import LoginManager, current_user
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from flask_migrate import Migrate
 from config import Config
 from app.models import db, User, seed_email_templates
 from app.email import mail
@@ -43,6 +44,7 @@ def create_app(config_class=Config):
 
     # Initialize extensions
     db.init_app(app)
+    migrate = Migrate(app, db)
     login_manager.init_app(app)
     mail.init_app(app)
 

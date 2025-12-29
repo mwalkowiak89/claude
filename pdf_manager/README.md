@@ -1,72 +1,104 @@
 # PDF Manager
 
-System zarządzania dostępem do plików PDF z automatycznymi powiadomieniami email.
+Aplikacja Flask do zarządzania dostępem do plików PDF z uwierzytelnianiem użytkowników.
 
-## Funkcjonalności
+## Funkcje
 
-- System logowania (użytkownicy + administratorzy)
-- Użytkownicy widzą tylko pliki do których mają dostęp
-- Administrator może:
-  - Uploadować pliki PDF
-  - Zarządzać użytkownikami
-  - Przypisywać dostęp do plików
-- Automatyczne powiadomienia email przy aktualizacji plików
-- Responsive UI z Bootstrap 5
+- Uwierzytelnianie użytkowników (użytkownicy + administratorzy)
+- Dwuskładnikowe logowanie (2FA) dla administratorów
+- Zarządzanie plikami PDF z wersjonowaniem
+- Kontrola dostępu do plików
+- Powiadomienia email o nowych plikach i aktualizacjach
+- Wielojęzyczne szablony email (PL, EN, DE, PT, FR, ES)
+- Rate limiting (ochrona przed brute-force)
+- Tryb ciemny (Dark Mode)
 
 ## Instalacja
 
-1. Sklonuj repozytorium i przejdź do katalogu projektu:
 ```bash
+# Klonowanie repozytorium
+git clone <repository-url>
 cd pdf_manager
-```
 
-2. Utwórz i aktywuj wirtualne środowisko:
-```bash
+# Utworzenie wirtualnego środowiska
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-# lub
-venv\Scripts\activate  # Windows
-```
+# lub: venv\Scripts\activate  # Windows
 
-3. Zainstaluj zależności:
-```bash
+# Instalacja zależności
 pip install -r requirements.txt
-```
 
-4. Skopiuj plik konfiguracyjny i dostosuj ustawienia:
-```bash
+# Konfiguracja zmiennych środowiskowych
 cp .env.example .env
-# Edytuj .env i ustaw odpowiednie wartości
+# Edytuj .env i ustaw wartości
+
+# Inicjalizacja bazy danych
+flask db init
+flask db migrate -m "Initial migration"
+flask db upgrade
+
+# Uruchomienie aplikacji
+flask run
 ```
 
-5. Uruchom aplikację:
+## Migracje bazy danych
+
+Projekt używa Flask-Migrate do zarządzania schematem bazy danych.
+
+### Pierwsza konfiguracja:
 ```bash
-python run.py
+flask db init
+flask db migrate -m "Initial migration"
+flask db upgrade
 ```
 
-6. Otwórz przeglądarkę: http://localhost:5000
+### Po zmianach w models.py:
+```bash
+flask db migrate -m "Opis zmian"
+flask db upgrade
+```
 
-## Domyślne konto administratora
+### Cofnięcie ostatniej migracji:
+```bash
+flask db downgrade
+```
 
-- **Email:** admin@example.com
-- **Hasło:** admin123
+### Podgląd historii migracji:
+```bash
+flask db history
+```
 
-**Zmień hasło po pierwszym logowaniu!**
+### Podgląd aktualnej wersji:
+```bash
+flask db current
+```
 
-## Konfiguracja Email
+## Konfiguracja
 
-Aby włączyć powiadomienia email, ustaw w pliku `.env`:
+Utwórz plik `.env` w głównym katalogu projektu:
 
 ```env
+SECRET_KEY=twoj-tajny-klucz
+DATABASE_URL=sqlite:///app.db
+
+# Email (opcjonalnie)
 MAIL_SERVER=smtp.gmail.com
 MAIL_PORT=587
 MAIL_USE_TLS=true
-MAIL_USERNAME=twoj-email@gmail.com
+MAIL_USERNAME=twoj@email.com
 MAIL_PASSWORD=haslo-aplikacji
-MAIL_DEFAULT_SENDER=noreply@twojaaplikacja.pl
+
+# Rate limiting (opcjonalnie)
+RATELIMIT_WHITELIST=127.0.0.1
 ```
 
-Dla Gmail zaleca się użycie "hasła aplikacji" zamiast głównego hasła.
+## Domyślne konto administratora
+
+Po pierwszym uruchomieniu tworzone jest konto:
+- Email: `admin@example.com`
+- Hasło: `admin123`
+
+**Ważne:** Zmień hasło po pierwszym logowaniu!
 
 ## Struktura projektu
 
@@ -76,28 +108,19 @@ pdf_manager/
 │   ├── __init__.py          # Fabryka aplikacji
 │   ├── models.py             # Modele bazy danych
 │   ├── forms.py              # Formularze WTForms
-│   ├── email.py              # Obsługa emaili
+│   ├── email.py              # Funkcje wysyłki email
 │   ├── routes/
-│   │   ├── auth.py           # Logowanie/wylogowanie
-│   │   ├── main.py           # Główne widoki użytkownika
+│   │   ├── auth.py           # Logowanie, 2FA
+│   │   ├── main.py           # Widoki użytkownika
 │   │   └── admin.py          # Panel administracyjny
-│   ├── templates/            # Szablony HTML
-│   └── static/               # CSS, JS, obrazy
+│   ├── templates/            # Szablony Jinja2
+│   └── static/               # Pliki statyczne (CSS)
+├── migrations/               # Migracje bazy danych
 ├── uploads/                  # Przesłane pliki PDF
 ├── config.py                 # Konfiguracja
-├── requirements.txt          # Zależności
-└── run.py                    # Punkt wejścia
+├── run.py                    # Punkt wejścia
+└── requirements.txt          # Zależności Python
 ```
-
-## Technologie
-
-- Flask 3.0
-- Flask-Login (autentykacja)
-- Flask-SQLAlchemy (ORM)
-- Flask-Mail (powiadomienia email)
-- Flask-WTF (formularze)
-- Bootstrap 5 (UI)
-- SQLite (baza danych)
 
 ## Licencja
 
