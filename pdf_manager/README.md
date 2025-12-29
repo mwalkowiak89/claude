@@ -12,6 +12,7 @@ Aplikacja Flask do zarządzania dostępem do plików PDF z uwierzytelnianiem uż
 - Wielojęzyczne szablony email (PL, EN, DE, PT, FR, ES)
 - Rate limiting (ochrona przed brute-force)
 - Tryb ciemny (Dark Mode)
+- Automatyczne backupy bazy i plików z panel administracyjnym
 
 ## Instalacja
 
@@ -73,6 +74,48 @@ flask db history
 flask db current
 ```
 
+## Kopie zapasowe (Backup)
+
+System backupów umożliwia tworzenie kopii zapasowych bazy danych i plików PDF.
+
+### Ręczne tworzenie backupu:
+```bash
+python backup.py
+```
+
+### Zarządzanie backupami z CLI:
+```bash
+# Utworzenie backupu
+python backup.py --create
+
+# Lista backupów
+python backup.py --list
+
+# Usunięcie starych backupów (domyślnie >7 dni)
+python backup.py --cleanup
+
+# Przywrócenie backupu
+python backup.py --restore nazwa_backupu.zip
+```
+
+### Automatyczne backupy (cron):
+```bash
+# Edytuj crontab
+crontab -e
+
+# Dodaj linię (backup codziennie o 2:00):
+0 2 * * * cd /ścieżka/do/projektu && /ścieżka/do/venv/bin/python backup.py >> backups/backup.log 2>&1
+```
+
+### Panel administracyjny:
+Backupy można także zarządzać z poziomu panelu administracyjnego pod adresem `/admin/backups`:
+- Tworzenie nowych backupów
+- Pobieranie istniejących backupów
+- Przywracanie z backupu (wymaga potwierdzenia hasłem)
+- Usuwanie niepotrzebnych backupów
+
+**Uwaga:** Backupy są automatycznie przechowywane przez 7 dni.
+
 ## Konfiguracja
 
 Utwórz plik `.env` w głównym katalogu projektu:
@@ -117,6 +160,9 @@ pdf_manager/
 │   └── static/               # Pliki statyczne (CSS)
 ├── migrations/               # Migracje bazy danych
 ├── uploads/                  # Przesłane pliki PDF
+├── backups/                  # Kopie zapasowe
+│   └── daily/                # Codzienne backupy
+├── backup.py                 # Skrypt backupu
 ├── config.py                 # Konfiguracja
 ├── run.py                    # Punkt wejścia
 └── requirements.txt          # Zależności Python

@@ -142,3 +142,16 @@ class TwoFactorDisableForm(FlaskForm):
         Length(min=6, max=6, message='Kod musi mieć 6 cyfr')
     ])
     submit = SubmitField('Wyłącz 2FA')
+
+
+# ===== Backup Forms =====
+
+class BackupRestoreForm(FlaskForm):
+    """Form for confirming backup restore."""
+    password = PasswordField('Hasło administratora', validators=[
+        DataRequired(message='Hasło jest wymagane')
+    ])
+    confirmation = StringField('Wpisz PRZYWRÓĆ aby potwierdzić', validators=[
+        DataRequired(message='Potwierdzenie jest wymagane')
+    ])
+    submit = SubmitField('Przywróć backup')

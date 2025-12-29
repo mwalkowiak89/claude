@@ -2,13 +2,14 @@ import os
 import uuid
 from datetime import datetime
 from functools import wraps
-from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app, abort, jsonify
+from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app, abort, jsonify, send_file
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 from app.models import db, User, File, UserFileAccess, EmailTemplate, LANGUAGES, TEMPLATE_TYPES
 from app.forms import (
     RegistrationForm, FileUploadForm, FileUpdateForm,
-    FileAccessForm, EditUserForm, ChangePasswordForm, EmailTemplateForm
+    FileAccessForm, EditUserForm, ChangePasswordForm, EmailTemplateForm,
+    BackupRestoreForm
 )
 from app.email import send_file_update_notification, send_bulk_access_notifications
 from app import limiter
@@ -652,3 +653,207 @@ def reset_email_template():
 
     flash('Szablon został przywrócony do domyślnego.', 'success')
     return redirect(url_for('admin.email_templates', type=template_type, lang=language))
+
+
+# ===== BACKUP MANAGEMENT =====
+
+@admin_bp.route('/backups')
+@login_required
+@admin_required
+@admin_limiter
+def backups():
+    """List all backups."""
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+    from backup import list_backups, DAILY_BACKUP_DIR
+
+    backup_list = list_backups()
+
+    # Calculate total size
+    total_size = sum(b['size_mb'] for b in backup_list)
+
+    # Get last backup info
+    last_backup = backup_list[0] if backup_list else None
+
+    return render_template(
+        'admin/backups.html',
+        title='Kopie zapasowe',
+        backups=backup_list,
+        total_size=round(total_size, 2),
+        last_backup=last_backup,
+        backup_count=len(backup_list)
+    )
+
+
+@admin_bp.route('/backups/create', methods=['POST'])
+@login_required
+@admin_required
+@limiter.limit("5 per hour")
+def create_backup():
+    """Create a new backup manually."""
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+    from backup import create_backup as do_create_backup
+
+    try:
+        # Change to project directory for backup
+        original_dir = os.getcwd()
+        project_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        os.chdir(project_dir)
+
+        try:
+            backup_info = do_create_backup(notify_admins=False)
+            flash(f'Backup utworzony: {backup_info["filename"]} ({backup_info["size_mb"]:.2f} MB)', 'success')
+        finally:
+            os.chdir(original_dir)
+
+    except Exception as e:
+        flash(f'Błąd tworzenia backupu: {str(e)}', 'danger')
+
+    return redirect(url_for('admin.backups'))
+
+
+@admin_bp.route('/backups/<filename>/download')
+@login_required
+@admin_required
+def download_backup(filename):
+    """Download a backup file."""
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+    from backup import get_backup_path
+
+    # Validate filename (prevent directory traversal)
+    if '..' in filename or '/' in filename or '\\' in filename:
+        abort(400)
+
+    if not filename.startswith('backup_') or not filename.endswith('.zip'):
+        abort(400)
+
+    project_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    backup_path = os.path.join(project_dir, 'backups', 'daily', filename)
+
+    if not os.path.exists(backup_path):
+        flash('Backup nie znaleziony.', 'danger')
+        return redirect(url_for('admin.backups'))
+
+    return send_file(
+        backup_path,
+        as_attachment=True,
+        download_name=filename
+    )
+
+
+@admin_bp.route('/backups/<filename>/delete', methods=['POST'])
+@login_required
+@admin_required
+def delete_backup(filename):
+    """Delete a backup file."""
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+    from backup import delete_backup as do_delete_backup, DAILY_BACKUP_DIR
+
+    # Validate filename
+    if '..' in filename or '/' in filename or '\\' in filename:
+        abort(400)
+
+    if not filename.startswith('backup_') or not filename.endswith('.zip'):
+        abort(400)
+
+    try:
+        project_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        original_dir = os.getcwd()
+        os.chdir(project_dir)
+
+        try:
+            do_delete_backup(filename)
+            flash(f'Backup usunięty: {filename}', 'success')
+        finally:
+            os.chdir(original_dir)
+
+    except FileNotFoundError:
+        flash('Backup nie znaleziony.', 'danger')
+    except Exception as e:
+        flash(f'Błąd usuwania backupu: {str(e)}', 'danger')
+
+    return redirect(url_for('admin.backups'))
+
+
+@admin_bp.route('/backups/<filename>/restore', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def restore_backup(filename):
+    """Restore from a backup file."""
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+    from backup import restore_backup as do_restore_backup, get_backup_info, DAILY_BACKUP_DIR
+
+    # Validate filename
+    if '..' in filename or '/' in filename or '\\' in filename:
+        abort(400)
+
+    if not filename.startswith('backup_') or not filename.endswith('.zip'):
+        abort(400)
+
+    project_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    backup_path = os.path.join(project_dir, 'backups', 'daily', filename)
+
+    if not os.path.exists(backup_path):
+        flash('Backup nie znaleziony.', 'danger')
+        return redirect(url_for('admin.backups'))
+
+    # Get backup info
+    from pathlib import Path
+    backup_info = get_backup_info(Path(backup_path))
+
+    form = BackupRestoreForm()
+
+    if form.validate_on_submit():
+        # Verify password
+        if not current_user.check_password(form.password.data):
+            flash('Nieprawidłowe hasło.', 'danger')
+            return render_template(
+                'admin/backup_restore.html',
+                title='Przywróć backup',
+                form=form,
+                backup=backup_info,
+                filename=filename
+            )
+
+        # Verify confirmation
+        if form.confirmation.data.strip().upper() != 'PRZYWRÓĆ':
+            flash('Nieprawidłowe potwierdzenie. Wpisz PRZYWRÓĆ.', 'danger')
+            return render_template(
+                'admin/backup_restore.html',
+                title='Przywróć backup',
+                form=form,
+                backup=backup_info,
+                filename=filename
+            )
+
+        try:
+            original_dir = os.getcwd()
+            os.chdir(project_dir)
+
+            try:
+                result = do_restore_backup(filename)
+                flash(f'Backup przywrócony pomyślnie! Przywrócono {result["files_restored"]} plików. Zaloguj się ponownie.', 'success')
+
+                # Force logout after restore
+                from flask_login import logout_user
+                logout_user()
+                return redirect(url_for('auth.login'))
+
+            finally:
+                os.chdir(original_dir)
+
+        except Exception as e:
+            flash(f'Błąd przywracania backupu: {str(e)}', 'danger')
+            return redirect(url_for('admin.backups'))
+
+    return render_template(
+        'admin/backup_restore.html',
+        title='Przywróć backup',
+        form=form,
+        backup=backup_info,
+        filename=filename
+    )
