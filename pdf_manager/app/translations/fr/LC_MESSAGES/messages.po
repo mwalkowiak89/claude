@@ -18,1619 +18,1019 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-# Navigation
-#: app/templates/base.html:81 app/templates/main/file_view.html:8
-#: app/templates/main/index.html:8
 msgid "Moje pliki"
 msgstr "Mes Fichiers"
 
-#: app/templates/base.html:88
 msgid "Administracja"
 msgstr "Administration"
 
-#: app/templates/admin/download_logs.html:8
-#: app/templates/admin/settings.html:43 app/templates/base.html:93
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
-#: app/templates/admin/access_overview.html:23
-#: app/templates/admin/change_password.html:12
-#: app/templates/admin/user_form.html:12 app/templates/admin/users.html:8
-#: app/templates/base.html:99
 msgid "Użytkownicy"
 msgstr "Utilisateurs"
 
-#: app/templates/admin/access_form.html:12
-#: app/templates/admin/file_update.html:12
-#: app/templates/admin/file_upload.html:12 app/templates/base.html:104
 msgid "Pliki"
 msgstr "Fichiers"
 
-#: app/templates/admin/access_form.html:14 app/templates/admin/files.html:71
-#: app/templates/base.html:109 app/templates/main/file_view.html:43
 msgid "Uprawnienia"
 msgstr "Permissions"
 
-#: app/templates/admin/email_template_edit.html:12
-#: app/templates/admin/email_templates.html:11
-#: app/templates/admin/email_templates.html:18 app/templates/base.html:115
 msgid "Szablony Email"
 msgstr "Modèles d'Email"
 
-#: app/templates/admin/backup_restore.html:12
-#: app/templates/admin/backups.html:11 app/templates/admin/backups.html:18
-#: app/templates/base.html:120
 msgid "Kopie zapasowe"
 msgstr "Sauvegardes"
 
-#: app/templates/admin/download_logs.html:11
-#: app/templates/admin/download_logs.html:18 app/templates/base.html:126
 msgid "Historia pobrań"
 msgstr "Historique des téléchargements"
 
-# Branding & Settings
-#: app/templates/admin/settings.html:46 app/templates/base.html:131
 msgid "Ustawienia"
 msgstr "Paramètres"
 
-#: app/templates/base.html:143 app/templates/base.html:197
 msgid "Zmień język"
 msgstr "Changer de langue"
 
-#: app/templates/base.html:161 app/templates/base.html:214
 msgid "Przełącz tryb ciemny/jasny"
 msgstr "Basculer mode sombre/clair"
 
-#: app/templates/base.html:161 app/templates/base.html:214
 msgid "Przełącz tryb ciemny"
 msgstr "Basculer mode sombre"
 
-#: app/templates/base.html:176
 msgid "Bezpieczeństwo"
 msgstr "Sécurité"
 
-#: app/templates/base.html:185
 msgid "Wyloguj"
 msgstr "Déconnexion"
 
-#: app/templates/base.html:255
 msgid "Wszystkie prawa zastrzeżone."
 msgstr "Tous droits réservés."
 
-#: app/templates/admin/access_form.html:8
-#: app/templates/admin/backup_restore.html:8 app/templates/admin/backups.html:8
-#: app/templates/admin/change_password.html:8
-#: app/templates/admin/dashboard.html:8
-#: app/templates/admin/email_template_edit.html:8
-#: app/templates/admin/email_templates.html:8
-#: app/templates/admin/file_update.html:8
-#: app/templates/admin/file_upload.html:8 app/templates/admin/user_form.html:8
-#, fuzzy
 msgid "Panel administracyjny"
-msgstr "Administration"
+msgstr "Panneau d'administration"
 
-#: app/templates/admin/access_form.html:24
-#, fuzzy
 msgid "Zarządzaj dostępem"
-msgstr "Accorder l'Accès"
+msgstr "Gérer l'accès"
 
-#: app/templates/admin/access_form.html:34 app/templates/admin/files.html:25
-#: app/templates/main/file_view.html:23
 msgid "Wersja"
-msgstr ""
+msgstr "Version"
 
-#: app/templates/admin/access_form.html:44 app/templates/admin/files.html:26
-#, fuzzy
 msgid "Użytkownicy z dostępem"
-msgstr "Utilisateurs"
+msgstr "Utilisateurs avec accès"
 
-#: app/templates/admin/access_form.html:48
 msgid "Przytrzymaj Ctrl (Cmd na Mac), aby wybrać wielu użytkowników."
-msgstr ""
+msgstr "Maintenez Ctrl (Cmd sur Mac) pour sélectionner plusieurs utilisateurs."
 
-#: app/templates/admin/access_form.html:55
-#: app/templates/admin/backup_restore.html:100
-#: app/templates/admin/change_password.html:65
-#: app/templates/admin/email_template_edit.html:63
-#: app/templates/admin/file_update.html:80
-#: app/templates/admin/file_upload.html:64 app/templates/admin/files.html:96
-#: app/templates/admin/user_form.html:104 app/templates/admin/users.html:98
-#: app/templates/auth/disable_2fa.html:56 app/templates/auth/setup_2fa.html:92
 msgid "Anuluj"
 msgstr "Annuler"
 
-#: app/templates/admin/access_form.html:66
-#: app/templates/admin/email_templates.html:154
-#: app/templates/admin/file_upload.html:75
-#: app/templates/admin/settings.html:186
 msgid "Informacje"
-msgstr ""
+msgstr "Informations"
 
-#: app/templates/admin/access_form.html:69
 msgid "Administratorzy mają automatycznie dostęp do wszystkich plików."
-msgstr ""
+msgstr "Les administrateurs ont automatiquement accès à tous les fichiers."
 
-#: app/templates/admin/access_form.html:70
 msgid "Użytkownicy na liście będą mogli pobierać i przeglądać ten plik."
-msgstr ""
+msgstr "Les utilisateurs de la liste pourront télécharger et consulter ce fichier."
 
-#: app/templates/admin/access_form.html:71
 msgid "Odznaczenie użytkownika odbierze mu dostęp."
-msgstr ""
+msgstr "Décocher un utilisateur lui retirera l'accès."
 
-# Permissions
-#: app/templates/admin/access_overview.html:8
-#: app/templates/admin/dashboard.html:176
 msgid "Zarządzaj uprawnieniami"
 msgstr "Gérer les Permissions"
 
-#: app/templates/admin/access_overview.html:10
 msgid "Przypisz dostęp do plików wielu użytkownikom jednocześnie"
-msgstr ""
+msgstr "Attribuer l'accès aux fichiers à plusieurs utilisateurs en même temps"
 
-#: app/templates/admin/access_overview.html:37
 msgid "Szukaj użytkownika po email..."
-msgstr ""
+msgstr "Rechercher un utilisateur par email..."
 
-#: app/templates/admin/access_overview.html:39
-#: app/templates/admin/access_overview.html:111
 msgid "Wyczyść"
-msgstr ""
+msgstr "Effacer"
 
-#: app/templates/admin/access_overview.html:48
 msgid "Zaznacz wszystkich"
-msgstr ""
+msgstr "Tout sélectionner"
 
-#: app/templates/admin/access_overview.html:51
-#: app/templates/admin/access_overview.html:123
 msgid "Wyczyść zaznaczenie"
-msgstr ""
+msgstr "Effacer la sélection"
 
-#: app/templates/admin/access_overview.html:70
-#: app/templates/admin/access_overview.html:165
-#, fuzzy
 msgid "plików"
-msgstr "Fichiers"
+msgstr "fichiers"
 
-#: app/templates/admin/access_overview.html:77
-#, fuzzy
 msgid "Nie znaleziono użytkowników"
-msgstr "Non Trouvé"
+msgstr "Aucun utilisateur trouvé"
 
-#: app/templates/admin/access_overview.html:83
-#: app/templates/admin/access_overview.html:165
 msgid "Zaznaczono:"
-msgstr ""
+msgstr "Sélectionné:"
 
-#: app/templates/admin/access_overview.html:83
-#, fuzzy
 msgid "użytkowników"
-msgstr "Utilisateurs"
+msgstr "utilisateurs"
 
-#: app/templates/admin/access_overview.html:95 app/templates/admin/files.html:8
-#, fuzzy
 msgid "Pliki PDF"
-msgstr "Fichiers"
+msgstr "Fichiers PDF"
 
-#: app/templates/admin/access_overview.html:109
 msgid "Szukaj pliku..."
-msgstr ""
+msgstr "Rechercher un fichier..."
 
-#: app/templates/admin/access_overview.html:120
 msgid "Zaznacz wszystkie"
-msgstr ""
+msgstr "Tout sélectionner"
 
-#: app/templates/admin/access_overview.html:129
 msgid "Istniejący dostęp"
-msgstr ""
+msgstr "Accès existant"
 
-#: app/templates/admin/access_overview.html:130
-#, fuzzy
 msgid "Nowe uprawnienie"
-msgstr "Permissions"
+msgstr "Nouvelle permission"
 
-#: app/templates/admin/access_overview.html:149
 msgid "Użytkownik ma już dostęp"
-msgstr ""
+msgstr "L'utilisateur a déjà accès"
 
-#: app/templates/admin/access_overview.html:152
 msgid "użytk."
-msgstr ""
+msgstr "util."
 
-#: app/templates/admin/access_overview.html:159
-#, fuzzy
 msgid "Nie znaleziono plików"
-msgstr "Non Trouvé"
+msgstr "Aucun fichier trouvé"
 
-#: app/templates/admin/access_overview.html:167
 msgid "istniejących"
-msgstr ""
+msgstr "existants"
 
-#: app/templates/admin/access_overview.html:182
 msgid "Wybierz użytkowników i pliki, aby nadać uprawnienia."
-msgstr ""
+msgstr "Sélectionnez des utilisateurs et des fichiers pour accorder les permissions."
 
-#: app/templates/admin/access_overview.html:188
-#, fuzzy
 msgid "Zapisz uprawnienia"
-msgstr "Permissions"
+msgstr "Enregistrer les permissions"
 
-#: app/templates/admin/access_overview.html:200
 msgid "Brak danych"
-msgstr ""
+msgstr "Aucune donnée"
 
-#: app/templates/admin/access_overview.html:203
 msgid "Nie ma jeszcze żadnych plików w systemie."
-msgstr ""
+msgstr "Il n'y a pas encore de fichiers dans le système."
 
-# Files
-#: app/templates/admin/access_overview.html:204
-#: app/templates/admin/files.html:120
-#, fuzzy
 msgid "Prześlij pierwszy plik"
-msgstr "Envoyer un fichier"
+msgstr "Envoyer le premier fichier"
 
-#: app/templates/admin/access_overview.html:206
 msgid "Nie ma jeszcze żadnych zwykłych użytkowników w systemie."
-msgstr ""
+msgstr "Il n'y a pas encore d'utilisateurs réguliers dans le système."
 
-#: app/templates/admin/access_overview.html:207
-#: app/templates/admin/dashboard.html:164 app/templates/admin/user_form.html:26
-#: app/templates/admin/users.html:13
-#, fuzzy
 msgid "Dodaj użytkownika"
-msgstr "Modifier l'Utilisateur"
+msgstr "Ajouter un utilisateur"
 
-#: app/templates/admin/backup_restore.html:14
-#, fuzzy
 msgid "Przywracanie"
-msgstr "Restaurer"
+msgstr "Restauration"
 
-#: app/templates/admin/backup_restore.html:24
 msgid "Przywracanie backupu"
-msgstr ""
+msgstr "Restauration de la sauvegarde"
 
-#: app/templates/admin/backup_restore.html:31
 msgid "Uwaga! Operacja nieodwracalna!"
-msgstr ""
+msgstr "Attention! Opération irréversible!"
 
-#: app/templates/admin/backup_restore.html:35
 msgid "Przywrócenie tego backupu"
-msgstr ""
+msgstr "La restauration de cette sauvegarde"
 
-# Common actions
-#: app/templates/admin/backup_restore.html:35
-#, fuzzy
 msgid "nadpisze"
-msgstr "Enregistrer"
+msgstr "écrasera"
 
-#: app/templates/admin/backup_restore.html:35
 msgid "wszystkie obecne dane:"
-msgstr ""
+msgstr "toutes les données actuelles:"
 
-#: app/templates/admin/backup_restore.html:38
 msgid "Baza danych zostanie zastąpiona"
-msgstr ""
+msgstr "La base de données sera remplacée"
 
-#: app/templates/admin/backup_restore.html:39
 msgid "Wszystkie pliki PDF zostaną nadpisane"
-msgstr ""
+msgstr "Tous les fichiers PDF seront écrasés"
 
-#: app/templates/admin/backup_restore.html:40
 msgid "Zmiany wprowadzone po utworzeniu backupu będą utracone"
-msgstr ""
+msgstr "Les modifications apportées après la création de la sauvegarde seront perdues"
 
-# Backups
-#: app/templates/admin/backup_restore.html:48
-#, fuzzy
 msgid "Wybrany backup:"
-msgstr "Créer une Sauvegarde"
+msgstr "Sauvegarde sélectionnée:"
 
-#: app/templates/admin/backup_restore.html:51
-#, fuzzy
 msgid "Plik:"
-msgstr "Fichiers"
+msgstr "Fichier:"
 
-#: app/templates/admin/backup_restore.html:54
-#: app/templates/auth/security.html:107
-#, fuzzy
 msgid "Data utworzenia:"
-msgstr "Date d'envoi"
+msgstr "Date de création:"
 
-#: app/templates/admin/backup_restore.html:57
-#, fuzzy
 msgid "Rozmiar:"
-msgstr "Taille"
+msgstr "Taille:"
 
-#: app/templates/admin/backup_restore.html:60
-#, fuzzy
 msgid "Plików:"
-msgstr "Fichiers"
+msgstr "Fichiers:"
 
-#: app/templates/admin/backup_restore.html:70
-#, fuzzy
 msgid "Hasło administratora"
-msgstr "Administrateur"
+msgstr "Mot de passe administrateur"
 
-#: app/templates/admin/backup_restore.html:73
-#: app/templates/auth/disable_2fa.html:31
 msgid "Wpisz swoje hasło"
-msgstr ""
+msgstr "Entrez votre mot de passe"
 
-#: app/templates/admin/backup_restore.html:83
-#, fuzzy
 msgid "Potwierdzenie"
-msgstr "Confirmer"
+msgstr "Confirmation"
 
-#: app/templates/admin/backup_restore.html:86
-#, fuzzy
 msgid "Wpisz PRZYWRÓĆ"
-msgstr "Restaurer"
+msgstr "Tapez RESTAURER"
 
-#: app/templates/admin/backup_restore.html:88
 msgid "Wpisz słowo"
-msgstr ""
+msgstr "Tapez le mot"
 
-#: app/templates/admin/backup_restore.html:88
-#, fuzzy
 msgid "PRZYWRÓĆ"
-msgstr "Restaurer"
+msgstr "RESTAURER"
 
-#: app/templates/admin/backup_restore.html:88
 msgid "aby potwierdzić operację."
-msgstr ""
+msgstr "pour confirmer l'opération."
 
-#: app/templates/admin/backup_restore.html:109
 msgid "Wskazówka:"
-msgstr ""
+msgstr "Conseil:"
 
-#: app/templates/admin/backup_restore.html:109
-msgid ""
-"Przed przywróceniem backupu zalecamy utworzenie nowego backupu obecnego "
-"stanu aplikacji."
-msgstr ""
+msgid "Przed przywróceniem backupu zalecamy utworzenie nowego backupu obecnego stanu aplikacji."
+msgstr "Avant de restaurer une sauvegarde, nous recommandons de créer une nouvelle sauvegarde de l'état actuel de l'application."
 
-# Backups
-#: app/templates/admin/backups.html:22
-#, fuzzy
 msgid "Utwórz backup teraz"
-msgstr "Créer une Sauvegarde"
+msgstr "Créer une sauvegarde maintenant"
 
-#: app/templates/admin/backups.html:34
 msgid "Liczba backupów"
-msgstr ""
+msgstr "Nombre de sauvegardes"
 
-#: app/templates/admin/backups.html:47
-#, fuzzy
 msgid "Łączny rozmiar"
-msgstr "Taille"
+msgstr "Taille totale"
 
-#: app/templates/admin/backups.html:60
 msgid "Ostatni backup"
-msgstr ""
+msgstr "Dernière sauvegarde"
 
-#: app/templates/admin/backups.html:65 app/templates/admin/settings.html:206
 msgid "Brak"
-msgstr ""
+msgstr "Aucun"
 
-#: app/templates/admin/backups.html:79
 msgid "Automatyczne backupy:"
-msgstr ""
+msgstr "Sauvegardes automatiques:"
 
-#: app/templates/admin/backups.html:79
 msgid "Konfiguruj cron job aby uruchamiać"
-msgstr ""
+msgstr "Configurez un cron job pour exécuter"
 
-#: app/templates/admin/backups.html:79
 msgid "codziennie."
-msgstr ""
+msgstr "quotidiennement."
 
-#: app/templates/admin/backups.html:80
 msgid "Backupy są przechowywane przez 7 dni, potem automatycznie usuwane."
-msgstr ""
+msgstr "Les sauvegardes sont conservées pendant 7 jours, puis automatiquement supprimées."
 
-#: app/templates/admin/backups.html:88
 msgid "Lista backupów"
-msgstr ""
+msgstr "Liste des sauvegardes"
 
-#: app/templates/admin/backups.html:97
-#: app/templates/admin/email_template_edit.html:123
-#: app/templates/admin/files.html:24
 msgid "Nazwa pliku"
 msgstr "Nom du fichier"
 
-#: app/templates/admin/backups.html:98 app/templates/admin/users.html:27
-#, fuzzy
 msgid "Data utworzenia"
-msgstr "Date d'envoi"
+msgstr "Date de création"
 
-#: app/templates/admin/backups.html:99
 msgid "Rozmiar"
 msgstr "Taille"
 
-#: app/templates/admin/backups.html:100
-#, fuzzy
 msgid "Plików"
 msgstr "Fichiers"
 
-#: app/templates/admin/backups.html:101 app/templates/admin/files.html:28
-#: app/templates/admin/users.html:28
 msgid "Akcje"
 msgstr "Actions"
 
-#: app/templates/admin/backups.html:122 app/templates/admin/files.html:63
-#: app/templates/main/file_view.html:34 app/templates/main/index.html:64
 msgid "Pobierz"
 msgstr "Télécharger"
 
-#: app/templates/admin/backups.html:126
 msgid "Przywróć"
 msgstr "Restaurer"
 
-#: app/templates/admin/backups.html:131
 msgid "Czy na pewno chcesz usunąć ten backup?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette sauvegarde?"
 
-#: app/templates/admin/backups.html:132 app/templates/admin/files.html:75
-#: app/templates/admin/files.html:101 app/templates/admin/users.html:75
-#: app/templates/admin/users.html:103
 msgid "Usuń"
 msgstr "Supprimer"
 
-#: app/templates/admin/backups.html:146
-#, fuzzy
 msgid "Brak backupów"
-msgstr "Aucun fichier"
+msgstr "Aucune sauvegarde"
 
-#: app/templates/admin/backups.html:147
 msgid "Utwórz pierwszy backup klikając przycisk powyżej."
-msgstr ""
+msgstr "Créez votre première sauvegarde en cliquant sur le bouton ci-dessus."
 
-#: app/templates/admin/backups.html:158
 msgid "Konfiguracja automatycznych backupów"
-msgstr ""
+msgstr "Configuration des sauvegardes automatiques"
 
-#: app/templates/admin/backups.html:162
 msgid "Aby uruchamiać backup automatycznie, dodaj zadanie cron:"
-msgstr ""
+msgstr "Pour exécuter des sauvegardes automatiquement, ajoutez une tâche cron:"
 
-#: app/templates/admin/backups.html:163
-#, fuzzy
 msgid "Edytuj crontab"
-msgstr "Modifier"
+msgstr "Modifier crontab"
 
-#: app/templates/admin/backups.html:166
 msgid "Dodaj linię (backup codziennie o 2:00):"
-msgstr ""
+msgstr "Ajouter une ligne (sauvegarde quotidienne à 2h00):"
 
-#: app/templates/admin/backups.html:170
 msgid "Backupy zawierają bazę danych"
-msgstr ""
+msgstr "Les sauvegardes contiennent la base de données"
 
-#: app/templates/admin/backups.html:170
 msgid "oraz wszystkie pliki z folderu"
-msgstr ""
+msgstr "et tous les fichiers du dossier"
 
-#: app/templates/admin/change_password.html:14
 msgid "Zmiana hasła"
-msgstr ""
+msgstr "Changement de mot de passe"
 
-#: app/templates/admin/change_password.html:24
-#: app/templates/admin/users.html:70
-#, fuzzy
 msgid "Zmień hasło"
-msgstr "Mot de passe"
+msgstr "Changer le mot de passe"
 
-#: app/templates/admin/change_password.html:30
 msgid "Zmieniasz hasło dla:"
-msgstr ""
+msgstr "Vous changez le mot de passe pour:"
 
-#: app/templates/admin/change_password.html:38
-#, fuzzy
 msgid "Nowe hasło"
-msgstr "Mot de passe"
+msgstr "Nouveau mot de passe"
 
-#: app/templates/admin/change_password.html:41
-#: app/templates/admin/user_form.html:52
 msgid "Minimum 8 znaków"
-msgstr ""
+msgstr "Minimum 8 caractères"
 
-#: app/templates/admin/change_password.html:51
-#, fuzzy
 msgid "Potwierdź nowe hasło"
-msgstr "Confirmer"
+msgstr "Confirmer le nouveau mot de passe"
 
-#: app/templates/admin/change_password.html:54
-#: app/templates/admin/user_form.html:65
 msgid "Powtórz hasło"
-msgstr ""
+msgstr "Répéter le mot de passe"
 
-#: app/templates/admin/dashboard.html:10
 msgid "Przegląd systemu"
-msgstr ""
+msgstr "Aperçu du système"
 
-#: app/templates/admin/dashboard.html:24
-#, fuzzy
 msgid "Użytkowników"
 msgstr "Utilisateurs"
 
-#: app/templates/admin/dashboard.html:37
 msgid "Plików PDF"
-msgstr ""
+msgstr "Fichiers PDF"
 
-#: app/templates/admin/dashboard.html:50
-#, fuzzy
 msgid "Przyznanych dostępów"
-msgstr "Accorder l'Accès"
+msgstr "Accès accordés"
 
-# Navigation
-#: app/templates/admin/dashboard.html:64
-#, fuzzy
 msgid "Ostatnie pliki"
-msgstr "Mes Fichiers"
+msgstr "Fichiers récents"
 
-#: app/templates/admin/dashboard.html:67
 msgid "Zobacz wszystkie"
-msgstr ""
+msgstr "Voir tout"
 
-#: app/templates/admin/dashboard.html:95 app/templates/admin/files.html:117
-#: app/templates/main/index.html:76
 msgid "Brak plików"
 msgstr "Aucun fichier"
 
-#: app/templates/admin/dashboard.html:108
-#, fuzzy
 msgid "Ostatni użytkownicy"
-msgstr "Utilisateurs"
+msgstr "Utilisateurs récents"
 
-#: app/templates/admin/dashboard.html:111
 msgid "Zobacz wszystkich"
-msgstr ""
+msgstr "Voir tous"
 
-#: app/templates/admin/dashboard.html:125
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
-#: app/templates/admin/dashboard.html:129
 msgid "Utworzono:"
-msgstr ""
+msgstr "Créé:"
 
-# Users
-#: app/templates/admin/dashboard.html:143 app/templates/admin/users.html:120
-#, fuzzy
 msgid "Brak użytkowników"
-msgstr "Nouvel Utilisateur"
+msgstr "Aucun utilisateur"
 
-#: app/templates/admin/dashboard.html:156
 msgid "Szybkie akcje"
-msgstr ""
+msgstr "Actions rapides"
 
-# Files
-#: app/templates/admin/dashboard.html:170
-#: app/templates/admin/file_upload.html:24
-#, fuzzy
 msgid "Prześlij plik PDF"
-msgstr "Envoyer un fichier"
+msgstr "Envoyer un fichier PDF"
 
-#: app/templates/admin/download_logs.html:26
 msgid "Eksport CSV"
-msgstr ""
+msgstr "Export CSV"
 
-#: app/templates/admin/download_logs.html:33
 msgid "Filtry"
-msgstr ""
+msgstr "Filtres"
 
-#: app/templates/admin/download_logs.html:38
-#: app/templates/admin/download_logs.html:118 app/templates/admin/users.html:47
-#: app/templates/auth/security.html:104
-#, fuzzy
 msgid "Użytkownik"
-msgstr "Utilisateurs"
+msgstr "Utilisateur"
 
-#: app/templates/admin/download_logs.html:40
 msgid "-- Wszyscy --"
-msgstr ""
+msgstr "-- Tous --"
 
-#: app/templates/admin/download_logs.html:49
-#: app/templates/admin/download_logs.html:119
-#, fuzzy
 msgid "Plik"
-msgstr "Fichiers"
+msgstr "Fichier"
 
-#: app/templates/admin/download_logs.html:51
 msgid "-- Wszystkie --"
-msgstr ""
+msgstr "-- Tous --"
 
-#: app/templates/admin/download_logs.html:60
 msgid "Data od"
-msgstr ""
+msgstr "Date de début"
 
-#: app/templates/admin/download_logs.html:64
 msgid "Data do"
-msgstr ""
+msgstr "Date de fin"
 
-#: app/templates/admin/download_logs.html:69
 msgid "Filtruj"
-msgstr ""
+msgstr "Filtrer"
 
-#: app/templates/admin/download_logs.html:85
 msgid "Łącznie pobrań"
-msgstr ""
+msgstr "Total des téléchargements"
 
-#: app/templates/admin/download_logs.html:93
 msgid "Stron"
-msgstr ""
+msgstr "Pages"
 
-#: app/templates/admin/download_logs.html:103
 msgid "Podejrzane aktywności"
-msgstr ""
+msgstr "Activités suspectes"
 
-#: app/templates/admin/download_logs.html:120
 msgid "Data/Czas"
-msgstr ""
+msgstr "Date/Heure"
 
-#: app/templates/admin/download_logs.html:121
 msgid "Adres IP"
-msgstr ""
+msgstr "Adresse IP"
 
-#: app/templates/admin/download_logs.html:122
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
-#: app/templates/admin/download_logs.html:138
-#: app/templates/admin/download_logs.html:147
 msgid "Usunięty"
-msgstr ""
+msgstr "Supprimé"
 
-#: app/templates/admin/download_logs.html:160
-#: app/templates/admin/download_logs.html:238
 msgid "Podejrzane"
-msgstr ""
+msgstr "Suspect"
 
-#: app/templates/admin/download_logs.html:163
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
-#: app/templates/admin/download_logs.html:229
 msgid "Brak pobrań do wyświetlenia"
-msgstr ""
+msgstr "Aucun téléchargement à afficher"
 
-#: app/templates/admin/download_logs.html:238
 msgid "więcej niż 5 pobrań tego samego pliku w ciągu ostatniej godziny"
-msgstr ""
+msgstr "plus de 5 téléchargements du même fichier au cours de la dernière heure"
 
-#: app/templates/admin/email_template_edit.html:14
-#: app/templates/admin/user_form.html:15 app/templates/admin/users.html:66
 msgid "Edytuj"
 msgstr "Modifier"
 
-#: app/templates/admin/email_template_edit.html:24
 msgid "Edytuj szablon:"
-msgstr ""
+msgstr "Modifier le modèle:"
 
-#: app/templates/admin/email_template_edit.html:33
 msgid "Temat emaila"
-msgstr ""
+msgstr "Sujet de l'email"
 
-#: app/templates/admin/email_template_edit.html:36
 msgid "Wpisz temat emaila..."
-msgstr ""
+msgstr "Entrez le sujet de l'email..."
 
-#: app/templates/admin/email_template_edit.html:42
 msgid "Możesz użyć zmiennych np."
-msgstr ""
+msgstr "Vous pouvez utiliser des variables par ex."
 
-#: app/templates/admin/email_template_edit.html:47
 msgid "Treść emaila (HTML)"
-msgstr ""
+msgstr "Contenu de l'email (HTML)"
 
-#: app/templates/admin/email_template_edit.html:51
 msgid "Treść emaila..."
-msgstr ""
+msgstr "Contenu de l'email..."
 
-#: app/templates/admin/email_template_edit.html:76
-#: app/templates/admin/email_templates.html:99
 msgid "Dostępne zmienne"
-msgstr ""
+msgstr "Variables disponibles"
 
-#: app/templates/admin/email_template_edit.html:81
 msgid "Kliknij na zmienną aby skopiować do schowka:"
-msgstr ""
+msgstr "Cliquez sur une variable pour la copier dans le presse-papiers:"
 
-#: app/templates/admin/email_template_edit.html:101
 msgid "Opis zmiennych"
-msgstr ""
+msgstr "Description des variables"
 
-#: app/templates/admin/email_template_edit.html:108
-#: app/templates/admin/email_template_edit.html:120
-#, fuzzy
 msgid "Email użytkownika"
-msgstr "Modifier l'Utilisateur"
+msgstr "Email de l'utilisateur"
 
-#: app/templates/admin/email_template_edit.html:111
 msgid "Lista plików w formacie HTML"
-msgstr ""
+msgstr "Liste des fichiers au format HTML"
 
-#: app/templates/admin/email_template_edit.html:114
-#, fuzzy
 msgid "Liczba plików"
-msgstr "Aucun fichier"
+msgstr "Nombre de fichiers"
 
-#: app/templates/admin/email_template_edit.html:117
-#: app/templates/admin/email_template_edit.html:132
 msgid "Link do logowania"
-msgstr ""
+msgstr "Lien de connexion"
 
-#: app/templates/admin/email_template_edit.html:126
 msgid "Numer wersji"
-msgstr ""
+msgstr "Numéro de version"
 
-#: app/templates/admin/email_template_edit.html:129
 msgid "Opis zmian (HTML)"
-msgstr ""
+msgstr "Description des modifications (HTML)"
 
-#: app/templates/admin/email_template_edit.html:142
-#: app/templates/admin/settings.html:223
 msgid "Wskazówki"
-msgstr ""
+msgstr "Conseils"
 
-#: app/templates/admin/email_template_edit.html:147
 msgid "Użyj inline CSS dla lepszej kompatybilności z klientami email."
-msgstr ""
+msgstr "Utilisez du CSS inline pour une meilleure compatibilité avec les clients email."
 
-#: app/templates/admin/email_template_edit.html:148
 msgid "Testuj szablony na różnych klientach (Gmail, Outlook, itp.)."
-msgstr ""
+msgstr "Testez les modèles sur différents clients (Gmail, Outlook, etc.)."
 
-#: app/templates/admin/email_template_edit.html:149
-msgid ""
-"Zachowaj proste formatowanie - niektóre klienty nie obsługują "
-"zaawansowanego CSS."
-msgstr ""
+msgid "Zachowaj proste formatowanie - niektóre klienty nie obsługują zaawansowanego CSS."
+msgstr "Conservez un formatage simple - certains clients ne prennent pas en charge le CSS avancé."
 
-#: app/templates/admin/email_template_edit.html:150
 msgid "Pamiętaj o wersji tekstowej dla starszych klientów."
-msgstr ""
+msgstr "N'oubliez pas la version texte pour les anciens clients."
 
-#: app/templates/admin/email_templates.html:44
 msgid "Wybierz wersję językową"
-msgstr ""
+msgstr "Sélectionnez la version linguistique"
 
-#: app/templates/admin/email_templates.html:72
-#, fuzzy
 msgid "Podgląd szablonu"
-msgstr "Aperçu"
+msgstr "Aperçu du modèle"
 
-#: app/templates/admin/email_templates.html:75
 msgid "Ostatnia aktualizacja:"
-msgstr ""
+msgstr "Dernière mise à jour:"
 
-#: app/templates/admin/email_templates.html:81
 msgid "Temat:"
-msgstr ""
+msgstr "Sujet:"
 
-#: app/templates/admin/email_templates.html:88
 msgid "Treść (HTML):"
-msgstr ""
+msgstr "Contenu (HTML):"
 
-#: app/templates/admin/email_templates.html:102
-msgid ""
-"Użyj tych zmiennych w szablonie. Zostaną automatycznie zamienione na "
-"rzeczywiste wartości."
-msgstr ""
+msgid "Użyj tych zmiennych w szablonie. Zostaną automatycznie zamienione na rzeczywiste wartości."
+msgstr "Utilisez ces variables dans le modèle. Elles seront automatiquement remplacées par les valeurs réelles."
 
-#: app/templates/admin/email_templates.html:117
-#, fuzzy
 msgid "Edytuj szablon"
-msgstr "Modifier"
+msgstr "Modifier le modèle"
 
-#: app/templates/admin/email_templates.html:120
-#, fuzzy
 msgid "Podgląd z danymi"
-msgstr "Aperçu"
+msgstr "Aperçu avec données"
 
-#: app/templates/admin/email_templates.html:123
-msgid ""
-"Czy na pewno chcesz przywrócić domyślny szablon? Twoje zmiany zostaną "
-"utracone."
-msgstr ""
+msgid "Czy na pewno chcesz przywrócić domyślny szablon? Twoje zmiany zostaną utracone."
+msgstr "Êtes-vous sûr de vouloir restaurer le modèle par défaut? Vos modifications seront perdues."
 
-#: app/templates/admin/email_templates.html:127
-#, fuzzy
 msgid "Przywróć domyślny"
-msgstr "Restaurer"
+msgstr "Restaurer par défaut"
 
-#: app/templates/admin/email_templates.html:136
 msgid "Brak szablonu dla tej konfiguracji"
-msgstr ""
+msgstr "Aucun modèle pour cette configuration"
 
-#: app/templates/admin/email_templates.html:138
-#, fuzzy
 msgid "Nie znaleziono szablonu typu"
-msgstr "Non Trouvé"
+msgstr "Type de modèle introuvable"
 
-#: app/templates/admin/email_templates.html:139
 msgid "dla języka"
-msgstr ""
+msgstr "pour la langue"
 
-#: app/templates/admin/email_templates.html:143
 msgid "Utwórz szablon"
-msgstr ""
+msgstr "Créer un modèle"
 
-#: app/templates/admin/email_templates.html:157
 msgid "Szablony email są wysyłane w języku preferowanym przez użytkownika."
-msgstr ""
+msgstr "Les modèles d'email sont envoyés dans la langue préférée de l'utilisateur."
 
-#: app/templates/admin/email_templates.html:158
-msgid ""
-"Jeśli szablon dla danego języka nie istnieje, system użyje angielskiego "
-"lub polskiego jako zapasowego."
-msgstr ""
+msgid "Jeśli szablon dla danego języka nie istnieje, system użyje angielskiego lub polskiego jako zapasowego."
+msgstr "Si un modèle pour une langue donnée n'existe pas, le système utilisera l'anglais ou le polonais comme solution de secours."
 
-#: app/templates/admin/email_templates.html:159
 msgid "Możesz użyć zmiennych w formacie"
-msgstr ""
+msgstr "Vous pouvez utiliser des variables au format"
 
-#: app/templates/admin/email_templates.html:159
 msgid "zostaną automatycznie zamienione na rzeczywiste dane."
-msgstr ""
+msgstr "seront automatiquement remplacées par les données réelles."
 
-#: app/templates/admin/email_templates.html:160
-msgid ""
-"Treść szablonu powinna być w formacie HTML dla poprawnego wyświetlania w "
-"klientach email."
-msgstr ""
+msgid "Treść szablonu powinna być w formacie HTML dla poprawnego wyświetlania w klientach email."
+msgstr "Le contenu du modèle doit être au format HTML pour un affichage correct dans les clients email."
 
-#: app/templates/admin/email_templates.html:171
-#, fuzzy
 msgid "Podgląd emaila"
-msgstr "Aperçu"
+msgstr "Aperçu de l'email"
 
-#: app/templates/admin/email_templates.html:181
 msgid "Zamknij"
-msgstr ""
+msgstr "Fermer"
 
-#: app/templates/admin/file_update.html:14 app/templates/admin/files.html:67
-#: app/templates/main/file_view.html:39
-#, fuzzy
 msgid "Aktualizuj"
-msgstr "Annuler"
+msgstr "Mettre à jour"
 
-#: app/templates/admin/file_update.html:24
 msgid "Aktualizuj plik"
-msgstr ""
+msgstr "Mettre à jour le fichier"
 
-#: app/templates/admin/file_update.html:34
 msgid "Aktualna wersja:"
-msgstr ""
+msgstr "Version actuelle:"
 
-#: app/templates/admin/file_update.html:41
 msgid "Powiadomienie email:"
-msgstr ""
+msgstr "Notification par email:"
 
-#: app/templates/admin/file_update.html:41
 msgid "Po aktualizacji wszyscy użytkownicy z dostępem"
-msgstr ""
+msgstr "Après la mise à jour, tous les utilisateurs avec accès"
 
-#: app/templates/admin/file_update.html:42
 msgid "osób"
-msgstr ""
+msgstr "personnes"
 
-#: app/templates/admin/file_update.html:42
 msgid "otrzymają powiadomienie o nowej wersji."
-msgstr ""
+msgstr "recevront une notification concernant la nouvelle version."
 
-#: app/templates/admin/file_update.html:50
-#, fuzzy
 msgid "Nowa wersja pliku PDF"
-msgstr "Nom du fichier"
+msgstr "Nouvelle version du fichier PDF"
 
-#: app/templates/admin/file_update.html:65
 msgid "Opis zmian (opcjonalnie)"
-msgstr ""
+msgstr "Description des modifications (optionnel)"
 
-#: app/templates/admin/file_update.html:69
 msgid "Co zostało zmienione w tej wersji..."
-msgstr ""
+msgstr "Ce qui a été modifié dans cette version..."
 
-#: app/templates/admin/file_upload.html:14
 msgid "Prześlij"
 msgstr "Envoyer"
 
-#: app/templates/admin/file_upload.html:33
-#, fuzzy
 msgid "Plik PDF"
-msgstr "Fichiers"
+msgstr "Fichier PDF"
 
-#: app/templates/admin/file_upload.html:44
 msgid "Maksymalny rozmiar pliku: 50 MB"
-msgstr ""
+msgstr "Taille maximale du fichier: 50 MB"
 
-#: app/templates/admin/file_upload.html:49
 msgid "Opis (opcjonalnie)"
-msgstr ""
+msgstr "Description (optionnel)"
 
-#: app/templates/admin/file_upload.html:53
 msgid "Krótki opis zawartości pliku..."
-msgstr ""
+msgstr "Brève description du contenu du fichier..."
 
-#: app/templates/admin/file_upload.html:78
 msgid "Po przesłaniu pliku, możesz przypisać dostęp użytkownikom."
-msgstr ""
+msgstr "Après l'envoi du fichier, vous pouvez attribuer l'accès aux utilisateurs."
 
-#: app/templates/admin/file_upload.html:79
 msgid "Aktualizacja pliku do nowej wersji automatycznie powiadomi użytkowników."
-msgstr ""
+msgstr "La mise à jour du fichier vers une nouvelle version notifiera automatiquement les utilisateurs."
 
-#: app/templates/admin/file_upload.html:80
 msgid "Dozwolone są tylko pliki w formacie PDF."
-msgstr ""
+msgstr "Seuls les fichiers au format PDF sont autorisés."
 
-#: app/templates/admin/files.html:10
 msgid "Zarządzanie plikami w systemie"
-msgstr ""
+msgstr "Gestion des fichiers dans le système"
 
-# Files
-#: app/templates/admin/files.html:13 app/templates/main/index.html:20
 msgid "Prześlij plik"
 msgstr "Envoyer un fichier"
 
-#: app/templates/admin/files.html:27
 msgid "Data uploadu"
-msgstr ""
+msgstr "Date d'envoi"
 
-#: app/templates/admin/files.html:59 app/templates/main/index.html:60
 msgid "Podgląd"
 msgstr "Aperçu"
 
-#: app/templates/admin/files.html:87 app/templates/admin/users.html:89
-#, fuzzy
 msgid "Potwierdź usunięcie"
-msgstr "Confirmer"
+msgstr "Confirmer la suppression"
 
-#: app/templates/admin/files.html:91
 msgid "Czy na pewno chcesz usunąć plik"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer le fichier"
 
-#: app/templates/admin/files.html:92
-msgid ""
-"Ta operacja jest nieodwracalna. Wszyscy użytkownicy stracą dostęp do tego"
-" pliku."
-msgstr ""
+msgid "Ta operacja jest nieodwracalna. Wszyscy użytkownicy stracą dostęp do tego pliku."
+msgstr "Cette opération est irréversible. Tous les utilisateurs perdront l'accès à ce fichier."
 
-#: app/templates/admin/files.html:118
 msgid "Nie przesłano jeszcze żadnych plików PDF."
-msgstr ""
+msgstr "Aucun fichier PDF n'a encore été envoyé."
 
-#: app/templates/admin/settings.html:56
 msgid "Branding aplikacji"
-msgstr ""
+msgstr "Image de marque de l'application"
 
-#: app/templates/admin/settings.html:65
-#, fuzzy
 msgid "Nazwa aplikacji"
-msgstr "Nom du fichier"
+msgstr "Nom de l'application"
 
-#: app/templates/admin/settings.html:74
 msgid "Nazwa wyświetlana w navbar i tytule strony"
-msgstr ""
+msgstr "Nom affiché dans la navbar et le titre de la page"
 
-#: app/templates/admin/settings.html:79
 msgid "Logo (navbar)"
-msgstr ""
+msgstr "Logo (navbar)"
 
-#: app/templates/admin/settings.html:89
 msgid "Usunąć logo?"
-msgstr ""
+msgstr "Supprimer le logo?"
 
-#: app/templates/admin/settings.html:90
-#, fuzzy
 msgid "Usuń logo"
-msgstr "Supprimer"
+msgstr "Supprimer le logo"
 
-#: app/templates/admin/settings.html:102
 msgid "PNG, JPG lub SVG, max 2MB, zalecana szerokość: 200px"
-msgstr ""
+msgstr "PNG, JPG ou SVG, max 2MB, largeur recommandée: 200px"
 
-#: app/templates/admin/settings.html:108
 msgid "Kolor główny (przyciski)"
-msgstr ""
+msgstr "Couleur principale (boutons)"
 
-#: app/templates/admin/settings.html:124
 msgid "Przykładowy przycisk"
-msgstr ""
+msgstr "Bouton exemple"
 
-#: app/templates/admin/settings.html:131
 msgid "Kolor navbar"
-msgstr ""
+msgstr "Couleur navbar"
 
-#: app/templates/admin/settings.html:147
-#, fuzzy
 msgid "Podgląd navbar"
-msgstr "Aperçu"
+msgstr "Aperçu navbar"
 
-#: app/templates/admin/settings.html:157
 msgid "Włącz niestandardowy branding"
-msgstr ""
+msgstr "Activer l'image de marque personnalisée"
 
-#: app/templates/admin/settings.html:161
 msgid "Gdy włączone, aplikacja używa niestandardowego logo, nazwy i kolorów"
-msgstr ""
+msgstr "Lorsqu'activé, l'application utilise un logo, un nom et des couleurs personnalisés"
 
-#: app/templates/admin/settings.html:172
 msgid "Przywrócić domyślne ustawienia?"
-msgstr ""
+msgstr "Restaurer les paramètres par défaut?"
 
-#: app/templates/admin/settings.html:173
-#, fuzzy
 msgid "Przywróć domyślne"
-msgstr "Restaurer"
+msgstr "Restaurer par défaut"
 
-#: app/templates/admin/settings.html:191
 msgid "Status:"
-msgstr ""
+msgstr "Statut:"
 
-#: app/templates/admin/settings.html:193
 msgid "Branding włączony"
-msgstr ""
+msgstr "Image de marque activée"
 
-#: app/templates/admin/settings.html:195
 msgid "Domyślny"
-msgstr ""
+msgstr "Par défaut"
 
-#: app/templates/admin/settings.html:199
 msgid "Nazwa:"
-msgstr ""
+msgstr "Nom:"
 
-#: app/templates/admin/settings.html:202
 msgid "Logo:"
-msgstr ""
+msgstr "Logo:"
 
-#: app/templates/admin/settings.html:210
 msgid "Ostatnia zmiana:"
-msgstr ""
+msgstr "Dernière modification:"
 
-#: app/templates/admin/settings.html:228
 msgid "Logo powinno mieć przezroczyste tło (PNG)"
-msgstr ""
+msgstr "Le logo doit avoir un fond transparent (PNG)"
 
-#: app/templates/admin/settings.html:229
 msgid "Zalecana szerokość logo: 150-200px"
-msgstr ""
+msgstr "Largeur de logo recommandée: 150-200px"
 
-#: app/templates/admin/settings.html:230
 msgid "Używaj kontrastowych kolorów dla lepszej czytelności"
-msgstr ""
+msgstr "Utilisez des couleurs contrastées pour une meilleure lisibilité"
 
-#: app/templates/admin/settings.html:231
 msgid "Zmiany są widoczne natychmiast po zapisaniu"
-msgstr ""
+msgstr "Les modifications sont visibles immédiatement après l'enregistrement"
 
-#: app/templates/admin/user_form.html:15
 msgid "Dodaj"
 msgstr "Ajouter"
 
-#: app/templates/admin/user_form.html:26
 msgid "Edytuj użytkownika"
 msgstr "Modifier l'Utilisateur"
 
-#: app/templates/admin/user_form.html:49 app/templates/auth/disable_2fa.html:28
-#: app/templates/auth/login.html:30
 msgid "Hasło"
 msgstr "Mot de passe"
 
-#: app/templates/admin/user_form.html:62
-#, fuzzy
 msgid "Potwierdź hasło"
-msgstr "Confirmer"
+msgstr "Confirmer le mot de passe"
 
-#: app/templates/admin/user_form.html:76
 msgid "Preferowany język"
-msgstr ""
+msgstr "Langue préférée"
 
-#: app/templates/admin/user_form.html:85
 msgid "Powiadomienia email będą wysyłane w wybranym języku."
-msgstr ""
+msgstr "Les notifications par email seront envoyées dans la langue sélectionnée."
 
-#: app/templates/admin/user_form.html:93 app/templates/admin/users.html:43
-#: app/templates/auth/security.html:102
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: app/templates/admin/user_form.html:97
-msgid ""
-"Administratorzy mają dostęp do wszystkich plików i mogą zarządzać "
-"systemem."
-msgstr ""
+msgid "Administratorzy mają dostęp do wszystkich plików i mogą zarządzać systemem."
+msgstr "Les administrateurs ont accès à tous les fichiers et peuvent gérer le système."
 
-#: app/templates/admin/users.html:10
 msgid "Zarządzanie kontami użytkowników"
-msgstr ""
+msgstr "Gestion des comptes utilisateurs"
 
-#: app/templates/admin/users.html:24 app/templates/auth/login.html:17
 msgid "Email"
 msgstr "Email"
 
-#: app/templates/admin/users.html:25
 msgid "Rola"
-msgstr ""
+msgstr "Rôle"
 
-#: app/templates/admin/users.html:26
 msgid "Dostęp do plików"
-msgstr ""
+msgstr "Accès aux fichiers"
 
-#: app/templates/admin/users.html:53
 msgid "Wszystkie"
-msgstr ""
+msgstr "Tous"
 
-#: app/templates/admin/users.html:93
 msgid "Czy na pewno chcesz usunąć użytkownika"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer l'utilisateur"
 
-#: app/templates/admin/users.html:94
 msgid "Ta operacja jest nieodwracalna."
-msgstr ""
+msgstr "Cette opération est irréversible."
 
-#: app/templates/admin/users.html:121
 msgid "Nie ma jeszcze żadnych użytkowników w systemie."
-msgstr ""
+msgstr "Il n'y a pas encore d'utilisateurs dans le système."
 
-# Users
-#: app/templates/admin/users.html:123
-#, fuzzy
 msgid "Dodaj pierwszego użytkownika"
-msgstr "Nouvel Utilisateur"
+msgstr "Ajouter le premier utilisateur"
 
-#: app/templates/auth/backup_codes.html:10 app/templates/auth/security.html:39
-#, fuzzy
 msgid "Kody zapasowe"
-msgstr "Sauvegardes"
+msgstr "Codes de secours"
 
-#: app/templates/auth/backup_codes.html:16
 msgid "Ważne!"
-msgstr ""
+msgstr "Important!"
 
-#: app/templates/auth/backup_codes.html:16
 msgid "Zapisz te kody w bezpiecznym miejscu. Każdy kod może być użyty tylko raz."
-msgstr ""
+msgstr "Enregistrez ces codes dans un endroit sûr. Chaque code ne peut être utilisé qu'une seule fois."
 
-#: app/templates/auth/backup_codes.html:20
-msgid ""
-"Użyj tych kodów, jeśli stracisz dostęp do aplikacji uwierzytelniającej. "
-"Każdy kod działa tylko raz."
-msgstr ""
+msgid "Użyj tych kodów, jeśli stracisz dostęp do aplikacji uwierzytelniającej. Każdy kod działa tylko raz."
+msgstr "Utilisez ces codes si vous perdez l'accès à votre application d'authentification. Chaque code ne fonctionne qu'une seule fois."
 
-#: app/templates/auth/backup_codes.html:37
 msgid "Kopiuj wszystkie"
-msgstr ""
+msgstr "Tout copier"
 
-#: app/templates/auth/backup_codes.html:40
 msgid "Drukuj"
-msgstr ""
+msgstr "Imprimer"
 
-#: app/templates/auth/backup_codes.html:48
 msgid "Zapisałem kody, kontynuuj"
-msgstr ""
+msgstr "J'ai enregistré les codes, continuer"
 
-#: app/templates/auth/backup_codes.html:58
 msgid "Nigdy nie udostępniaj tych kodów!"
-msgstr ""
+msgstr "Ne partagez jamais ces codes!"
 
-#: app/templates/auth/backup_codes.html:59
 msgid "Nikt z zespołu PDF Manager nigdy o nie nie poprosi."
-msgstr ""
+msgstr "Personne de l'équipe PDF Manager ne vous les demandera jamais."
 
-#: app/templates/auth/disable_2fa.html:10 app/templates/auth/security.html:59
 msgid "Wyłącz 2FA"
 msgstr "Désactiver 2FA"
 
-#: app/templates/auth/disable_2fa.html:16
 msgid "Uwaga!"
-msgstr ""
+msgstr "Attention!"
 
-#: app/templates/auth/disable_2fa.html:16
-msgid ""
-"Wyłączenie uwierzytelniania dwuskładnikowego zmniejszy bezpieczeństwo "
-"Twojego konta."
-msgstr ""
+msgid "Wyłączenie uwierzytelniania dwuskładnikowego zmniejszy bezpieczeństwo Twojego konta."
+msgstr "La désactivation de l'authentification à deux facteurs réduira la sécurité de votre compte."
 
-#: app/templates/auth/disable_2fa.html:20
-msgid ""
-"Aby wyłączyć 2FA, musisz potwierdzić swoją tożsamość hasłem i aktualnym "
-"kodem z aplikacji."
-msgstr ""
+msgid "Aby wyłączyć 2FA, musisz potwierdzić swoją tożsamość hasłem i aktualnym kodem z aplikacji."
+msgstr "Pour désactiver 2FA, vous devez confirmer votre identité avec votre mot de passe et le code actuel de l'application."
 
-#: app/templates/auth/disable_2fa.html:41 app/templates/auth/setup_2fa.html:72
 msgid "Kod z aplikacji"
-msgstr ""
+msgstr "Code de l'application"
 
-# Authentication
-#: app/templates/auth/login.html:9
-#, fuzzy
 msgid "Zaloguj się do systemu"
-msgstr "Se connecter"
+msgstr "Se connecter au système"
 
-#: app/templates/auth/login.html:45
-#, fuzzy
 msgid "Zapamiętaj mnie"
 msgstr "Se souvenir de moi"
 
-#: app/templates/auth/login.html:60
 msgid "Bezpieczne logowanie"
-msgstr ""
+msgstr "Connexion sécurisée"
 
-#: app/templates/auth/security.html:8
-#, fuzzy
 msgid "Ustawienia bezpieczeństwa"
-msgstr "Sécurité"
+msgstr "Paramètres de sécurité"
 
-#: app/templates/auth/security.html:16
 msgid "Uwierzytelnianie dwuskładnikowe (2FA)"
-msgstr ""
+msgstr "Authentification à deux facteurs (2FA)"
 
-#: app/templates/auth/security.html:20 app/templates/auth/security.html:113
 msgid "Włączone"
-msgstr ""
+msgstr "Activé"
 
-#: app/templates/auth/security.html:24 app/templates/auth/security.html:115
-#, fuzzy
 msgid "Wyłączone"
-msgstr "Désactiver 2FA"
+msgstr "Désactivé"
 
-#: app/templates/auth/security.html:31
-msgid ""
-"Twoje konto jest chronione uwierzytelnianiem dwuskładnikowym. Przy każdym"
-" logowaniu musisz podać kod z aplikacji uwierzytelniającej."
-msgstr ""
+msgid "Twoje konto jest chronione uwierzytelnianiem dwuskładnikowym. Przy każdym logowaniu musisz podać kod z aplikacji uwierzytelniającej."
+msgstr "Votre compte est protégé par l'authentification à deux facteurs. À chaque connexion, vous devez fournir un code de l'application d'authentification."
 
-#: app/templates/auth/security.html:42
 msgid "Pozostało kodów:"
-msgstr ""
+msgstr "Codes restants:"
 
-#: app/templates/auth/security.html:42
 msgid "z"
-msgstr ""
+msgstr "de"
 
-#: app/templates/auth/security.html:47
 msgid "Stare kody zapasowe przestaną działać. Kontynuować?"
-msgstr ""
+msgstr "Les anciens codes de secours cesseront de fonctionner. Continuer?"
 
-#: app/templates/auth/security.html:48
 msgid "Wygeneruj nowe"
-msgstr ""
+msgstr "Générer de nouveaux"
 
-#: app/templates/auth/security.html:65
 msgid "Administratorzy nie mogą wyłączyć uwierzytelniania dwuskładnikowego."
-msgstr ""
+msgstr "Les administrateurs ne peuvent pas désactiver l'authentification à deux facteurs."
 
-#: app/templates/auth/security.html:71
-msgid ""
-"Uwierzytelnianie dwuskładnikowe dodaje dodatkową warstwę ochrony do "
-"Twojego konta. Po włączeniu, przy każdym logowaniu będziesz musiał podać "
-"kod z aplikacji uwierzytelniającej."
-msgstr ""
+msgid "Uwierzytelnianie dwuskładnikowe dodaje dodatkową warstwę ochrony do Twojego konta. Po włączeniu, przy każdym logowaniu będziesz musiał podać kod z aplikacji uwierzytelniającej."
+msgstr "L'authentification à deux facteurs ajoute une couche de protection supplémentaire à votre compte. Une fois activée, vous devrez fournir un code de l'application d'authentification à chaque connexion."
 
-#: app/templates/auth/security.html:77 app/templates/auth/setup_2fa.html:17
 msgid "Wymagane!"
-msgstr ""
+msgstr "Obligatoire!"
 
-#: app/templates/auth/security.html:77 app/templates/auth/setup_2fa.html:17
 msgid "Jako administrator musisz włączyć uwierzytelnianie dwuskładnikowe."
-msgstr ""
+msgstr "En tant qu'administrateur, vous devez activer l'authentification à deux facteurs."
 
-#: app/templates/auth/security.html:82
 msgid "Włącz 2FA"
 msgstr "Activer 2FA"
 
-#: app/templates/auth/security.html:93
 msgid "Informacje o koncie"
-msgstr ""
+msgstr "Informations sur le compte"
 
-#: app/templates/auth/security.html:99
-#, fuzzy
 msgid "Email:"
-msgstr "Email"
+msgstr "Email:"
 
-#: app/templates/auth/security.html:100
 msgid "Typ konta:"
-msgstr ""
+msgstr "Type de compte:"
 
-#: app/templates/auth/security.html:110
 msgid "Preferowany język:"
-msgstr ""
+msgstr "Langue préférée:"
 
-#: app/templates/auth/security.html:111
 msgid "2FA:"
-msgstr ""
+msgstr "2FA:"
 
-#: app/templates/auth/setup_2fa.html:10
 msgid "Włącz uwierzytelnianie dwuskładnikowe (2FA)"
-msgstr ""
+msgstr "Activer l'authentification à deux facteurs (2FA)"
 
-#: app/templates/auth/setup_2fa.html:25
 msgid "Zeskanuj kod QR"
-msgstr ""
+msgstr "Scanner le code QR"
 
-#: app/templates/auth/setup_2fa.html:28
-msgid ""
-"Otwórz aplikację uwierzytelniającą (Google Authenticator, Authy, itp.) i "
-"zeskanuj poniższy kod QR."
-msgstr ""
+msgid "Otwórz aplikację uwierzytelniającą (Google Authenticator, Authy, itp.) i zeskanuj poniższy kod QR."
+msgstr "Ouvrez votre application d'authentification (Google Authenticator, Authy, etc.) et scannez le code QR ci-dessous."
 
-#: app/templates/auth/setup_2fa.html:40
 msgid "Nie możesz zeskanować? Wpisz ten klucz ręcznie:"
-msgstr ""
+msgstr "Vous ne pouvez pas scanner? Entrez cette clé manuellement:"
 
-#: app/templates/auth/setup_2fa.html:51
 msgid "Kopiuj"
-msgstr ""
+msgstr "Copier"
 
-#: app/templates/auth/setup_2fa.html:61
-#, fuzzy
 msgid "Wpisz kod weryfikacyjny"
-msgstr "Code de Vérification"
+msgstr "Entrer le code de vérification"
 
-#: app/templates/auth/setup_2fa.html:64
 msgid "Po dodaniu konta w aplikacji, wpisz wygenerowany 6-cyfrowy kod."
-msgstr ""
+msgstr "Après avoir ajouté le compte dans l'application, entrez le code à 6 chiffres généré."
 
-#: app/templates/auth/setup_2fa.html:84
 msgid "Kod zmienia się co 30 sekund"
-msgstr ""
+msgstr "Le code change toutes les 30 secondes"
 
-#: app/templates/auth/setup_2fa.html:105
 msgid "Zalecane aplikacje"
-msgstr ""
+msgstr "Applications recommandées"
 
-# 2FA
-#: app/templates/auth/verify_2fa.html:9
-#, fuzzy
 msgid "Weryfikacja dwuskładnikowa"
-msgstr "Authentification à Deux Facteurs"
+msgstr "Vérification à deux facteurs"
 
-#: app/templates/auth/verify_2fa.html:13
 msgid "Wpisz 6-cyfrowy kod z aplikacji uwierzytelniającej dla konta:"
-msgstr ""
+msgstr "Entrez le code à 6 chiffres de l'application d'authentification pour le compte:"
 
-#: app/templates/auth/verify_2fa.html:22
 msgid "Kod weryfikacyjny"
-msgstr "Code de Vérification"
+msgstr "Code de vérification"
 
-#: app/templates/auth/verify_2fa.html:40
-#, fuzzy
 msgid "Użyj kodu zapasowego"
-msgstr "Sauvegardes"
+msgstr "Utiliser un code de secours"
 
-#: app/templates/auth/verify_2fa.html:48
 msgid "Wróć do logowania"
-msgstr ""
+msgstr "Retour à la connexion"
 
-#: app/templates/auth/verify_2fa.html:58
 msgid "Nie masz dostępu do aplikacji? Użyj jednego z kodów zapasowych."
-msgstr ""
+msgstr "Vous n'avez pas accès à l'application? Utilisez l'un de vos codes de secours."
 
-# Errors
-#: app/templates/errors/403.html:9
 msgid "Brak dostępu"
-msgstr "Accès Refusé"
+msgstr "Accès refusé"
 
-#: app/templates/errors/403.html:11
 msgid "Nie masz uprawnień do wyświetlenia tej strony."
-msgstr ""
+msgstr "Vous n'avez pas la permission d'afficher cette page."
 
-#: app/templates/errors/403.html:14 app/templates/errors/404.html:14
-#: app/templates/errors/429.html:21 app/templates/errors/500.html:14
 msgid "Wróć do strony głównej"
-msgstr ""
+msgstr "Retour à la page d'accueil"
 
-#: app/templates/errors/404.html:9
-#, fuzzy
 msgid "Strona nie znaleziona"
-msgstr "Non Trouvé"
+msgstr "Page non trouvée"
 
-#: app/templates/errors/404.html:11
 msgid "Strona, której szukasz, nie istnieje lub została przeniesiona."
-msgstr ""
+msgstr "La page que vous recherchez n'existe pas ou a été déplacée."
 
-#: app/templates/errors/429.html:9
 msgid "Zbyt wiele żądań"
-msgstr "Trop de Requêtes"
+msgstr "Trop de requêtes"
 
-#: app/templates/errors/429.html:11
 msgid "Przekroczono limit żądań. Proszę poczekać chwilę i spróbować ponownie."
-msgstr ""
+msgstr "Limite de requêtes dépassée. Veuillez attendre un moment et réessayer."
 
-#: app/templates/errors/429.html:16
-#, fuzzy
 msgid "Spróbuj ponownie za:"
-msgstr "Une erreur s'est produite. Veuillez réessayer."
+msgstr "Réessayez dans:"
 
-#: app/templates/errors/429.html:24
 msgid "Odśwież stronę"
-msgstr ""
+msgstr "Actualiser la page"
 
-#: app/templates/errors/500.html:9
 msgid "Błąd serwera"
-msgstr "Erreur Serveur"
+msgstr "Erreur serveur"
 
-#: app/templates/errors/500.html:11
 msgid "Wystąpił nieoczekiwany błąd. Przepraszamy za niedogodności."
-msgstr ""
+msgstr "Une erreur inattendue s'est produite. Nous nous excusons pour la gêne occasionnée."
 
-#: app/templates/main/accept_terms.html:10
 msgid "Regulamin korzystania z plików"
 msgstr "Conditions d'utilisation des fichiers"
 
-#: app/templates/main/accept_terms.html:16
 msgid "Przed pobraniem plików musisz zaakceptować poniższy regulamin."
-msgstr ""
+msgstr "Avant de télécharger les fichiers, vous devez accepter les conditions suivantes."
 
-#: app/templates/main/accept_terms.html:20
-#, fuzzy
 msgid "Regulamin korzystania z plików PDF"
-msgstr "Conditions d'utilisation des fichiers"
+msgstr "Conditions d'utilisation des fichiers PDF"
 
-#: app/templates/main/accept_terms.html:23
 msgid "1. Przeznaczenie plików"
-msgstr ""
+msgstr "1. Objectif des fichiers"
 
-#: app/templates/main/accept_terms.html:24
-msgid ""
-"Pliki udostępnione w systemie PDF Manager są przeznaczone wyłącznie do "
-"użytku osobistego autoryzowanego użytkownika."
-msgstr ""
+msgid "Pliki udostępnione w systemie PDF Manager są przeznaczone wyłącznie do użytku osobistego autoryzowanego użytkownika."
+msgstr "Les fichiers partagés dans le système PDF Manager sont destinés uniquement à l'usage personnel de l'utilisateur autorisé."
 
-#: app/templates/main/accept_terms.html:27
 msgid "2. Zakaz rozpowszechniania"
-msgstr ""
+msgstr "2. Interdiction de distribution"
 
-#: app/templates/main/accept_terms.html:28
-msgid ""
-"Użytkownik zobowiązuje się do nieudostępniania, niepublikowania i "
-"nierozpowszechniania pobranych plików osobom trzecim bez wyraźnej zgody "
-"administratora systemu."
-msgstr ""
+msgid "Użytkownik zobowiązuje się do nieudostępniania, niepublikowania i nierozpowszechniania pobranych plików osobom trzecim bez wyraźnej zgody administratora systemu."
+msgstr "L'utilisateur s'engage à ne pas partager, publier ou distribuer les fichiers téléchargés à des tiers sans le consentement explicite de l'administrateur du système."
 
-#: app/templates/main/accept_terms.html:31
 msgid "3. Monitorowanie aktywności"
-msgstr ""
+msgstr "3. Surveillance de l'activité"
 
-#: app/templates/main/accept_terms.html:32
-msgid ""
-"Wszystkie pobrania plików są rejestrowane w systemie audytu. Każdy "
-"pobrany plik zawiera znak wodny z informacją o użytkowniku i dacie "
-"pobrania."
-msgstr ""
+msgid "Wszystkie pobrania plików są rejestrowane w systemie audytu. Każdy pobrany plik zawiera znak wodny z informacją o użytkowniku i dacie pobrania."
+msgstr "Tous les téléchargements de fichiers sont enregistrés dans le système d'audit. Chaque fichier téléchargé contient un filigrane avec les informations de l'utilisateur et la date de téléchargement."
 
-#: app/templates/main/accept_terms.html:35
 msgid "4. Limity pobrań"
-msgstr ""
+msgstr "4. Limites de téléchargement"
 
-#: app/templates/main/accept_terms.html:36
-msgid ""
-"Każdy plik może być pobrany maksymalnie 10 razy przez jednego "
-"użytkownika. W przypadku potrzeby dodatkowych pobrań należy skontaktować "
-"się z administratorem."
-msgstr ""
+msgid "Każdy plik może być pobrany maksymalnie 10 razy przez jednego użytkownika. W przypadku potrzeby dodatkowych pobrań należy skontaktować się z administratorem."
+msgstr "Chaque fichier peut être téléchargé un maximum de 10 fois par utilisateur. Pour des téléchargements supplémentaires, veuillez contacter l'administrateur."
 
-#: app/templates/main/accept_terms.html:39
 msgid "5. Podejrzana aktywność"
-msgstr ""
+msgstr "5. Activité suspecte"
 
-#: app/templates/main/accept_terms.html:40
-msgid ""
-"Nadmierne pobieranie plików (więcej niż 5 razy w ciągu godziny) może "
-"skutkować powiadomieniem administratora i ograniczeniem dostępu do "
-"systemu."
-msgstr ""
+msgid "Nadmierne pobieranie plików (więcej niż 5 razy w ciągu godziny) może skutkować powiadomieniem administratora i ograniczeniem dostępu do systemu."
+msgstr "Le téléchargement excessif de fichiers (plus de 5 fois par heure) peut entraîner une notification à l'administrateur et une restriction d'accès au système."
 
-#: app/templates/main/accept_terms.html:43
 msgid "6. Odpowiedzialność"
-msgstr ""
+msgstr "6. Responsabilité"
 
-#: app/templates/main/accept_terms.html:44
-msgid ""
-"Użytkownik ponosi pełną odpowiedzialność za nieautoryzowane "
-"rozpowszechnianie plików pobranych z systemu."
-msgstr ""
+msgid "Użytkownik ponosi pełną odpowiedzialność za nieautoryzowane rozpowszechnianie plików pobranych z systemu."
+msgstr "L'utilisateur assume l'entière responsabilité de la distribution non autorisée de fichiers téléchargés depuis le système."
 
-#: app/templates/main/accept_terms.html:69
 msgid "Powrót"
 msgstr "Retour"
 
-#: app/templates/main/accept_terms.html:79
 msgid "Twoje pobrania są zabezpieczone znakiem wodnym"
-msgstr ""
+msgstr "Vos téléchargements sont protégés par un filigrane"
 
-#: app/templates/main/file_view.html:26
 msgid "Ostatnia aktualizacja"
-msgstr ""
+msgstr "Dernière mise à jour"
 
-# Common actions
-#: app/templates/main/file_view.html:53
-#, fuzzy
 msgid "Opis"
-msgstr "Enregistrer"
+msgstr "Description"
 
-#: app/templates/main/file_view.html:69
 msgid "Powrót do listy"
-msgstr ""
+msgstr "Retour à la liste"
 
-#: app/templates/main/index.html:12
-#, fuzzy
 msgid "Wszystkie pliki w systemie"
-msgstr "Tous droits réservés."
+msgstr "Tous les fichiers du système"
 
-#: app/templates/main/index.html:14
 msgid "Pliki, do których masz dostęp"
-msgstr ""
+msgstr "Fichiers auxquels vous avez accès"
 
-#: app/templates/main/index.html:79
-msgid ""
-"Nie przesłano jeszcze żadnych plików. Kliknij \"Prześlij plik\", aby "
-"dodać pierwszy."
-msgstr ""
+msgid "Nie przesłano jeszcze żadnych plików. Kliknij \"Prześlij plik\", aby dodać pierwszy."
+msgstr "Aucun fichier n'a encore été envoyé. Cliquez sur \"Envoyer un fichier\" pour ajouter le premier."
 
-#: app/templates/main/index.html:81
-msgid ""
-"Nie masz jeszcze dostępu do żadnych plików. Skontaktuj się z "
-"administratorem."
-msgstr ""
-
-#~ msgid "Nie masz konta?"
-#~ msgstr "Pas de compte ?"
-
-#~ msgid "Zarejestruj się"
-#~ msgstr "S'inscrire"
-
-#~ msgid "Nieprawidłowy email lub hasło."
-#~ msgstr "Email ou mot de passe invalide."
-
-#~ msgid "Zalogowano pomyślnie."
-#~ msgstr "Connexion réussie."
-
-#~ msgid "Wylogowano pomyślnie."
-#~ msgstr "Déconnexion réussie."
-
-#~ msgid "Szukaj"
-#~ msgstr "Rechercher"
-
-#~ msgid "Plik został przesłany pomyślnie."
-#~ msgstr "Fichier envoyé avec succès."
-
-#~ msgid "Plik został usunięty."
-#~ msgstr "Fichier supprimé."
-
-#~ msgid "Aktywny"
-#~ msgstr "Actif"
-
-#~ msgid "Użytkownik został dodany."
-#~ msgstr "Utilisateur ajouté."
-
-#~ msgid "Użytkownik został zaktualizowany."
-#~ msgstr "Utilisateur mis à jour."
-
-#~ msgid "Użytkownik został usunięty."
-#~ msgstr "Utilisateur supprimé."
-
-#~ msgid "Usuń dostęp"
-#~ msgstr "Retirer l'Accès"
-
-#~ msgid "Uprawnienia zostały zaktualizowane."
-#~ msgstr "Permissions mises à jour."
-
-#~ msgid "Backup został utworzony."
-#~ msgstr "Sauvegarde créée."
-
-#~ msgid "Backup został przywrócony."
-#~ msgstr "Sauvegarde restaurée."
-
-#~ msgid "Backup został usunięty."
-#~ msgstr "Sauvegarde supprimée."
-
-#~ msgid "2FA zostało włączone."
-#~ msgstr "2FA activé."
-
-#~ msgid "2FA zostało wyłączone."
-#~ msgstr "2FA désactivé."
-
+msgid "Nie masz jeszcze dostępu do żadnych plików. Skontaktuj się z administratorem."
+msgstr "Vous n'avez pas encore accès à des fichiers. Contactez l'administrateur."
