@@ -5,17 +5,17 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{ url_for('admin.dashboard') }}">
-                <i class="bi bi-speedometer2 me-1"></i> Panel administracyjny
+                <i class="bi bi-speedometer2 me-1"></i> {{ _('Panel administracyjny') }}
             </a>
         </li>
-        <li class="breadcrumb-item active">Szablony Email</li>
+        <li class="breadcrumb-item active">{{ _('Szablony Email') }}</li>
     </ol>
 </nav>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>
         <i class="bi bi-envelope me-2"></i>
-        Szablony Email
+        {{ _('Szablony Email') }}
     </h2>
 </div>
 
@@ -41,7 +41,7 @@
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
             <h5 class="mb-0">
                 <i class="bi bi-translate me-2"></i>
-                Wybierz wersje jezykowa
+                {{ _('Wybierz wersję językową') }}
             </h5>
             <!-- Language Buttons -->
             <div class="btn-group" role="group">
@@ -69,23 +69,23 @@
         <div class="mb-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h6 class="mb-0">
-                    <i class="bi bi-eye me-1"></i> Podglad szablonu
+                    <i class="bi bi-eye me-1"></i> {{ _('Podgląd szablonu') }}
                 </h6>
                 <small class="text-muted">
-                    Ostatnia aktualizacja: {{ template.updated_at.strftime('%Y-%m-%d %H:%M') if template.updated_at else 'N/A' }}
+                    {{ _('Ostatnia aktualizacja:') }} {{ template.updated_at.strftime('%Y-%m-%d %H:%M') if template.updated_at else 'N/A' }}
                 </small>
             </div>
 
             <div class="border rounded p-3 bg-light">
                 <div class="mb-3">
-                    <strong class="text-muted">Temat:</strong>
+                    <strong class="text-muted">{{ _('Temat:') }}</strong>
                     <div class="mt-1 p-2 bg-white border rounded">
                         {{ template.subject }}
                     </div>
                 </div>
 
                 <div>
-                    <strong class="text-muted">Tresc (HTML):</strong>
+                    <strong class="text-muted">{{ _('Treść (HTML):') }}</strong>
                     <div class="mt-1 p-2 bg-white border rounded" style="max-height: 300px; overflow-y: auto;">
                         <pre class="mb-0" style="white-space: pre-wrap; word-wrap: break-word; font-size: 0.85em;">{{ template.body }}</pre>
                     </div>
@@ -96,10 +96,10 @@
         <!-- Available Variables -->
         <div class="mb-4">
             <h6>
-                <i class="bi bi-braces me-1"></i> Dostepne zmienne
+                <i class="bi bi-braces me-1"></i> {{ _('Dostępne zmienne') }}
             </h6>
             <p class="text-muted small mb-2">
-                Uzyj tych zmiennych w szablonie. Zostana automatycznie zamienione na rzeczywiste wartosci.
+                {{ _('Użyj tych zmiennych w szablonie. Zostaną automatycznie zamienione na rzeczywiste wartości.') }}
             </p>
             <div class="d-flex flex-wrap gap-2">
                 {% for var in (template.variables or '').split(', ') %}
@@ -114,17 +114,17 @@
         <div class="d-flex gap-2 flex-wrap">
             <a href="{{ url_for('admin.edit_email_template', type=current_type, lang=current_language) }}"
                class="btn btn-primary">
-                <i class="bi bi-pencil me-1"></i> Edytuj szablon
+                <i class="bi bi-pencil me-1"></i> {{ _('Edytuj szablon') }}
             </a>
             <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#previewModal">
-                <i class="bi bi-eye me-1"></i> Podglad z danymi
+                <i class="bi bi-eye me-1"></i> {{ _('Podgląd z danymi') }}
             </button>
             <form action="{{ url_for('admin.reset_email_template') }}" method="POST" class="d-inline"
-                  onsubmit="return confirm('Czy na pewno chcesz przywrocic domyslny szablon? Twoje zmiany zostana utracone.');">
+                  onsubmit="return confirm('{{ _('Czy na pewno chcesz przywrócić domyślny szablon? Twoje zmiany zostaną utracone.') }}');">
                 <input type="hidden" name="type" value="{{ current_type }}">
                 <input type="hidden" name="lang" value="{{ current_language }}">
                 <button type="submit" class="btn btn-outline-danger">
-                    <i class="bi bi-arrow-counterclockwise me-1"></i> Przywroc domyslny
+                    <i class="bi bi-arrow-counterclockwise me-1"></i> {{ _('Przywróć domyślny') }}
                 </button>
             </form>
         </div>
@@ -133,14 +133,14 @@
         <!-- No Template -->
         <div class="text-center py-5">
             <i class="bi bi-envelope-x display-4 text-muted mb-3 d-block"></i>
-            <h5>Brak szablonu dla tej konfiguracji</h5>
+            <h5>{{ _('Brak szablonu dla tej konfiguracji') }}</h5>
             <p class="text-muted">
-                Nie znaleziono szablonu typu <strong>{{ dict(template_types).get(current_type, current_type) }}</strong>
-                dla jezyka <strong>{{ dict(languages).get(current_language, current_language) }}</strong>.
+                {{ _('Nie znaleziono szablonu typu') }} <strong>{{ dict(template_types).get(current_type, current_type) }}</strong>
+                {{ _('dla języka') }} <strong>{{ dict(languages).get(current_language, current_language) }}</strong>.
             </p>
             <a href="{{ url_for('admin.edit_email_template', type=current_type, lang=current_language) }}"
                class="btn btn-primary">
-                <i class="bi bi-plus-circle me-1"></i> Utworz szablon
+                <i class="bi bi-plus-circle me-1"></i> {{ _('Utwórz szablon') }}
             </a>
         </div>
         {% endif %}
@@ -151,13 +151,13 @@
 <div class="card mt-4">
     <div class="card-body">
         <h6 class="card-title">
-            <i class="bi bi-info-circle me-1"></i> Informacje
+            <i class="bi bi-info-circle me-1"></i> {{ _('Informacje') }}
         </h6>
         <ul class="mb-0 small text-muted">
-            <li>Szablony email sa wysylane w jezyku preferowanym przez uzytkownika.</li>
-            <li>Jesli szablon dla danego jezyka nie istnieje, system uzyje angielskiego lub polskiego jako zapasowego.</li>
-            <li>Mozesz uzyc zmiennych w formacie <code>{nazwa_zmiennej}</code> - zostana automatycznie zamienione na rzeczywiste dane.</li>
-            <li>Tresc szablonu powinna byc w formacie HTML dla poprawnego wyswietlania w klientach email.</li>
+            <li>{{ _('Szablony email są wysyłane w języku preferowanym przez użytkownika.') }}</li>
+            <li>{{ _('Jeśli szablon dla danego języka nie istnieje, system użyje angielskiego lub polskiego jako zapasowego.') }}</li>
+            <li>{{ _('Możesz użyć zmiennych w formacie') }} <code>{nazwa_zmiennej}</code> - {{ _('zostaną automatycznie zamienione na rzeczywiste dane.') }}</li>
+            <li>{{ _('Treść szablonu powinna być w formacie HTML dla poprawnego wyświetlania w klientach email.') }}</li>
         </ul>
     </div>
 </div>
@@ -168,7 +168,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-                    <i class="bi bi-eye me-2"></i> Podglad emaila
+                    <i class="bi bi-eye me-2"></i> {{ _('Podgląd emaila') }}
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
@@ -178,7 +178,7 @@
                         style="width: 100%; height: 500px; border: none;"></iframe>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ _('Zamknij') }}</button>
             </div>
         </div>
     </div>

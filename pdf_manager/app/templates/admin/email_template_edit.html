@@ -5,13 +5,13 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{ url_for('admin.dashboard') }}">
-                <i class="bi bi-speedometer2 me-1"></i> Panel administracyjny
+                <i class="bi bi-speedometer2 me-1"></i> {{ _('Panel administracyjny') }}
             </a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{ url_for('admin.email_templates') }}">Szablony Email</a>
+            <a href="{{ url_for('admin.email_templates') }}">{{ _('Szablony Email') }}</a>
         </li>
-        <li class="breadcrumb-item active">Edytuj</li>
+        <li class="breadcrumb-item active">{{ _('Edytuj') }}</li>
     </ol>
 </nav>
 
@@ -21,7 +21,7 @@
             <div class="card-header bg-white">
                 <h5 class="mb-0">
                     <i class="bi bi-pencil me-2"></i>
-                    Edytuj szablon: {{ type_display }} ({{ lang_display }})
+                    {{ _('Edytuj szablon:') }} {{ type_display }} ({{ lang_display }})
                 </h5>
             </div>
             <div class="card-body">
@@ -30,25 +30,25 @@
 
                     <div class="mb-3">
                         <label for="subject" class="form-label">
-                            <i class="bi bi-type me-1"></i> Temat emaila
+                            <i class="bi bi-type me-1"></i> {{ _('Temat emaila') }}
                         </label>
                         {{ form.subject(class="form-control" + (" is-invalid" if form.subject.errors else ""),
-                                        placeholder="Wpisz temat emaila...") }}
+                                        placeholder=_('Wpisz temat emaila...')) }}
                         {% if form.subject.errors %}
                         <div class="invalid-feedback">
                             {% for error in form.subject.errors %}{{ error }}{% endfor %}
                         </div>
                         {% endif %}
-                        <small class="text-muted">Mozesz uzyc zmiennych np. <code>{file_name}</code></small>
+                        <small class="text-muted">{{ _('Możesz użyć zmiennych np.') }} <code>{file_name}</code></small>
                     </div>
 
                     <div class="mb-3">
                         <label for="body" class="form-label">
-                            <i class="bi bi-file-earmark-code me-1"></i> Tresc emaila (HTML)
+                            <i class="bi bi-file-earmark-code me-1"></i> {{ _('Treść emaila (HTML)') }}
                         </label>
                         {{ form.body(class="form-control font-monospace" + (" is-invalid" if form.body.errors else ""),
                                      rows="15",
-                                     placeholder="<html>\n<body>\n  Tresc emaila...\n</body>\n</html>") }}
+                                     placeholder="<html>\n<body>\n  " + _('Treść emaila...') + "\n</body>\n</html>") }}
                         {% if form.body.errors %}
                         <div class="invalid-feedback">
                             {% for error in form.body.errors %}{{ error }}{% endfor %}
@@ -60,7 +60,7 @@
                         {{ form.submit(class="btn btn-primary") }}
                         <a href="{{ url_for('admin.email_templates', type=template_type, lang=language) }}"
                            class="btn btn-outline-secondary">
-                            Anuluj
+                            {{ _('Anuluj') }}
                         </a>
                     </div>
                 </form>
@@ -73,12 +73,12 @@
         <div class="card mb-4">
             <div class="card-header bg-white">
                 <h6 class="mb-0">
-                    <i class="bi bi-braces me-1"></i> Dostepne zmienne
+                    <i class="bi bi-braces me-1"></i> {{ _('Dostępne zmienne') }}
                 </h6>
             </div>
             <div class="card-body">
                 <p class="small text-muted mb-3">
-                    Kliknij na zmienna aby skopiowac do schowka:
+                    {{ _('Kliknij na zmienną aby skopiować do schowka:') }}
                 </p>
                 <div class="d-flex flex-column gap-2">
                     {% for var in variables.split(', ') %}
@@ -98,38 +98,38 @@
         <div class="card mb-4">
             <div class="card-header bg-white">
                 <h6 class="mb-0">
-                    <i class="bi bi-question-circle me-1"></i> Opis zmiennych
+                    <i class="bi bi-question-circle me-1"></i> {{ _('Opis zmiennych') }}
                 </h6>
             </div>
             <div class="card-body small">
                 <dl class="mb-0">
                     {% if template_type == 'new_access' %}
                     <dt><code>{user_name}</code></dt>
-                    <dd class="text-muted mb-2">Email uzytkownika</dd>
+                    <dd class="text-muted mb-2">{{ _('Email użytkownika') }}</dd>
 
                     <dt><code>{file_list}</code></dt>
-                    <dd class="text-muted mb-2">Lista plikow w formacie HTML</dd>
+                    <dd class="text-muted mb-2">{{ _('Lista plików w formacie HTML') }}</dd>
 
                     <dt><code>{file_count}</code></dt>
-                    <dd class="text-muted mb-2">Liczba plikow</dd>
+                    <dd class="text-muted mb-2">{{ _('Liczba plików') }}</dd>
 
                     <dt><code>{login_url}</code></dt>
-                    <dd class="text-muted mb-0">Link do logowania</dd>
+                    <dd class="text-muted mb-0">{{ _('Link do logowania') }}</dd>
                     {% else %}
                     <dt><code>{user_name}</code></dt>
-                    <dd class="text-muted mb-2">Email uzytkownika</dd>
+                    <dd class="text-muted mb-2">{{ _('Email użytkownika') }}</dd>
 
                     <dt><code>{file_name}</code></dt>
-                    <dd class="text-muted mb-2">Nazwa pliku</dd>
+                    <dd class="text-muted mb-2">{{ _('Nazwa pliku') }}</dd>
 
                     <dt><code>{file_version}</code></dt>
-                    <dd class="text-muted mb-2">Numer wersji</dd>
+                    <dd class="text-muted mb-2">{{ _('Numer wersji') }}</dd>
 
                     <dt><code>{file_description}</code></dt>
-                    <dd class="text-muted mb-2">Opis zmian (HTML)</dd>
+                    <dd class="text-muted mb-2">{{ _('Opis zmian (HTML)') }}</dd>
 
                     <dt><code>{login_url}</code></dt>
-                    <dd class="text-muted mb-0">Link do logowania</dd>
+                    <dd class="text-muted mb-0">{{ _('Link do logowania') }}</dd>
                     {% endif %}
                 </dl>
             </div>
@@ -139,15 +139,15 @@
         <div class="card">
             <div class="card-header bg-white">
                 <h6 class="mb-0">
-                    <i class="bi bi-lightbulb me-1"></i> Wskazowki
+                    <i class="bi bi-lightbulb me-1"></i> {{ _('Wskazówki') }}
                 </h6>
             </div>
             <div class="card-body small text-muted">
                 <ul class="mb-0 ps-3">
-                    <li class="mb-2">Uzyj inline CSS dla lepszej kompatybilnosci z klientami email.</li>
-                    <li class="mb-2">Testuj szablony na roznych klientach (Gmail, Outlook, itp.).</li>
-                    <li class="mb-2">Zachowaj proste formatowanie - niektore klienty nie obsluguja zaawansowanego CSS.</li>
-                    <li>Pamietaj o wersji tekstowej dla starszych klientow.</li>
+                    <li class="mb-2">{{ _('Użyj inline CSS dla lepszej kompatybilności z klientami email.') }}</li>
+                    <li class="mb-2">{{ _('Testuj szablony na różnych klientach (Gmail, Outlook, itp.).') }}</li>
+                    <li class="mb-2">{{ _('Zachowaj proste formatowanie - niektóre klienty nie obsługują zaawansowanego CSS.') }}</li>
+                    <li>{{ _('Pamiętaj o wersji tekstowej dla starszych klientów.') }}</li>
                 </ul>
             </div>
         </div>

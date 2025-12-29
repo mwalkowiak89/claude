@@ -5,7 +5,7 @@
     <div class="col-lg-8">
         <h2 class="mb-4">
             <i class="bi bi-shield-lock me-2"></i>
-            Ustawienia bezpieczeństwa
+            {{ _('Ustawienia bezpieczeństwa') }}
         </h2>
 
         <!-- 2FA Status Card -->
@@ -13,23 +13,22 @@
             <div class="card-header bg-white d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">
                     <i class="bi bi-shield-check me-2"></i>
-                    Uwierzytelnianie dwuskładnikowe (2FA)
+                    {{ _('Uwierzytelnianie dwuskładnikowe (2FA)') }}
                 </h5>
                 {% if current_user.otp_enabled %}
                 <span class="badge bg-success">
-                    <i class="bi bi-check-circle me-1"></i> Włączone
+                    <i class="bi bi-check-circle me-1"></i> {{ _('Włączone') }}
                 </span>
                 {% else %}
                 <span class="badge bg-secondary">
-                    <i class="bi bi-x-circle me-1"></i> Wyłączone
+                    <i class="bi bi-x-circle me-1"></i> {{ _('Wyłączone') }}
                 </span>
                 {% endif %}
             </div>
             <div class="card-body">
                 {% if current_user.otp_enabled %}
                 <p class="text-muted mb-4">
-                    Twoje konto jest chronione uwierzytelnianiem dwuskładnikowym.
-                    Przy każdym logowaniu musisz podać kod z aplikacji uwierzytelniającej.
+                    {{ _('Twoje konto jest chronione uwierzytelnianiem dwuskładnikowym. Przy każdym logowaniu musisz podać kod z aplikacji uwierzytelniającej.') }}
                 </p>
 
                 <div class="row mb-4">
@@ -37,16 +36,16 @@
                         <div class="card bg-light">
                             <div class="card-body">
                                 <h6 class="card-title">
-                                    <i class="bi bi-key me-2"></i> Kody zapasowe
+                                    <i class="bi bi-key me-2"></i> {{ _('Kody zapasowe') }}
                                 </h6>
                                 <p class="text-muted mb-2">
-                                    Pozostało kodów: <strong>{{ backup_codes_count }}</strong> z 10
+                                    {{ _('Pozostało kodów:') }} <strong>{{ backup_codes_count }}</strong> {{ _('z') }} 10
                                 </p>
                                 <form action="{{ url_for('auth.regenerate_backup_codes') }}" method="POST" class="d-inline">
                                     <button type="submit"
                                             class="btn btn-outline-primary btn-sm"
-                                            onclick="return confirm('Stare kody zapasowe przestaną działać. Kontynuować?')">
-                                        <i class="bi bi-arrow-repeat me-1"></i> Wygeneruj nowe
+                                            onclick="return confirm('{{ _('Stare kody zapasowe przestaną działać. Kontynuować?') }}')">
+                                        <i class="bi bi-arrow-repeat me-1"></i> {{ _('Wygeneruj nowe') }}
                                     </button>
                                 </form>
                             </div>
@@ -57,31 +56,30 @@
                 {% if not current_user.is_admin %}
                 <div class="d-flex gap-2">
                     <a href="{{ url_for('auth.disable_2fa') }}" class="btn btn-outline-danger">
-                        <i class="bi bi-shield-x me-1"></i> Wyłącz 2FA
+                        <i class="bi bi-shield-x me-1"></i> {{ _('Wyłącz 2FA') }}
                     </a>
                 </div>
                 {% else %}
                 <div class="alert alert-info mb-0">
                     <i class="bi bi-info-circle me-2"></i>
-                    Administratorzy nie mogą wyłączyć uwierzytelniania dwuskładnikowego.
+                    {{ _('Administratorzy nie mogą wyłączyć uwierzytelniania dwuskładnikowego.') }}
                 </div>
                 {% endif %}
 
                 {% else %}
                 <p class="text-muted mb-4">
-                    Uwierzytelnianie dwuskładnikowe dodaje dodatkową warstwę ochrony do Twojego konta.
-                    Po włączeniu, przy każdym logowaniu będziesz musiał podać kod z aplikacji uwierzytelniającej.
+                    {{ _('Uwierzytelnianie dwuskładnikowe dodaje dodatkową warstwę ochrony do Twojego konta. Po włączeniu, przy każdym logowaniu będziesz musiał podać kod z aplikacji uwierzytelniającej.') }}
                 </p>
 
                 {% if current_user.is_admin %}
                 <div class="alert alert-warning mb-4">
                     <i class="bi bi-exclamation-triangle me-2"></i>
-                    <strong>Wymagane!</strong> Jako administrator musisz włączyć uwierzytelnianie dwuskładnikowe.
+                    <strong>{{ _('Wymagane!') }}</strong> {{ _('Jako administrator musisz włączyć uwierzytelnianie dwuskładnikowe.') }}
                 </div>
                 {% endif %}
 
                 <a href="{{ url_for('auth.setup_2fa') }}" class="btn btn-primary">
-                    <i class="bi bi-shield-plus me-1"></i> Włącz 2FA
+                    <i class="bi bi-shield-plus me-1"></i> {{ _('Włącz 2FA') }}
                 </a>
                 {% endif %}
             </div>
@@ -92,29 +90,29 @@
             <div class="card-header bg-white">
                 <h5 class="mb-0">
                     <i class="bi bi-person-circle me-2"></i>
-                    Informacje o koncie
+                    {{ _('Informacje o koncie') }}
                 </h5>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <p><strong>Email:</strong> {{ current_user.email }}</p>
-                        <p><strong>Typ konta:</strong>
+                        <p><strong>{{ _('Email:') }}</strong> {{ current_user.email }}</p>
+                        <p><strong>{{ _('Typ konta:') }}</strong>
                             {% if current_user.is_admin %}
-                            <span class="badge bg-warning text-dark">Administrator</span>
+                            <span class="badge bg-warning text-dark">{{ _('Administrator') }}</span>
                             {% else %}
-                            <span class="badge bg-secondary">Użytkownik</span>
+                            <span class="badge bg-secondary">{{ _('Użytkownik') }}</span>
                             {% endif %}
                         </p>
-                        <p><strong>Data utworzenia:</strong> {{ current_user.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                        <p><strong>{{ _('Data utworzenia:') }}</strong> {{ current_user.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Preferowany język:</strong> {{ current_user.get_language_name() }}</p>
-                        <p><strong>2FA:</strong>
+                        <p><strong>{{ _('Preferowany język:') }}</strong> {{ current_user.get_language_name() }}</p>
+                        <p><strong>{{ _('2FA:') }}</strong>
                             {% if current_user.otp_enabled %}
-                            <span class="text-success"><i class="bi bi-check-circle"></i> Włączone</span>
+                            <span class="text-success"><i class="bi bi-check-circle"></i> {{ _('Włączone') }}</span>
                             {% else %}
-                            <span class="text-muted"><i class="bi bi-x-circle"></i> Wyłączone</span>
+                            <span class="text-muted"><i class="bi bi-x-circle"></i> {{ _('Wyłączone') }}</span>
                             {% endif %}
                         </p>
                     </div>

@@ -6,12 +6,12 @@
         <i class="bi bi-question-circle text-info" style="font-size: 5rem;"></i>
     </div>
     <h1 class="display-4 fw-bold">404</h1>
-    <h2 class="mb-4">Strona nie znaleziona</h2>
+    <h2 class="mb-4">{{ _('Strona nie znaleziona') }}</h2>
     <p class="lead text-muted mb-4">
-        Strona, której szukasz, nie istnieje lub została przeniesiona.
+        {{ _('Strona, której szukasz, nie istnieje lub została przeniesiona.') }}
     </p>
     <a href="{{ url_for('main.index') }}" class="btn btn-primary btn-lg">
-        <i class="bi bi-house me-2"></i> Wróć do strony głównej
+        <i class="bi bi-house me-2"></i> {{ _('Wróć do strony głównej') }}
     </a>
 </div>
 {% endblock %}

@@ -6,7 +6,7 @@
         <div class="card-header text-center text-white">
             <i class="bi bi-file-earmark-pdf-fill display-4 mb-3"></i>
             <h3 class="mb-0">PDF Manager</h3>
-            <p class="mb-0 opacity-75">Zaloguj się do systemu</p>
+            <p class="mb-0 opacity-75">{{ _('Zaloguj się do systemu') }}</p>
         </div>
         <div class="card-body p-4">
             <form method="POST" action="{{ url_for('auth.login') }}" novalidate>
@@ -14,7 +14,7 @@
 
                 <div class="mb-3">
                     <label for="email" class="form-label">
-                        <i class="bi bi-envelope me-1"></i> Email
+                        <i class="bi bi-envelope me-1"></i> {{ _('Email') }}
                     </label>
                     {{ form.email(class="form-control form-control-lg" + (" is-invalid" if form.email.errors else ""),
                                   placeholder="twoj@email.pl", autofocus=true) }}
@@ -27,7 +27,7 @@
 
                 <div class="mb-3">
                     <label for="password" class="form-label">
-                        <i class="bi bi-lock me-1"></i> Hasło
+                        <i class="bi bi-lock me-1"></i> {{ _('Hasło') }}
                     </label>
                     {{ form.password(class="form-control form-control-lg" + (" is-invalid" if form.password.errors else ""),
                                      placeholder="********") }}
@@ -42,7 +42,7 @@
                     <div class="form-check">
                         {{ form.remember_me(class="form-check-input") }}
                         <label class="form-check-label" for="remember_me">
-                            Zapamiętaj mnie
+                            {{ _('Zapamiętaj mnie') }}
                         </label>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
     <p class="text-center text-muted mt-4">
         <small>
             <i class="bi bi-shield-lock me-1"></i>
-            Bezpieczne logowanie
+            {{ _('Bezpieczne logowanie') }}
         </small>
     </p>
 </div>

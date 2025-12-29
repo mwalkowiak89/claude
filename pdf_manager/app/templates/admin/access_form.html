@@ -5,13 +5,13 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{ url_for('admin.dashboard') }}">
-                <i class="bi bi-speedometer2 me-1"></i> Panel administracyjny
+                <i class="bi bi-speedometer2 me-1"></i> {{ _('Panel administracyjny') }}
             </a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{ url_for('admin.files') }}">Pliki</a>
+            <a href="{{ url_for('admin.files') }}">{{ _('Pliki') }}</a>
         </li>
-        <li class="breadcrumb-item active">Uprawnienia</li>
+        <li class="breadcrumb-item active">{{ _('Uprawnienia') }}</li>
     </ol>
 </nav>
 
@@ -21,7 +21,7 @@
             <div class="card-header bg-white">
                 <h5 class="mb-0">
                     <i class="bi bi-shield-lock me-2"></i>
-                    Zarządzaj dostępem
+                    {{ _('Zarządzaj dostępem') }}
                 </h5>
             </div>
             <div class="card-body">
@@ -31,7 +31,7 @@
                         <div>
                             <strong>{{ file.filename }}</strong>
                             <br>
-                            <small class="text-muted">Wersja {{ file.version }}</small>
+                            <small class="text-muted">{{ _('Wersja') }} {{ file.version }}</small>
                         </div>
                     </div>
                 </div>
@@ -41,18 +41,18 @@
 
                     <div class="mb-4">
                         <label for="users" class="form-label">
-                            <i class="bi bi-people me-1"></i> Użytkownicy z dostępem
+                            <i class="bi bi-people me-1"></i> {{ _('Użytkownicy z dostępem') }}
                         </label>
                         {{ form.users(class="form-select", size=10) }}
                         <small class="text-muted">
-                            Przytrzymaj Ctrl (Cmd na Mac), aby wybrać wielu użytkowników.
+                            {{ _('Przytrzymaj Ctrl (Cmd na Mac), aby wybrać wielu użytkowników.') }}
                         </small>
                     </div>
 
                     <div class="d-flex gap-2">
                         {{ form.submit(class="btn btn-success") }}
                         <a href="{{ url_for('admin.files') }}" class="btn btn-outline-secondary">
-                            Anuluj
+                            {{ _('Anuluj') }}
                         </a>
                     </div>
                 </form>
@@ -63,12 +63,12 @@
             <div class="card-body">
                 <h6 class="card-title">
                     <i class="bi bi-info-circle me-2"></i>
-                    Informacje
+                    {{ _('Informacje') }}
                 </h6>
                 <ul class="mb-0 text-muted small">
-                    <li>Administratorzy mają automatycznie dostęp do wszystkich plików.</li>
-                    <li>Użytkownicy na liście będą mogli pobierać i przeglądać ten plik.</li>
-                    <li>Odznaczenie użytkownika odbierze mu dostęp.</li>
+                    <li>{{ _('Administratorzy mają automatycznie dostęp do wszystkich plików.') }}</li>
+                    <li>{{ _('Użytkownicy na liście będą mogli pobierać i przeglądać ten plik.') }}</li>
+                    <li>{{ _('Odznaczenie użytkownika odbierze mu dostęp.') }}</li>
                 </ul>
             </div>
         </div>

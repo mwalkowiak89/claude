@@ -5,12 +5,12 @@
     <div>
         <h2 class="mb-1">
             <i class="bi bi-file-earmark-pdf text-primary me-2"></i>
-            Pliki PDF
+            {{ _('Pliki PDF') }}
         </h2>
-        <p class="text-muted mb-0">Zarządzanie plikami w systemie</p>
+        <p class="text-muted mb-0">{{ _('Zarządzanie plikami w systemie') }}</p>
     </div>
     <a href="{{ url_for('admin.upload_file') }}" class="btn btn-primary">
-        <i class="bi bi-cloud-upload me-1"></i> Prześlij plik
+        <i class="bi bi-cloud-upload me-1"></i> {{ _('Prześlij plik') }}
     </a>
 </div>
 
@@ -21,11 +21,11 @@
             <table class="table table-hover mb-0">
                 <thead class="table-light">
                     <tr>
-                        <th>Nazwa pliku</th>
-                        <th class="text-center">Wersja</th>
-                        <th class="text-center">Użytkownicy z dostępem</th>
-                        <th>Data uploadu</th>
-                        <th class="text-end">Akcje</th>
+                        <th>{{ _('Nazwa pliku') }}</th>
+                        <th class="text-center">{{ _('Wersja') }}</th>
+                        <th class="text-center">{{ _('Użytkownicy z dostępem') }}</th>
+                        <th>{{ _('Data uploadu') }}</th>
+                        <th class="text-end">{{ _('Akcje') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,23 +56,23 @@
                         <td class="text-end">
                             <div class="btn-group btn-group-sm">
                                 <a href="{{ url_for('main.view_file', file_id=file.id) }}"
-                                   class="btn btn-outline-primary" title="Podgląd">
+                                   class="btn btn-outline-primary" title="{{ _('Podgląd') }}">
                                     <i class="bi bi-eye"></i>
                                 </a>
                                 <a href="{{ url_for('main.download_file', file_id=file.id) }}"
-                                   class="btn btn-outline-secondary" title="Pobierz">
+                                   class="btn btn-outline-secondary" title="{{ _('Pobierz') }}">
                                     <i class="bi bi-download"></i>
                                 </a>
                                 <a href="{{ url_for('admin.update_file', file_id=file.id) }}"
-                                   class="btn btn-outline-warning" title="Aktualizuj">
+                                   class="btn btn-outline-warning" title="{{ _('Aktualizuj') }}">
                                     <i class="bi bi-upload"></i>
                                 </a>
                                 <a href="{{ url_for('admin.manage_access', file_id=file.id) }}"
-                                   class="btn btn-outline-success" title="Uprawnienia">
+                                   class="btn btn-outline-success" title="{{ _('Uprawnienia') }}">
                                     <i class="bi bi-shield-lock"></i>
                                 </a>
                                 <button type="button" class="btn btn-outline-danger"
-                                        title="Usuń"
+                                        title="{{ _('Usuń') }}"
                                         data-bs-toggle="modal"
                                         data-bs-target="#deleteModal{{ file.id }}">
                                     <i class="bi bi-trash"></i>
@@ -84,21 +84,21 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Potwierdź usunięcie</h5>
+                                            <h5 class="modal-title">{{ _('Potwierdź usunięcie') }}</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Czy na pewno chcesz usunąć plik <strong>{{ file.filename }}</strong>?</p>
-                                            <p class="text-muted mb-0">Ta operacja jest nieodwracalna. Wszyscy użytkownicy stracą dostęp do tego pliku.</p>
+                                            <p>{{ _('Czy na pewno chcesz usunąć plik') }} <strong>{{ file.filename }}</strong>?</p>
+                                            <p class="text-muted mb-0">{{ _('Ta operacja jest nieodwracalna. Wszyscy użytkownicy stracą dostęp do tego pliku.') }}</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                Anuluj
+                                                {{ _('Anuluj') }}
                                             </button>
                                             <form action="{{ url_for('admin.delete_file', file_id=file.id) }}"
                                                   method="POST" class="d-inline">
                                                 <button type="submit" class="btn btn-danger">
-                                                    <i class="bi bi-trash me-1"></i> Usuń
+                                                    <i class="bi bi-trash me-1"></i> {{ _('Usuń') }}
                                                 </button>
                                             </form>
                                         </div>
@@ -114,10 +114,10 @@
         {% else %}
         <div class="empty-state">
             <i class="bi bi-file-earmark-pdf"></i>
-            <h4>Brak plików</h4>
-            <p class="mb-3">Nie przesłano jeszcze żadnych plików PDF.</p>
+            <h4>{{ _('Brak plików') }}</h4>
+            <p class="mb-3">{{ _('Nie przesłano jeszcze żadnych plików PDF.') }}</p>
             <a href="{{ url_for('admin.upload_file') }}" class="btn btn-primary">
-                <i class="bi bi-cloud-upload me-1"></i> Prześlij pierwszy plik
+                <i class="bi bi-cloud-upload me-1"></i> {{ _('Prześlij pierwszy plik') }}
             </a>
         </div>
         {% endif %}

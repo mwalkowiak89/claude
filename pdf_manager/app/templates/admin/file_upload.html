@@ -5,13 +5,13 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{ url_for('admin.dashboard') }}">
-                <i class="bi bi-speedometer2 me-1"></i> Panel administracyjny
+                <i class="bi bi-speedometer2 me-1"></i> {{ _('Panel administracyjny') }}
             </a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{ url_for('admin.files') }}">Pliki</a>
+            <a href="{{ url_for('admin.files') }}">{{ _('Pliki') }}</a>
         </li>
-        <li class="breadcrumb-item active">Prześlij</li>
+        <li class="breadcrumb-item active">{{ _('Prześlij') }}</li>
     </ol>
 </nav>
 
@@ -21,7 +21,7 @@
             <div class="card-header bg-white">
                 <h5 class="mb-0">
                     <i class="bi bi-cloud-upload me-2"></i>
-                    Prześlij plik PDF
+                    {{ _('Prześlij plik PDF') }}
                 </h5>
             </div>
             <div class="card-body">
@@ -30,7 +30,7 @@
 
                     <div class="mb-4">
                         <label for="file" class="form-label">
-                            <i class="bi bi-file-earmark-pdf me-1"></i> Plik PDF
+                            <i class="bi bi-file-earmark-pdf me-1"></i> {{ _('Plik PDF') }}
                         </label>
                         <div class="input-group">
                             {{ form.file(class="form-control" + (" is-invalid" if form.file.errors else ""),
@@ -41,16 +41,16 @@
                             {% for error in form.file.errors %}{{ error }}{% endfor %}
                         </div>
                         {% endif %}
-                        <small class="text-muted">Maksymalny rozmiar pliku: 50 MB</small>
+                        <small class="text-muted">{{ _('Maksymalny rozmiar pliku: 50 MB') }}</small>
                     </div>
 
                     <div class="mb-4">
                         <label for="description" class="form-label">
-                            <i class="bi bi-text-left me-1"></i> Opis (opcjonalnie)
+                            <i class="bi bi-text-left me-1"></i> {{ _('Opis (opcjonalnie)') }}
                         </label>
                         {{ form.description(class="form-control" + (" is-invalid" if form.description.errors else ""),
                                             rows=3,
-                                            placeholder="Krótki opis zawartości pliku...") }}
+                                            placeholder=_('Krótki opis zawartości pliku...')) }}
                         {% if form.description.errors %}
                         <div class="invalid-feedback">
                             {% for error in form.description.errors %}{{ error }}{% endfor %}
@@ -61,7 +61,7 @@
                     <div class="d-flex gap-2">
                         {{ form.submit(class="btn btn-primary") }}
                         <a href="{{ url_for('admin.files') }}" class="btn btn-outline-secondary">
-                            Anuluj
+                            {{ _('Anuluj') }}
                         </a>
                     </div>
                 </form>
@@ -72,12 +72,12 @@
             <div class="card-body">
                 <h6 class="card-title">
                     <i class="bi bi-info-circle me-2"></i>
-                    Informacje
+                    {{ _('Informacje') }}
                 </h6>
                 <ul class="mb-0 text-muted small">
-                    <li>Po przesłaniu pliku, możesz przypisać dostęp użytkownikom.</li>
-                    <li>Aktualizacja pliku do nowej wersji automatycznie powiadomi użytkowników.</li>
-                    <li>Dozwolone są tylko pliki w formacie PDF.</li>
+                    <li>{{ _('Po przesłaniu pliku, możesz przypisać dostęp użytkownikom.') }}</li>
+                    <li>{{ _('Aktualizacja pliku do nowej wersji automatycznie powiadomi użytkowników.') }}</li>
+                    <li>{{ _('Dozwolone są tylko pliki w formacie PDF.') }}</li>
                 </ul>
             </div>
         </div>

@@ -5,9 +5,9 @@
     <div>
         <h2 class="mb-1">
             <i class="bi bi-speedometer2 text-primary me-2"></i>
-            Panel administracyjny
+            {{ _('Panel administracyjny') }}
         </h2>
-        <p class="text-muted mb-0">Przegląd systemu</p>
+        <p class="text-muted mb-0">{{ _('Przegląd systemu') }}</p>
     </div>
 </div>
 
@@ -21,7 +21,7 @@
                 </div>
                 <div>
                     <h3 class="mb-0">{{ stats.users }}</h3>
-                    <p class="text-muted mb-0">Użytkowników</p>
+                    <p class="text-muted mb-0">{{ _('Użytkowników') }}</p>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     <h3 class="mb-0">{{ stats.files }}</h3>
-                    <p class="text-muted mb-0">Plików PDF</p>
+                    <p class="text-muted mb-0">{{ _('Plików PDF') }}</p>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div>
                     <h3 class="mb-0">{{ stats.access_grants }}</h3>
-                    <p class="text-muted mb-0">Przyznanych dostępów</p>
+                    <p class="text-muted mb-0">{{ _('Przyznanych dostępów') }}</p>
                 </div>
             </div>
         </div>
@@ -61,10 +61,10 @@
             <div class="card-header bg-white d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">
                     <i class="bi bi-clock-history me-2"></i>
-                    Ostatnie pliki
+                    {{ _('Ostatnie pliki') }}
                 </h5>
                 <a href="{{ url_for('admin.files') }}" class="btn btn-sm btn-outline-primary">
-                    Zobacz wszystkie
+                    {{ _('Zobacz wszystkie') }}
                 </a>
             </div>
             <div class="card-body p-0">
@@ -92,7 +92,7 @@
                 {% else %}
                 <div class="p-4 text-center text-muted">
                     <i class="bi bi-folder2 fs-1 d-block mb-2"></i>
-                    Brak plików
+                    {{ _('Brak plików') }}
                 </div>
                 {% endif %}
             </div>
@@ -105,10 +105,10 @@
             <div class="card-header bg-white d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">
                     <i class="bi bi-person-plus me-2"></i>
-                    Ostatni użytkownicy
+                    {{ _('Ostatni użytkownicy') }}
                 </h5>
                 <a href="{{ url_for('admin.users') }}" class="btn btn-sm btn-outline-primary">
-                    Zobacz wszystkich
+                    {{ _('Zobacz wszystkich') }}
                 </a>
             </div>
             <div class="card-body p-0">
@@ -122,11 +122,11 @@
                                 <h6 class="mb-0">
                                     {{ user.email }}
                                     {% if user.is_admin %}
-                                    <span class="badge bg-warning text-dark ms-1">Admin</span>
+                                    <span class="badge bg-warning text-dark ms-1">{{ _('Admin') }}</span>
                                     {% endif %}
                                 </h6>
                                 <small class="text-muted">
-                                    Utworzono: {{ user.created_at.strftime('%d.%m.%Y') }}
+                                    {{ _('Utworzono:') }} {{ user.created_at.strftime('%d.%m.%Y') }}
                                 </small>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                 {% else %}
                 <div class="p-4 text-center text-muted">
                     <i class="bi bi-people fs-1 d-block mb-2"></i>
-                    Brak użytkowników
+                    {{ _('Brak użytkowników') }}
                 </div>
                 {% endif %}
             </div>
@@ -153,7 +153,7 @@
     <div class="card-header bg-white">
         <h5 class="mb-0">
             <i class="bi bi-lightning me-2"></i>
-            Szybkie akcje
+            {{ _('Szybkie akcje') }}
         </h5>
     </div>
     <div class="card-body">
@@ -161,19 +161,19 @@
             <div class="col-md-4">
                 <a href="{{ url_for('admin.add_user') }}" class="btn btn-outline-primary w-100 py-3">
                     <i class="bi bi-person-plus-fill me-2"></i>
-                    Dodaj użytkownika
+                    {{ _('Dodaj użytkownika') }}
                 </a>
             </div>
             <div class="col-md-4">
                 <a href="{{ url_for('admin.upload_file') }}" class="btn btn-outline-danger w-100 py-3">
                     <i class="bi bi-cloud-upload-fill me-2"></i>
-                    Prześlij plik PDF
+                    {{ _('Prześlij plik PDF') }}
                 </a>
             </div>
             <div class="col-md-4">
                 <a href="{{ url_for('admin.access_overview') }}" class="btn btn-outline-success w-100 py-3">
                     <i class="bi bi-shield-lock-fill me-2"></i>
-                    Zarządzaj uprawnieniami
+                    {{ _('Zarządzaj uprawnieniami') }}
                 </a>
             </div>
         </div>

@@ -5,12 +5,12 @@
     <div>
         <h2 class="mb-1">
             <i class="bi bi-people text-primary me-2"></i>
-            Użytkownicy
+            {{ _('Użytkownicy') }}
         </h2>
-        <p class="text-muted mb-0">Zarządzanie kontami użytkowników</p>
+        <p class="text-muted mb-0">{{ _('Zarządzanie kontami użytkowników') }}</p>
     </div>
     <a href="{{ url_for('admin.add_user') }}" class="btn btn-primary">
-        <i class="bi bi-person-plus me-1"></i> Dodaj użytkownika
+        <i class="bi bi-person-plus me-1"></i> {{ _('Dodaj użytkownika') }}
     </a>
 </div>
 
@@ -21,11 +21,11 @@
             <table class="table table-hover mb-0">
                 <thead class="table-light">
                     <tr>
-                        <th>Email</th>
-                        <th class="text-center">Rola</th>
-                        <th class="text-center">Dostęp do plików</th>
-                        <th>Data utworzenia</th>
-                        <th class="text-end">Akcje</th>
+                        <th>{{ _('Email') }}</th>
+                        <th class="text-center">{{ _('Rola') }}</th>
+                        <th class="text-center">{{ _('Dostęp do plików') }}</th>
+                        <th>{{ _('Data utworzenia') }}</th>
+                        <th class="text-end">{{ _('Akcje') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,17 +40,17 @@
                         <td class="text-center">
                             {% if user.is_admin %}
                             <span class="badge bg-warning text-dark">
-                                <i class="bi bi-shield-fill me-1"></i> Administrator
+                                <i class="bi bi-shield-fill me-1"></i> {{ _('Administrator') }}
                             </span>
                             {% else %}
                             <span class="badge bg-secondary">
-                                <i class="bi bi-person-fill me-1"></i> Użytkownik
+                                <i class="bi bi-person-fill me-1"></i> {{ _('Użytkownik') }}
                             </span>
                             {% endif %}
                         </td>
                         <td class="text-center">
                             {% if user.is_admin %}
-                            <span class="text-muted">Wszystkie</span>
+                            <span class="text-muted">{{ _('Wszystkie') }}</span>
                             {% else %}
                             <span class="badge bg-info">{{ user.file_access.count() }}</span>
                             {% endif %}
@@ -63,16 +63,16 @@
                         <td class="text-end">
                             <div class="btn-group btn-group-sm">
                                 <a href="{{ url_for('admin.edit_user', user_id=user.id) }}"
-                                   class="btn btn-outline-primary" title="Edytuj">
+                                   class="btn btn-outline-primary" title="{{ _('Edytuj') }}">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 <a href="{{ url_for('admin.change_user_password', user_id=user.id) }}"
-                                   class="btn btn-outline-secondary" title="Zmień hasło">
+                                   class="btn btn-outline-secondary" title="{{ _('Zmień hasło') }}">
                                     <i class="bi bi-key"></i>
                                 </a>
                                 {% if user.id != current_user.id %}
                                 <button type="button" class="btn btn-outline-danger"
-                                        title="Usuń"
+                                        title="{{ _('Usuń') }}"
                                         data-bs-toggle="modal"
                                         data-bs-target="#deleteModal{{ user.id }}">
                                     <i class="bi bi-trash"></i>
@@ -86,21 +86,21 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Potwierdź usunięcie</h5>
+                                            <h5 class="modal-title">{{ _('Potwierdź usunięcie') }}</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Czy na pewno chcesz usunąć użytkownika <strong>{{ user.email }}</strong>?</p>
-                                            <p class="text-muted mb-0">Ta operacja jest nieodwracalna.</p>
+                                            <p>{{ _('Czy na pewno chcesz usunąć użytkownika') }} <strong>{{ user.email }}</strong>?</p>
+                                            <p class="text-muted mb-0">{{ _('Ta operacja jest nieodwracalna.') }}</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                Anuluj
+                                                {{ _('Anuluj') }}
                                             </button>
                                             <form action="{{ url_for('admin.delete_user', user_id=user.id) }}"
                                                   method="POST" class="d-inline">
                                                 <button type="submit" class="btn btn-danger">
-                                                    <i class="bi bi-trash me-1"></i> Usuń
+                                                    <i class="bi bi-trash me-1"></i> {{ _('Usuń') }}
                                                 </button>
                                             </form>
                                         </div>
@@ -117,10 +117,10 @@
         {% else %}
         <div class="empty-state">
             <i class="bi bi-people"></i>
-            <h4>Brak użytkowników</h4>
-            <p class="mb-3">Nie ma jeszcze żadnych użytkowników w systemie.</p>
+            <h4>{{ _('Brak użytkowników') }}</h4>
+            <p class="mb-3">{{ _('Nie ma jeszcze żadnych użytkowników w systemie.') }}</p>
             <a href="{{ url_for('admin.add_user') }}" class="btn btn-primary">
-                <i class="bi bi-person-plus me-1"></i> Dodaj pierwszego użytkownika
+                <i class="bi bi-person-plus me-1"></i> {{ _('Dodaj pierwszego użytkownika') }}
             </a>
         </div>
         {% endif %}

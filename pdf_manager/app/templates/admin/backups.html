@@ -5,21 +5,21 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{ url_for('admin.dashboard') }}">
-                <i class="bi bi-speedometer2 me-1"></i> Panel administracyjny
+                <i class="bi bi-speedometer2 me-1"></i> {{ _('Panel administracyjny') }}
             </a>
         </li>
-        <li class="breadcrumb-item active">Kopie zapasowe</li>
+        <li class="breadcrumb-item active">{{ _('Kopie zapasowe') }}</li>
     </ol>
 </nav>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>
         <i class="bi bi-archive me-2"></i>
-        Kopie zapasowe
+        {{ _('Kopie zapasowe') }}
     </h2>
     <form action="{{ url_for('admin.create_backup') }}" method="POST" class="d-inline">
         <button type="submit" class="btn btn-primary">
-            <i class="bi bi-plus-circle me-1"></i> Utwórz backup teraz
+            <i class="bi bi-plus-circle me-1"></i> {{ _('Utwórz backup teraz') }}
         </button>
     </form>
 </div>
@@ -31,7 +31,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="text-white-50 mb-1">Liczba backupów</h6>
+                        <h6 class="text-white-50 mb-1">{{ _('Liczba backupów') }}</h6>
                         <h3 class="mb-0">{{ backup_count }}</h3>
                     </div>
                     <i class="bi bi-archive fs-1 opacity-50"></i>
@@ -44,7 +44,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="text-white-50 mb-1">Łączny rozmiar</h6>
+                        <h6 class="text-white-50 mb-1">{{ _('Łączny rozmiar') }}</h6>
                         <h3 class="mb-0">{{ total_size }} MB</h3>
                     </div>
                     <i class="bi bi-hdd fs-1 opacity-50"></i>
@@ -57,12 +57,12 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="text-white-50 mb-1">Ostatni backup</h6>
+                        <h6 class="text-white-50 mb-1">{{ _('Ostatni backup') }}</h6>
                         <h3 class="mb-0">
                             {% if last_backup %}
                             {{ last_backup.created.strftime('%d.%m %H:%M') }}
                             {% else %}
-                            Brak
+                            {{ _('Brak') }}
                             {% endif %}
                         </h3>
                     </div>
@@ -76,8 +76,8 @@
 <!-- Info Alert -->
 <div class="alert alert-info">
     <i class="bi bi-info-circle me-2"></i>
-    <strong>Automatyczne backupy:</strong> Konfiguruj cron job aby uruchamiać <code>python backup.py</code> codziennie.
-    Backupy są przechowywane przez 7 dni, potem automatycznie usuwane.
+    <strong>{{ _('Automatyczne backupy:') }}</strong> {{ _('Konfiguruj cron job aby uruchamiać') }} <code>python backup.py</code> {{ _('codziennie.') }}
+    {{ _('Backupy są przechowywane przez 7 dni, potem automatycznie usuwane.') }}
 </div>
 
 <!-- Backups Table -->
@@ -85,7 +85,7 @@
     <div class="card-header bg-white">
         <h5 class="mb-0">
             <i class="bi bi-list-ul me-2"></i>
-            Lista backupów
+            {{ _('Lista backupów') }}
         </h5>
     </div>
     <div class="card-body p-0">
@@ -94,11 +94,11 @@
             <table class="table table-hover mb-0">
                 <thead class="table-light">
                     <tr>
-                        <th>Nazwa pliku</th>
-                        <th>Data utworzenia</th>
-                        <th>Rozmiar</th>
-                        <th>Plików</th>
-                        <th class="text-end">Akcje</th>
+                        <th>{{ _('Nazwa pliku') }}</th>
+                        <th>{{ _('Data utworzenia') }}</th>
+                        <th>{{ _('Rozmiar') }}</th>
+                        <th>{{ _('Plików') }}</th>
+                        <th class="text-end">{{ _('Akcje') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -119,17 +119,17 @@
                         <td class="text-end">
                             <div class="btn-group btn-group-sm">
                                 <a href="{{ url_for('admin.download_backup', filename=backup.filename) }}"
-                                   class="btn btn-outline-primary" title="Pobierz">
+                                   class="btn btn-outline-primary" title="{{ _('Pobierz') }}">
                                     <i class="bi bi-download"></i>
                                 </a>
                                 <a href="{{ url_for('admin.restore_backup', filename=backup.filename) }}"
-                                   class="btn btn-outline-warning" title="Przywróć">
+                                   class="btn btn-outline-warning" title="{{ _('Przywróć') }}">
                                     <i class="bi bi-arrow-counterclockwise"></i>
                                 </a>
                                 <form action="{{ url_for('admin.delete_backup', filename=backup.filename) }}"
                                       method="POST" class="d-inline"
-                                      onsubmit="return confirm('Czy na pewno chcesz usunąć ten backup?');">
-                                    <button type="submit" class="btn btn-outline-danger" title="Usuń">
+                                      onsubmit="return confirm('{{ _('Czy na pewno chcesz usunąć ten backup?') }}');">
+                                    <button type="submit" class="btn btn-outline-danger" title="{{ _('Usuń') }}">
                                         <i class="bi bi-trash"></i>
                                     </button>
                                 </form>
@@ -143,8 +143,8 @@
         {% else %}
         <div class="text-center py-5">
             <i class="bi bi-archive display-4 text-muted mb-3 d-block"></i>
-            <h5>Brak backupów</h5>
-            <p class="text-muted">Utwórz pierwszy backup klikając przycisk powyżej.</p>
+            <h5>{{ _('Brak backupów') }}</h5>
+            <p class="text-muted">{{ _('Utwórz pierwszy backup klikając przycisk powyżej.') }}</p>
         </div>
         {% endif %}
     </div>
@@ -155,19 +155,19 @@
     <div class="card-header bg-white">
         <h6 class="mb-0">
             <i class="bi bi-question-circle me-2"></i>
-            Konfiguracja automatycznych backupów
+            {{ _('Konfiguracja automatycznych backupów') }}
         </h6>
     </div>
     <div class="card-body">
-        <p class="text-muted mb-3">Aby uruchamiać backup automatycznie, dodaj zadanie cron:</p>
-        <pre class="bg-light p-3 rounded mb-3"><code># Edytuj crontab
+        <p class="text-muted mb-3">{{ _('Aby uruchamiać backup automatycznie, dodaj zadanie cron:') }}</p>
+        <pre class="bg-light p-3 rounded mb-3"><code># {{ _('Edytuj crontab') }}
 crontab -e
 
-# Dodaj linię (backup codziennie o 2:00):
+# {{ _('Dodaj linię (backup codziennie o 2:00):') }}
 0 2 * * * cd /ścieżka/do/projektu && /ścieżka/do/venv/bin/python backup.py >> backups/backup.log 2>&1</code></pre>
         <p class="text-muted mb-0">
             <i class="bi bi-info-circle me-1"></i>
-            Backupy zawierają bazę danych (<code>app.db</code>) oraz wszystkie pliki z folderu <code>uploads/</code>.
+            {{ _('Backupy zawierają bazę danych') }} (<code>app.db</code>) {{ _('oraz wszystkie pliki z folderu') }} <code>uploads/</code>.
         </p>
     </div>
 </div>

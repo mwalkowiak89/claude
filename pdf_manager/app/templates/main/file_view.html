@@ -5,7 +5,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{ url_for('main.index') }}">
-                <i class="bi bi-folder2-open me-1"></i> Moje pliki
+                <i class="bi bi-folder2-open me-1"></i> {{ _('Moje pliki') }}
             </a>
         </li>
         <li class="breadcrumb-item active">{{ file.filename }}</li>
@@ -20,10 +20,10 @@
                 <div>
                     <h4 class="mb-0">{{ file.filename }}</h4>
                     <div class="text-muted">
-                        <span class="badge bg-secondary version-badge me-2">Wersja {{ file.version }}</span>
+                        <span class="badge bg-secondary version-badge me-2">{{ _('Wersja') }} {{ file.version }}</span>
                         <small>
                             <i class="bi bi-calendar3 me-1"></i>
-                            Ostatnia aktualizacja: {{ file.upload_date.strftime('%d.%m.%Y o %H:%M') }}
+                            {{ _('Ostatnia aktualizacja') }}: {{ file.upload_date.strftime('%d.%m.%Y o %H:%M') }}
                         </small>
                     </div>
                 </div>
@@ -31,16 +31,16 @@
             <div class="action-buttons">
                 <a href="{{ url_for('main.download_file', file_id=file.id) }}"
                    class="btn btn-primary">
-                    <i class="bi bi-download me-1"></i> Pobierz
+                    <i class="bi bi-download me-1"></i> {{ _('Pobierz') }}
                 </a>
                 {% if current_user.is_admin %}
                 <a href="{{ url_for('admin.update_file', file_id=file.id) }}"
                    class="btn btn-outline-secondary">
-                    <i class="bi bi-upload me-1"></i> Aktualizuj
+                    <i class="bi bi-upload me-1"></i> {{ _('Aktualizuj') }}
                 </a>
                 <a href="{{ url_for('admin.manage_access', file_id=file.id) }}"
                    class="btn btn-outline-secondary">
-                    <i class="bi bi-shield-lock me-1"></i> Uprawnienia
+                    <i class="bi bi-shield-lock me-1"></i> {{ _('Uprawnienia') }}
                 </a>
                 {% endif %}
             </div>
@@ -50,7 +50,7 @@
     {% if file.description %}
     <div class="card-body border-bottom">
         <h6 class="text-muted mb-2">
-            <i class="bi bi-text-left me-1"></i> Opis
+            <i class="bi bi-text-left me-1"></i> {{ _('Opis') }}
         </h6>
         <p class="mb-0">{{ file.description }}</p>
     </div>
@@ -66,7 +66,7 @@
 
 <div class="d-flex justify-content-between">
     <a href="{{ url_for('main.index') }}" class="btn btn-outline-secondary">
-        <i class="bi bi-arrow-left me-1"></i> Powrót do listy
+        <i class="bi bi-arrow-left me-1"></i> {{ _('Powrót do listy') }}
     </a>
 </div>
 {% endblock %}

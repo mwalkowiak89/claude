@@ -5,14 +5,14 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{ url_for('admin.dashboard') }}">
-                <i class="bi bi-speedometer2 me-1"></i> Panel administracyjny
+                <i class="bi bi-speedometer2 me-1"></i> {{ _('Panel administracyjny') }}
             </a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{ url_for('admin.users') }}">Użytkownicy</a>
+            <a href="{{ url_for('admin.users') }}">{{ _('Użytkownicy') }}</a>
         </li>
         <li class="breadcrumb-item active">
-            {{ 'Edytuj' if user is defined else 'Dodaj' }}
+            {{ _('Edytuj') if user is defined else _('Dodaj') }}
         </li>
     </ol>
 </nav>
@@ -23,7 +23,7 @@
             <div class="card-header bg-white">
                 <h5 class="mb-0">
                     <i class="bi bi-person-{{ 'gear' if user is defined else 'plus' }} me-2"></i>
-                    {{ 'Edytuj użytkownika' if user is defined else 'Dodaj użytkownika' }}
+                    {{ _('Edytuj użytkownika') if user is defined else _('Dodaj użytkownika') }}
                 </h5>
             </div>
             <div class="card-body">
@@ -46,10 +46,10 @@
                     {% if not user is defined %}
                     <div class="mb-3">
                         <label for="password" class="form-label">
-                            <i class="bi bi-lock me-1"></i> Hasło
+                            <i class="bi bi-lock me-1"></i> {{ _('Hasło') }}
                         </label>
                         {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""),
-                                         placeholder="Minimum 8 znaków") }}
+                                         placeholder=_('Minimum 8 znaków')) }}
                         {% if form.password.errors %}
                         <div class="invalid-feedback">
                             {% for error in form.password.errors %}{{ error }}{% endfor %}
@@ -59,10 +59,10 @@
 
                     <div class="mb-3">
                         <label for="password2" class="form-label">
-                            <i class="bi bi-lock-fill me-1"></i> Potwierdź hasło
+                            <i class="bi bi-lock-fill me-1"></i> {{ _('Potwierdź hasło') }}
                         </label>
                         {{ form.password2(class="form-control" + (" is-invalid" if form.password2.errors else ""),
-                                          placeholder="Powtórz hasło") }}
+                                          placeholder=_('Powtórz hasło')) }}
                         {% if form.password2.errors %}
                         <div class="invalid-feedback">
                             {% for error in form.password2.errors %}{{ error }}{% endfor %}
@@ -73,7 +73,7 @@
 
                     <div class="mb-3">
                         <label for="preferred_language" class="form-label">
-                            <i class="bi bi-translate me-1"></i> Preferowany język
+                            <i class="bi bi-translate me-1"></i> {{ _('Preferowany język') }}
                         </label>
                         {{ form.preferred_language(class="form-select" + (" is-invalid" if form.preferred_language.errors else "")) }}
                         {% if form.preferred_language.errors %}
@@ -82,7 +82,7 @@
                         </div>
                         {% endif %}
                         <small class="text-muted">
-                            Powiadomienia email będą wysyłane w wybranym języku.
+                            {{ _('Powiadomienia email będą wysyłane w wybranym języku.') }}
                         </small>
                     </div>
 
@@ -90,18 +90,18 @@
                         <div class="form-check form-switch">
                             {{ form.is_admin(class="form-check-input") }}
                             <label class="form-check-label" for="is_admin">
-                                <i class="bi bi-shield me-1"></i> Administrator
+                                <i class="bi bi-shield me-1"></i> {{ _('Administrator') }}
                             </label>
                         </div>
                         <small class="text-muted">
-                            Administratorzy mają dostęp do wszystkich plików i mogą zarządzać systemem.
+                            {{ _('Administratorzy mają dostęp do wszystkich plików i mogą zarządzać systemem.') }}
                         </small>
                     </div>
 
                     <div class="d-flex gap-2">
                         {{ form.submit(class="btn btn-primary") }}
                         <a href="{{ url_for('admin.users') }}" class="btn btn-outline-secondary">
-                            Anuluj
+                            {{ _('Anuluj') }}
                         </a>
                     </div>
                 </form>

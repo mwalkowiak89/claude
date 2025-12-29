@@ -13,45 +13,35 @@
             <div class="card-body">
                 <div class="alert alert-info">
                     <i class="bi bi-info-circle me-2"></i>
-                    Przed pobraniem plików musisz zaakceptować poniższy regulamin.
+                    {{ _('Przed pobraniem plików musisz zaakceptować poniższy regulamin.') }}
                 </div>
 
                 <div class="border rounded p-3 mb-4 bg-light" style="max-height: 300px; overflow-y: auto;">
-                    <h6>Regulamin korzystania z plików PDF</h6>
+                    <h6>{{ _('Regulamin korzystania z plików PDF') }}</h6>
                     <hr>
                     <p class="small">
-                        <strong>1. Przeznaczenie plików</strong><br>
-                        Pliki udostępnione w systemie PDF Manager są przeznaczone wyłącznie
-                        do użytku osobistego autoryzowanego użytkownika.
+                        <strong>{{ _('1. Przeznaczenie plików') }}</strong><br>
+                        {{ _('Pliki udostępnione w systemie PDF Manager są przeznaczone wyłącznie do użytku osobistego autoryzowanego użytkownika.') }}
                     </p>
                     <p class="small">
-                        <strong>2. Zakaz rozpowszechniania</strong><br>
-                        Użytkownik zobowiązuje się do nieudostępniania, niepublikowania
-                        i nierozpowszechniania pobranych plików osobom trzecim bez
-                        wyraźnej zgody administratora systemu.
+                        <strong>{{ _('2. Zakaz rozpowszechniania') }}</strong><br>
+                        {{ _('Użytkownik zobowiązuje się do nieudostępniania, niepublikowania i nierozpowszechniania pobranych plików osobom trzecim bez wyraźnej zgody administratora systemu.') }}
                     </p>
                     <p class="small">
-                        <strong>3. Monitorowanie aktywności</strong><br>
-                        Wszystkie pobrania plików są rejestrowane w systemie audytu.
-                        Każdy pobrany plik zawiera znak wodny z informacją o użytkowniku
-                        i dacie pobrania.
+                        <strong>{{ _('3. Monitorowanie aktywności') }}</strong><br>
+                        {{ _('Wszystkie pobrania plików są rejestrowane w systemie audytu. Każdy pobrany plik zawiera znak wodny z informacją o użytkowniku i dacie pobrania.') }}
                     </p>
                     <p class="small">
-                        <strong>4. Limity pobrań</strong><br>
-                        Każdy plik może być pobrany maksymalnie 10 razy przez jednego
-                        użytkownika. W przypadku potrzeby dodatkowych pobrań należy
-                        skontaktować się z administratorem.
+                        <strong>{{ _('4. Limity pobrań') }}</strong><br>
+                        {{ _('Każdy plik może być pobrany maksymalnie 10 razy przez jednego użytkownika. W przypadku potrzeby dodatkowych pobrań należy skontaktować się z administratorem.') }}
                     </p>
                     <p class="small">
-                        <strong>5. Podejrzana aktywność</strong><br>
-                        Nadmierne pobieranie plików (więcej niż 5 razy w ciągu godziny)
-                        może skutkować powiadomieniem administratora i ograniczeniem
-                        dostępu do systemu.
+                        <strong>{{ _('5. Podejrzana aktywność') }}</strong><br>
+                        {{ _('Nadmierne pobieranie plików (więcej niż 5 razy w ciągu godziny) może skutkować powiadomieniem administratora i ograniczeniem dostępu do systemu.') }}
                     </p>
                     <p class="small mb-0">
-                        <strong>6. Odpowiedzialność</strong><br>
-                        Użytkownik ponosi pełną odpowiedzialność za nieautoryzowane
-                        rozpowszechnianie plików pobranych z systemu.
+                        <strong>{{ _('6. Odpowiedzialność') }}</strong><br>
+                        {{ _('Użytkownik ponosi pełną odpowiedzialność za nieautoryzowane rozpowszechnianie plików pobranych z systemu.') }}
                     </p>
                 </div>
 
@@ -86,7 +76,7 @@
         <div class="text-center mt-3">
             <small class="text-muted">
                 <i class="bi bi-shield-lock me-1"></i>
-                Twoje pobrania są zabezpieczone znakiem wodnym
+                {{ _('Twoje pobrania są zabezpieczone znakiem wodnym') }}
             </small>
         </div>
     </div>

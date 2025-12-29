@@ -5,9 +5,9 @@
     <div>
         <h2 class="mb-1">
             <i class="bi bi-shield-lock text-primary me-2"></i>
-            Zarządzaj uprawnieniami
+            {{ _('Zarządzaj uprawnieniami') }}
         </h2>
-        <p class="text-muted mb-0">Przypisz dostęp do plików wielu użytkownikom jednocześnie</p>
+        <p class="text-muted mb-0">{{ _('Przypisz dostęp do plików wielu użytkownikom jednocześnie') }}</p>
     </div>
 </div>
 
@@ -20,7 +20,7 @@
                 <div class="card-header bg-white">
                     <h5 class="mb-0">
                         <i class="bi bi-people me-2"></i>
-                        Użytkownicy
+                        {{ _('Użytkownicy') }}
                         <span class="badge bg-secondary ms-2" id="usersTotal">{{ users|length }}</span>
                     </h5>
                 </div>
@@ -34,9 +34,9 @@
                             <input type="text"
                                    class="form-control"
                                    id="userSearch"
-                                   placeholder="Szukaj użytkownika po email..."
+                                   placeholder="{{ _('Szukaj użytkownika po email...') }}"
                                    autocomplete="off">
-                            <button type="button" class="btn btn-outline-secondary" id="clearSearch" title="Wyczyść">
+                            <button type="button" class="btn btn-outline-secondary" id="clearSearch" title="{{ _('Wyczyść') }}">
                                 <i class="bi bi-x-lg"></i>
                             </button>
                         </div>
@@ -45,10 +45,10 @@
                     <!-- Selection Buttons -->
                     <div class="mb-3 d-flex gap-2 flex-wrap">
                         <button type="button" class="btn btn-sm btn-outline-primary" id="selectAllUsers">
-                            <i class="bi bi-check-all me-1"></i> Zaznacz wszystkich
+                            <i class="bi bi-check-all me-1"></i> {{ _('Zaznacz wszystkich') }}
                         </button>
                         <button type="button" class="btn btn-sm btn-outline-secondary" id="clearUsers">
-                            <i class="bi bi-x-circle me-1"></i> Wyczyść zaznaczenie
+                            <i class="bi bi-x-circle me-1"></i> {{ _('Wyczyść zaznaczenie') }}
                         </button>
                     </div>
 
@@ -67,20 +67,20 @@
                                         <i class="bi bi-person me-1 text-muted"></i>
                                         {{ user.email }}
                                     </span>
-                                    <span class="badge bg-info flex-shrink-0">{{ user_file_counts[user.id] }} plików</span>
+                                    <span class="badge bg-info flex-shrink-0">{{ user_file_counts[user.id] }} {{ _('plików') }}</span>
                                 </label>
                             </div>
                             {% endfor %}
                         </div>
                         <div id="noUsersMessage" class="text-center text-muted py-4 d-none">
                             <i class="bi bi-search fs-3 d-block mb-2"></i>
-                            Nie znaleziono użytkowników
+                            {{ _('Nie znaleziono użytkowników') }}
                         </div>
                     </div>
 
                     <!-- Selected Count -->
                     <div class="mt-2 text-muted small">
-                        Zaznaczono: <span id="selectedUsersCount" class="fw-bold text-primary">0</span> użytkowników
+                        {{ _('Zaznaczono:') }} <span id="selectedUsersCount" class="fw-bold text-primary">0</span> {{ _('użytkowników') }}
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                 <div class="card-header bg-white">
                     <h5 class="mb-0">
                         <i class="bi bi-file-earmark-pdf me-2"></i>
-                        Pliki PDF
+                        {{ _('Pliki PDF') }}
                         <span class="badge bg-secondary ms-2" id="filesTotal">{{ files|length }}</span>
                     </h5>
                 </div>
@@ -106,9 +106,9 @@
                             <input type="text"
                                    class="form-control"
                                    id="fileSearch"
-                                   placeholder="Szukaj pliku..."
+                                   placeholder="{{ _('Szukaj pliku...') }}"
                                    autocomplete="off">
-                            <button type="button" class="btn btn-outline-secondary" id="clearFileSearch" title="Wyczyść">
+                            <button type="button" class="btn btn-outline-secondary" id="clearFileSearch" title="{{ _('Wyczyść') }}">
                                 <i class="bi bi-x-lg"></i>
                             </button>
                         </div>
@@ -117,17 +117,17 @@
                     <!-- Selection Buttons -->
                     <div class="mb-3 d-flex gap-2 flex-wrap">
                         <button type="button" class="btn btn-sm btn-outline-primary" id="selectAllFiles">
-                            <i class="bi bi-check-all me-1"></i> Zaznacz wszystkie
+                            <i class="bi bi-check-all me-1"></i> {{ _('Zaznacz wszystkie') }}
                         </button>
                         <button type="button" class="btn btn-sm btn-outline-secondary" id="clearFiles">
-                            <i class="bi bi-x-circle me-1"></i> Wyczyść zaznaczenie
+                            <i class="bi bi-x-circle me-1"></i> {{ _('Wyczyść zaznaczenie') }}
                         </button>
                     </div>
 
                     <!-- Legend -->
                     <div class="mb-2 small">
-                        <span class="badge bg-success me-2"><i class="bi bi-check-circle me-1"></i>Istniejący dostęp</span>
-                        <span class="badge bg-primary"><i class="bi bi-plus-circle me-1"></i>Nowe uprawnienie</span>
+                        <span class="badge bg-success me-2"><i class="bi bi-check-circle me-1"></i>{{ _('Istniejący dostęp') }}</span>
+                        <span class="badge bg-primary"><i class="bi bi-plus-circle me-1"></i>{{ _('Nowe uprawnienie') }}</span>
                     </div>
 
                     <!-- Files List -->
@@ -146,25 +146,25 @@
                                         {{ file.filename }}
                                         <span class="badge bg-secondary ms-1">v{{ file.version }}</span>
                                         <span class="existing-badge d-none">
-                                            <i class="bi bi-check-circle-fill text-success ms-1" title="Użytkownik ma już dostęp"></i>
+                                            <i class="bi bi-check-circle-fill text-success ms-1" title="{{ _('Użytkownik ma już dostęp') }}"></i>
                                         </span>
                                     </span>
-                                    <span class="badge bg-success flex-shrink-0">{{ file_user_counts[file.id] }} użytk.</span>
+                                    <span class="badge bg-success flex-shrink-0">{{ file_user_counts[file.id] }} {{ _('użytk.') }}</span>
                                 </label>
                             </div>
                             {% endfor %}
                         </div>
                         <div id="noFilesMessage" class="text-center text-muted py-4 d-none">
                             <i class="bi bi-search fs-3 d-block mb-2"></i>
-                            Nie znaleziono plików
+                            {{ _('Nie znaleziono plików') }}
                         </div>
                     </div>
 
                     <!-- Selected Count -->
                     <div class="mt-2 text-muted small">
-                        Zaznaczono: <span id="selectedFilesCount" class="fw-bold text-primary">0</span> plików
+                        {{ _('Zaznaczono:') }} <span id="selectedFilesCount" class="fw-bold text-primary">0</span> {{ _('plików') }}
                         <span id="existingAccessInfo" class="ms-2 d-none">
-                            (<span id="existingAccessCount" class="text-success fw-bold">0</span> istniejących)
+                            (<span id="existingAccessCount" class="text-success fw-bold">0</span> {{ _('istniejących') }})
                         </span>
                     </div>
                 </div>
@@ -179,13 +179,13 @@
                 <div class="col-12 col-md-8 mb-3 mb-md-0">
                     <div id="summaryText" class="text-muted">
                         <i class="bi bi-info-circle me-1"></i>
-                        Wybierz użytkowników i pliki, aby nadać uprawnienia.
+                        {{ _('Wybierz użytkowników i pliki, aby nadać uprawnienia.') }}
                     </div>
                 </div>
                 <div class="col-12 col-md-4 text-md-end">
                     <button type="submit" class="btn btn-primary btn-lg w-100 w-md-auto" id="submitBtn" disabled>
                         <i class="bi bi-shield-plus me-2"></i>
-                        Zapisz uprawnienia
+                        {{ _('Zapisz uprawnienia') }}
                     </button>
                 </div>
             </div>
@@ -197,14 +197,14 @@
 <div class="card">
     <div class="card-body empty-state">
         <i class="bi bi-shield-lock"></i>
-        <h4>Brak danych</h4>
+        <h4>{{ _('Brak danych') }}</h4>
         <p class="mb-0">
             {% if not files %}
-            Nie ma jeszcze żadnych plików w systemie.
-            <a href="{{ url_for('admin.upload_file') }}">Prześlij pierwszy plik</a>.
+            {{ _('Nie ma jeszcze żadnych plików w systemie.') }}
+            <a href="{{ url_for('admin.upload_file') }}">{{ _('Prześlij pierwszy plik') }}</a>.
             {% elif not users %}
-            Nie ma jeszcze żadnych zwykłych użytkowników w systemie.
-            <a href="{{ url_for('admin.add_user') }}">Dodaj użytkownika</a>.
+            {{ _('Nie ma jeszcze żadnych zwykłych użytkowników w systemie.') }}
+            <a href="{{ url_for('admin.add_user') }}">{{ _('Dodaj użytkownika') }}</a>.
             {% endif %}
         </p>
     </div>

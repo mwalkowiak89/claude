@@ -1,101 +1,98 @@
-# Portuguese translations for PDF Manager.
-# Copyright (C) 2024 PDF Manager
-# This file is distributed under the same license as the PDF Manager
-# project.
+# Translations template for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PDF Manager 1.0\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2025-12-29 15:18+0000\n"
-"PO-Revision-Date: 2024-01-01 00:00+0000\n"
-"Last-Translator: \n"
-"Language: pt\n"
-"Language-Team: pt\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-# Navigation
 #: app/templates/base.html:81 app/templates/main/file_view.html:8
 #: app/templates/main/index.html:8
 msgid "Moje pliki"
-msgstr "Meus Arquivos"
+msgstr ""
 
 #: app/templates/base.html:88
 msgid "Administracja"
-msgstr "Administração"
+msgstr ""
 
 #: app/templates/admin/download_logs.html:8
 #: app/templates/admin/settings.html:43 app/templates/base.html:93
 msgid "Dashboard"
-msgstr "Painel"
+msgstr ""
 
 #: app/templates/admin/access_overview.html:23
 #: app/templates/admin/change_password.html:12
 #: app/templates/admin/user_form.html:12 app/templates/admin/users.html:8
 #: app/templates/base.html:99
 msgid "Użytkownicy"
-msgstr "Usuários"
+msgstr ""
 
 #: app/templates/admin/access_form.html:12
 #: app/templates/admin/file_update.html:12
 #: app/templates/admin/file_upload.html:12 app/templates/base.html:104
 msgid "Pliki"
-msgstr "Arquivos"
+msgstr ""
 
 #: app/templates/admin/access_form.html:14 app/templates/admin/files.html:71
 #: app/templates/base.html:109 app/templates/main/file_view.html:43
 msgid "Uprawnienia"
-msgstr "Permissões"
+msgstr ""
 
 #: app/templates/admin/email_template_edit.html:12
 #: app/templates/admin/email_templates.html:11
 #: app/templates/admin/email_templates.html:18 app/templates/base.html:115
 msgid "Szablony Email"
-msgstr "Modelos de Email"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:12
 #: app/templates/admin/backups.html:11 app/templates/admin/backups.html:18
 #: app/templates/base.html:120
 msgid "Kopie zapasowe"
-msgstr "Backups"
+msgstr ""
 
 #: app/templates/admin/download_logs.html:11
 #: app/templates/admin/download_logs.html:18 app/templates/base.html:126
 msgid "Historia pobrań"
-msgstr "Histórico de Downloads"
+msgstr ""
 
-# Branding & Settings
 #: app/templates/admin/settings.html:46 app/templates/base.html:131
 msgid "Ustawienia"
-msgstr "Configurações"
+msgstr ""
 
 #: app/templates/base.html:143 app/templates/base.html:197
 msgid "Zmień język"
-msgstr "Alterar idioma"
+msgstr ""
 
 #: app/templates/base.html:161 app/templates/base.html:214
 msgid "Przełącz tryb ciemny/jasny"
-msgstr "Alternar modo escuro/claro"
+msgstr ""
 
 #: app/templates/base.html:161 app/templates/base.html:214
 msgid "Przełącz tryb ciemny"
-msgstr "Alternar modo escuro"
+msgstr ""
 
 #: app/templates/base.html:176
 msgid "Bezpieczeństwo"
-msgstr "Segurança"
+msgstr ""
 
 #: app/templates/base.html:185
 msgid "Wyloguj"
-msgstr "Sair"
+msgstr ""
 
 #: app/templates/base.html:255
 msgid "Wszystkie prawa zastrzeżone."
-msgstr "Todos os direitos reservados."
+msgstr ""
 
 #: app/templates/admin/access_form.html:8
 #: app/templates/admin/backup_restore.html:8 app/templates/admin/backups.html:8
@@ -105,14 +102,12 @@ msgstr "Todos os direitos reservados."
 #: app/templates/admin/email_templates.html:8
 #: app/templates/admin/file_update.html:8
 #: app/templates/admin/file_upload.html:8 app/templates/admin/user_form.html:8
-#, fuzzy
 msgid "Panel administracyjny"
-msgstr "Administração"
+msgstr ""
 
 #: app/templates/admin/access_form.html:24
-#, fuzzy
 msgid "Zarządzaj dostępem"
-msgstr "Conceder Acesso"
+msgstr ""
 
 #: app/templates/admin/access_form.html:34 app/templates/admin/files.html:25
 #: app/templates/main/file_view.html:23
@@ -120,9 +115,8 @@ msgid "Wersja"
 msgstr ""
 
 #: app/templates/admin/access_form.html:44 app/templates/admin/files.html:26
-#, fuzzy
 msgid "Użytkownicy z dostępem"
-msgstr "Usuários"
+msgstr ""
 
 #: app/templates/admin/access_form.html:48
 msgid "Przytrzymaj Ctrl (Cmd na Mac), aby wybrać wielu użytkowników."
@@ -137,7 +131,7 @@ msgstr ""
 #: app/templates/admin/user_form.html:104 app/templates/admin/users.html:98
 #: app/templates/auth/disable_2fa.html:56 app/templates/auth/setup_2fa.html:92
 msgid "Anuluj"
-msgstr "Cancelar"
+msgstr ""
 
 #: app/templates/admin/access_form.html:66
 #: app/templates/admin/email_templates.html:154
@@ -158,11 +152,10 @@ msgstr ""
 msgid "Odznaczenie użytkownika odbierze mu dostęp."
 msgstr ""
 
-# Permissions
 #: app/templates/admin/access_overview.html:8
 #: app/templates/admin/dashboard.html:176
 msgid "Zarządzaj uprawnieniami"
-msgstr "Gerenciar Permissões"
+msgstr ""
 
 #: app/templates/admin/access_overview.html:10
 msgid "Przypisz dostęp do plików wielu użytkownikom jednocześnie"
@@ -188,14 +181,12 @@ msgstr ""
 
 #: app/templates/admin/access_overview.html:70
 #: app/templates/admin/access_overview.html:165
-#, fuzzy
 msgid "plików"
-msgstr "Arquivos"
+msgstr ""
 
 #: app/templates/admin/access_overview.html:77
-#, fuzzy
 msgid "Nie znaleziono użytkowników"
-msgstr "Não Encontrado"
+msgstr ""
 
 #: app/templates/admin/access_overview.html:83
 #: app/templates/admin/access_overview.html:165
@@ -203,14 +194,12 @@ msgid "Zaznaczono:"
 msgstr ""
 
 #: app/templates/admin/access_overview.html:83
-#, fuzzy
 msgid "użytkowników"
-msgstr "Usuários"
+msgstr ""
 
 #: app/templates/admin/access_overview.html:95 app/templates/admin/files.html:8
-#, fuzzy
 msgid "Pliki PDF"
-msgstr "Arquivos"
+msgstr ""
 
 #: app/templates/admin/access_overview.html:109
 msgid "Szukaj pliku..."
@@ -225,9 +214,8 @@ msgid "Istniejący dostęp"
 msgstr ""
 
 #: app/templates/admin/access_overview.html:130
-#, fuzzy
 msgid "Nowe uprawnienie"
-msgstr "Permissões"
+msgstr ""
 
 #: app/templates/admin/access_overview.html:149
 msgid "Użytkownik ma już dostęp"
@@ -238,9 +226,8 @@ msgid "użytk."
 msgstr ""
 
 #: app/templates/admin/access_overview.html:159
-#, fuzzy
 msgid "Nie znaleziono plików"
-msgstr "Não Encontrado"
+msgstr ""
 
 #: app/templates/admin/access_overview.html:167
 msgid "istniejących"
@@ -251,9 +238,8 @@ msgid "Wybierz użytkowników i pliki, aby nadać uprawnienia."
 msgstr ""
 
 #: app/templates/admin/access_overview.html:188
-#, fuzzy
 msgid "Zapisz uprawnienia"
-msgstr "Permissões"
+msgstr ""
 
 #: app/templates/admin/access_overview.html:200
 msgid "Brak danych"
@@ -263,12 +249,10 @@ msgstr ""
 msgid "Nie ma jeszcze żadnych plików w systemie."
 msgstr ""
 
-# Files
 #: app/templates/admin/access_overview.html:204
 #: app/templates/admin/files.html:120
-#, fuzzy
 msgid "Prześlij pierwszy plik"
-msgstr "Enviar Arquivo"
+msgstr ""
 
 #: app/templates/admin/access_overview.html:206
 msgid "Nie ma jeszcze żadnych zwykłych użytkowników w systemie."
@@ -277,14 +261,12 @@ msgstr ""
 #: app/templates/admin/access_overview.html:207
 #: app/templates/admin/dashboard.html:164 app/templates/admin/user_form.html:26
 #: app/templates/admin/users.html:13
-#, fuzzy
 msgid "Dodaj użytkownika"
-msgstr "Editar Usuário"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:14
-#, fuzzy
 msgid "Przywracanie"
-msgstr "Restaurar"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:24
 msgid "Przywracanie backupu"
@@ -298,11 +280,9 @@ msgstr ""
 msgid "Przywrócenie tego backupu"
 msgstr ""
 
-# Common actions
 #: app/templates/admin/backup_restore.html:35
-#, fuzzy
 msgid "nadpisze"
-msgstr "Salvar"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:35
 msgid "wszystkie obecne dane:"
@@ -320,37 +300,30 @@ msgstr ""
 msgid "Zmiany wprowadzone po utworzeniu backupu będą utracone"
 msgstr ""
 
-# Backups
 #: app/templates/admin/backup_restore.html:48
-#, fuzzy
 msgid "Wybrany backup:"
-msgstr "Criar Backup"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:51
-#, fuzzy
 msgid "Plik:"
-msgstr "Arquivos"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:54
 #: app/templates/auth/security.html:107
-#, fuzzy
 msgid "Data utworzenia:"
-msgstr "Data de envio"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:57
-#, fuzzy
 msgid "Rozmiar:"
-msgstr "Tamanho"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:60
-#, fuzzy
 msgid "Plików:"
-msgstr "Arquivos"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:70
-#, fuzzy
 msgid "Hasło administratora"
-msgstr "Administrador"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:73
 #: app/templates/auth/disable_2fa.html:31
@@ -358,23 +331,20 @@ msgid "Wpisz swoje hasło"
 msgstr ""
 
 #: app/templates/admin/backup_restore.html:83
-#, fuzzy
 msgid "Potwierdzenie"
-msgstr "Confirmar"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:86
-#, fuzzy
 msgid "Wpisz PRZYWRÓĆ"
-msgstr "Restaurar"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:88
 msgid "Wpisz słowo"
 msgstr ""
 
 #: app/templates/admin/backup_restore.html:88
-#, fuzzy
 msgid "PRZYWRÓĆ"
-msgstr "Restaurar"
+msgstr ""
 
 #: app/templates/admin/backup_restore.html:88
 msgid "aby potwierdzić operację."
@@ -390,20 +360,17 @@ msgid ""
 "stanu aplikacji."
 msgstr ""
 
-# Backups
 #: app/templates/admin/backups.html:22
-#, fuzzy
 msgid "Utwórz backup teraz"
-msgstr "Criar Backup"
+msgstr ""
 
 #: app/templates/admin/backups.html:34
 msgid "Liczba backupów"
 msgstr ""
 
 #: app/templates/admin/backups.html:47
-#, fuzzy
 msgid "Łączny rozmiar"
-msgstr "Tamanho"
+msgstr ""
 
 #: app/templates/admin/backups.html:60
 msgid "Ostatni backup"
@@ -437,35 +404,33 @@ msgstr ""
 #: app/templates/admin/email_template_edit.html:123
 #: app/templates/admin/files.html:24
 msgid "Nazwa pliku"
-msgstr "Nome do arquivo"
+msgstr ""
 
 #: app/templates/admin/backups.html:98 app/templates/admin/users.html:27
-#, fuzzy
 msgid "Data utworzenia"
-msgstr "Data de envio"
+msgstr ""
 
 #: app/templates/admin/backups.html:99
 msgid "Rozmiar"
-msgstr "Tamanho"
+msgstr ""
 
 #: app/templates/admin/backups.html:100
-#, fuzzy
 msgid "Plików"
-msgstr "Arquivos"
+msgstr ""
 
 #: app/templates/admin/backups.html:101 app/templates/admin/files.html:28
 #: app/templates/admin/users.html:28
 msgid "Akcje"
-msgstr "Ações"
+msgstr ""
 
 #: app/templates/admin/backups.html:122 app/templates/admin/files.html:63
 #: app/templates/main/file_view.html:34 app/templates/main/index.html:64
 msgid "Pobierz"
-msgstr "Baixar"
+msgstr ""
 
 #: app/templates/admin/backups.html:126
 msgid "Przywróć"
-msgstr "Restaurar"
+msgstr ""
 
 #: app/templates/admin/backups.html:131
 msgid "Czy na pewno chcesz usunąć ten backup?"
@@ -475,12 +440,11 @@ msgstr ""
 #: app/templates/admin/files.html:101 app/templates/admin/users.html:75
 #: app/templates/admin/users.html:103
 msgid "Usuń"
-msgstr "Excluir"
+msgstr ""
 
 #: app/templates/admin/backups.html:146
-#, fuzzy
 msgid "Brak backupów"
-msgstr "Nenhum arquivo"
+msgstr ""
 
 #: app/templates/admin/backups.html:147
 msgid "Utwórz pierwszy backup klikając przycisk powyżej."
@@ -495,9 +459,8 @@ msgid "Aby uruchamiać backup automatycznie, dodaj zadanie cron:"
 msgstr ""
 
 #: app/templates/admin/backups.html:163
-#, fuzzy
 msgid "Edytuj crontab"
-msgstr "Editar"
+msgstr ""
 
 #: app/templates/admin/backups.html:166
 msgid "Dodaj linię (backup codziennie o 2:00):"
@@ -517,18 +480,16 @@ msgstr ""
 
 #: app/templates/admin/change_password.html:24
 #: app/templates/admin/users.html:70
-#, fuzzy
 msgid "Zmień hasło"
-msgstr "Senha"
+msgstr ""
 
 #: app/templates/admin/change_password.html:30
 msgid "Zmieniasz hasło dla:"
 msgstr ""
 
 #: app/templates/admin/change_password.html:38
-#, fuzzy
 msgid "Nowe hasło"
-msgstr "Senha"
+msgstr ""
 
 #: app/templates/admin/change_password.html:41
 #: app/templates/admin/user_form.html:52
@@ -536,9 +497,8 @@ msgid "Minimum 8 znaków"
 msgstr ""
 
 #: app/templates/admin/change_password.html:51
-#, fuzzy
 msgid "Potwierdź nowe hasło"
-msgstr "Confirmar"
+msgstr ""
 
 #: app/templates/admin/change_password.html:54
 #: app/templates/admin/user_form.html:65
@@ -550,24 +510,20 @@ msgid "Przegląd systemu"
 msgstr ""
 
 #: app/templates/admin/dashboard.html:24
-#, fuzzy
 msgid "Użytkowników"
-msgstr "Usuários"
+msgstr ""
 
 #: app/templates/admin/dashboard.html:37
 msgid "Plików PDF"
 msgstr ""
 
 #: app/templates/admin/dashboard.html:50
-#, fuzzy
 msgid "Przyznanych dostępów"
-msgstr "Conceder Acesso"
+msgstr ""
 
-# Navigation
 #: app/templates/admin/dashboard.html:64
-#, fuzzy
 msgid "Ostatnie pliki"
-msgstr "Meus Arquivos"
+msgstr ""
 
 #: app/templates/admin/dashboard.html:67
 msgid "Zobacz wszystkie"
@@ -576,12 +532,11 @@ msgstr ""
 #: app/templates/admin/dashboard.html:95 app/templates/admin/files.html:117
 #: app/templates/main/index.html:76
 msgid "Brak plików"
-msgstr "Nenhum arquivo"
+msgstr ""
 
 #: app/templates/admin/dashboard.html:108
-#, fuzzy
 msgid "Ostatni użytkownicy"
-msgstr "Usuários"
+msgstr ""
 
 #: app/templates/admin/dashboard.html:111
 msgid "Zobacz wszystkich"
@@ -595,22 +550,18 @@ msgstr ""
 msgid "Utworzono:"
 msgstr ""
 
-# Users
 #: app/templates/admin/dashboard.html:143 app/templates/admin/users.html:120
-#, fuzzy
 msgid "Brak użytkowników"
-msgstr "Novo Usuário"
+msgstr ""
 
 #: app/templates/admin/dashboard.html:156
 msgid "Szybkie akcje"
 msgstr ""
 
-# Files
 #: app/templates/admin/dashboard.html:170
 #: app/templates/admin/file_upload.html:24
-#, fuzzy
 msgid "Prześlij plik PDF"
-msgstr "Enviar Arquivo"
+msgstr ""
 
 #: app/templates/admin/download_logs.html:26
 msgid "Eksport CSV"
@@ -623,9 +574,8 @@ msgstr ""
 #: app/templates/admin/download_logs.html:38
 #: app/templates/admin/download_logs.html:118 app/templates/admin/users.html:47
 #: app/templates/auth/security.html:104
-#, fuzzy
 msgid "Użytkownik"
-msgstr "Usuários"
+msgstr ""
 
 #: app/templates/admin/download_logs.html:40
 msgid "-- Wszyscy --"
@@ -633,9 +583,8 @@ msgstr ""
 
 #: app/templates/admin/download_logs.html:49
 #: app/templates/admin/download_logs.html:119
-#, fuzzy
 msgid "Plik"
-msgstr "Arquivos"
+msgstr ""
 
 #: app/templates/admin/download_logs.html:51
 msgid "-- Wszystkie --"
@@ -702,7 +651,7 @@ msgstr ""
 #: app/templates/admin/email_template_edit.html:14
 #: app/templates/admin/user_form.html:15 app/templates/admin/users.html:66
 msgid "Edytuj"
-msgstr "Editar"
+msgstr ""
 
 #: app/templates/admin/email_template_edit.html:24
 msgid "Edytuj szablon:"
@@ -743,18 +692,16 @@ msgstr ""
 
 #: app/templates/admin/email_template_edit.html:108
 #: app/templates/admin/email_template_edit.html:120
-#, fuzzy
 msgid "Email użytkownika"
-msgstr "Editar Usuário"
+msgstr ""
 
 #: app/templates/admin/email_template_edit.html:111
 msgid "Lista plików w formacie HTML"
 msgstr ""
 
 #: app/templates/admin/email_template_edit.html:114
-#, fuzzy
 msgid "Liczba plików"
-msgstr "Nenhum arquivo"
+msgstr ""
 
 #: app/templates/admin/email_template_edit.html:117
 #: app/templates/admin/email_template_edit.html:132
@@ -797,9 +744,8 @@ msgid "Wybierz wersję językową"
 msgstr ""
 
 #: app/templates/admin/email_templates.html:72
-#, fuzzy
 msgid "Podgląd szablonu"
-msgstr "Visualizar"
+msgstr ""
 
 #: app/templates/admin/email_templates.html:75
 msgid "Ostatnia aktualizacja:"
@@ -820,14 +766,12 @@ msgid ""
 msgstr ""
 
 #: app/templates/admin/email_templates.html:117
-#, fuzzy
 msgid "Edytuj szablon"
-msgstr "Editar"
+msgstr ""
 
 #: app/templates/admin/email_templates.html:120
-#, fuzzy
 msgid "Podgląd z danymi"
-msgstr "Visualizar"
+msgstr ""
 
 #: app/templates/admin/email_templates.html:123
 msgid ""
@@ -836,18 +780,16 @@ msgid ""
 msgstr ""
 
 #: app/templates/admin/email_templates.html:127
-#, fuzzy
 msgid "Przywróć domyślny"
-msgstr "Restaurar"
+msgstr ""
 
 #: app/templates/admin/email_templates.html:136
 msgid "Brak szablonu dla tej konfiguracji"
 msgstr ""
 
 #: app/templates/admin/email_templates.html:138
-#, fuzzy
 msgid "Nie znaleziono szablonu typu"
-msgstr "Não Encontrado"
+msgstr ""
 
 #: app/templates/admin/email_templates.html:139
 msgid "dla języka"
@@ -882,9 +824,8 @@ msgid ""
 msgstr ""
 
 #: app/templates/admin/email_templates.html:171
-#, fuzzy
 msgid "Podgląd emaila"
-msgstr "Visualizar"
+msgstr ""
 
 #: app/templates/admin/email_templates.html:181
 msgid "Zamknij"
@@ -892,9 +833,8 @@ msgstr ""
 
 #: app/templates/admin/file_update.html:14 app/templates/admin/files.html:67
 #: app/templates/main/file_view.html:39
-#, fuzzy
 msgid "Aktualizuj"
-msgstr "Cancelar"
+msgstr ""
 
 #: app/templates/admin/file_update.html:24
 msgid "Aktualizuj plik"
@@ -921,9 +861,8 @@ msgid "otrzymają powiadomienie o nowej wersji."
 msgstr ""
 
 #: app/templates/admin/file_update.html:50
-#, fuzzy
 msgid "Nowa wersja pliku PDF"
-msgstr "Nome do arquivo"
+msgstr ""
 
 #: app/templates/admin/file_update.html:65
 msgid "Opis zmian (opcjonalnie)"
@@ -935,12 +874,11 @@ msgstr ""
 
 #: app/templates/admin/file_upload.html:14
 msgid "Prześlij"
-msgstr "Enviar"
+msgstr ""
 
 #: app/templates/admin/file_upload.html:33
-#, fuzzy
 msgid "Plik PDF"
-msgstr "Arquivos"
+msgstr ""
 
 #: app/templates/admin/file_upload.html:44
 msgid "Maksymalny rozmiar pliku: 50 MB"
@@ -970,10 +908,9 @@ msgstr ""
 msgid "Zarządzanie plikami w systemie"
 msgstr ""
 
-# Files
 #: app/templates/admin/files.html:13 app/templates/main/index.html:20
 msgid "Prześlij plik"
-msgstr "Enviar Arquivo"
+msgstr ""
 
 #: app/templates/admin/files.html:27
 msgid "Data uploadu"
@@ -981,12 +918,11 @@ msgstr ""
 
 #: app/templates/admin/files.html:59 app/templates/main/index.html:60
 msgid "Podgląd"
-msgstr "Visualizar"
+msgstr ""
 
 #: app/templates/admin/files.html:87 app/templates/admin/users.html:89
-#, fuzzy
 msgid "Potwierdź usunięcie"
-msgstr "Confirmar"
+msgstr ""
 
 #: app/templates/admin/files.html:91
 msgid "Czy na pewno chcesz usunąć plik"
@@ -1007,9 +943,8 @@ msgid "Branding aplikacji"
 msgstr ""
 
 #: app/templates/admin/settings.html:65
-#, fuzzy
 msgid "Nazwa aplikacji"
-msgstr "Nome do arquivo"
+msgstr ""
 
 #: app/templates/admin/settings.html:74
 msgid "Nazwa wyświetlana w navbar i tytule strony"
@@ -1024,9 +959,8 @@ msgid "Usunąć logo?"
 msgstr ""
 
 #: app/templates/admin/settings.html:90
-#, fuzzy
 msgid "Usuń logo"
-msgstr "Excluir"
+msgstr ""
 
 #: app/templates/admin/settings.html:102
 msgid "PNG, JPG lub SVG, max 2MB, zalecana szerokość: 200px"
@@ -1045,9 +979,8 @@ msgid "Kolor navbar"
 msgstr ""
 
 #: app/templates/admin/settings.html:147
-#, fuzzy
 msgid "Podgląd navbar"
-msgstr "Visualizar"
+msgstr ""
 
 #: app/templates/admin/settings.html:157
 msgid "Włącz niestandardowy branding"
@@ -1062,9 +995,8 @@ msgid "Przywrócić domyślne ustawienia?"
 msgstr ""
 
 #: app/templates/admin/settings.html:173
-#, fuzzy
 msgid "Przywróć domyślne"
-msgstr "Restaurar"
+msgstr ""
 
 #: app/templates/admin/settings.html:191
 msgid "Status:"
@@ -1108,21 +1040,20 @@ msgstr ""
 
 #: app/templates/admin/user_form.html:15
 msgid "Dodaj"
-msgstr "Adicionar"
+msgstr ""
 
 #: app/templates/admin/user_form.html:26
 msgid "Edytuj użytkownika"
-msgstr "Editar Usuário"
+msgstr ""
 
 #: app/templates/admin/user_form.html:49 app/templates/auth/disable_2fa.html:28
 #: app/templates/auth/login.html:30
 msgid "Hasło"
-msgstr "Senha"
+msgstr ""
 
 #: app/templates/admin/user_form.html:62
-#, fuzzy
 msgid "Potwierdź hasło"
-msgstr "Confirmar"
+msgstr ""
 
 #: app/templates/admin/user_form.html:76
 msgid "Preferowany język"
@@ -1135,7 +1066,7 @@ msgstr ""
 #: app/templates/admin/user_form.html:93 app/templates/admin/users.html:43
 #: app/templates/auth/security.html:102
 msgid "Administrator"
-msgstr "Administrador"
+msgstr ""
 
 #: app/templates/admin/user_form.html:97
 msgid ""
@@ -1149,7 +1080,7 @@ msgstr ""
 
 #: app/templates/admin/users.html:24 app/templates/auth/login.html:17
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
 #: app/templates/admin/users.html:25
 msgid "Rola"
@@ -1175,16 +1106,13 @@ msgstr ""
 msgid "Nie ma jeszcze żadnych użytkowników w systemie."
 msgstr ""
 
-# Users
 #: app/templates/admin/users.html:123
-#, fuzzy
 msgid "Dodaj pierwszego użytkownika"
-msgstr "Novo Usuário"
+msgstr ""
 
 #: app/templates/auth/backup_codes.html:10 app/templates/auth/security.html:39
-#, fuzzy
 msgid "Kody zapasowe"
-msgstr "Backups"
+msgstr ""
 
 #: app/templates/auth/backup_codes.html:16
 msgid "Ważne!"
@@ -1222,7 +1150,7 @@ msgstr ""
 
 #: app/templates/auth/disable_2fa.html:10 app/templates/auth/security.html:59
 msgid "Wyłącz 2FA"
-msgstr "Desativar 2FA"
+msgstr ""
 
 #: app/templates/auth/disable_2fa.html:16
 msgid "Uwaga!"
@@ -1244,25 +1172,21 @@ msgstr ""
 msgid "Kod z aplikacji"
 msgstr ""
 
-# Authentication
 #: app/templates/auth/login.html:9
-#, fuzzy
 msgid "Zaloguj się do systemu"
-msgstr "Entrar"
+msgstr ""
 
 #: app/templates/auth/login.html:45
-#, fuzzy
 msgid "Zapamiętaj mnie"
-msgstr "Lembrar-me"
+msgstr ""
 
 #: app/templates/auth/login.html:60
 msgid "Bezpieczne logowanie"
 msgstr ""
 
 #: app/templates/auth/security.html:8
-#, fuzzy
 msgid "Ustawienia bezpieczeństwa"
-msgstr "Segurança"
+msgstr ""
 
 #: app/templates/auth/security.html:16
 msgid "Uwierzytelnianie dwuskładnikowe (2FA)"
@@ -1273,9 +1197,8 @@ msgid "Włączone"
 msgstr ""
 
 #: app/templates/auth/security.html:24 app/templates/auth/security.html:115
-#, fuzzy
 msgid "Wyłączone"
-msgstr "Desativar 2FA"
+msgstr ""
 
 #: app/templates/auth/security.html:31
 msgid ""
@@ -1320,16 +1243,15 @@ msgstr ""
 
 #: app/templates/auth/security.html:82
 msgid "Włącz 2FA"
-msgstr "Ativar 2FA"
+msgstr ""
 
 #: app/templates/auth/security.html:93
 msgid "Informacje o koncie"
 msgstr ""
 
 #: app/templates/auth/security.html:99
-#, fuzzy
 msgid "Email:"
-msgstr "Email"
+msgstr ""
 
 #: app/templates/auth/security.html:100
 msgid "Typ konta:"
@@ -1366,9 +1288,8 @@ msgid "Kopiuj"
 msgstr ""
 
 #: app/templates/auth/setup_2fa.html:61
-#, fuzzy
 msgid "Wpisz kod weryfikacyjny"
-msgstr "Código de Verificação"
+msgstr ""
 
 #: app/templates/auth/setup_2fa.html:64
 msgid "Po dodaniu konta w aplikacji, wpisz wygenerowany 6-cyfrowy kod."
@@ -1382,11 +1303,9 @@ msgstr ""
 msgid "Zalecane aplikacje"
 msgstr ""
 
-# 2FA
 #: app/templates/auth/verify_2fa.html:9
-#, fuzzy
 msgid "Weryfikacja dwuskładnikowa"
-msgstr "Autenticação de Dois Fatores"
+msgstr ""
 
 #: app/templates/auth/verify_2fa.html:13
 msgid "Wpisz 6-cyfrowy kod z aplikacji uwierzytelniającej dla konta:"
@@ -1394,12 +1313,11 @@ msgstr ""
 
 #: app/templates/auth/verify_2fa.html:22
 msgid "Kod weryfikacyjny"
-msgstr "Código de Verificação"
+msgstr ""
 
 #: app/templates/auth/verify_2fa.html:40
-#, fuzzy
 msgid "Użyj kodu zapasowego"
-msgstr "Backups"
+msgstr ""
 
 #: app/templates/auth/verify_2fa.html:48
 msgid "Wróć do logowania"
@@ -1409,10 +1327,9 @@ msgstr ""
 msgid "Nie masz dostępu do aplikacji? Użyj jednego z kodów zapasowych."
 msgstr ""
 
-# Errors
 #: app/templates/errors/403.html:9
 msgid "Brak dostępu"
-msgstr "Acesso Negado"
+msgstr ""
 
 #: app/templates/errors/403.html:11
 msgid "Nie masz uprawnień do wyświetlenia tej strony."
@@ -1424,9 +1341,8 @@ msgid "Wróć do strony głównej"
 msgstr ""
 
 #: app/templates/errors/404.html:9
-#, fuzzy
 msgid "Strona nie znaleziona"
-msgstr "Não Encontrado"
+msgstr ""
 
 #: app/templates/errors/404.html:11
 msgid "Strona, której szukasz, nie istnieje lub została przeniesiona."
@@ -1434,16 +1350,15 @@ msgstr ""
 
 #: app/templates/errors/429.html:9
 msgid "Zbyt wiele żądań"
-msgstr "Muitas Requisições"
+msgstr ""
 
 #: app/templates/errors/429.html:11
 msgid "Przekroczono limit żądań. Proszę poczekać chwilę i spróbować ponownie."
 msgstr ""
 
 #: app/templates/errors/429.html:16
-#, fuzzy
 msgid "Spróbuj ponownie za:"
-msgstr "Ocorreu um erro. Tente novamente."
+msgstr ""
 
 #: app/templates/errors/429.html:24
 msgid "Odśwież stronę"
@@ -1451,7 +1366,7 @@ msgstr ""
 
 #: app/templates/errors/500.html:9
 msgid "Błąd serwera"
-msgstr "Erro do Servidor"
+msgstr ""
 
 #: app/templates/errors/500.html:11
 msgid "Wystąpił nieoczekiwany błąd. Przepraszamy za niedogodności."
@@ -1459,16 +1374,15 @@ msgstr ""
 
 #: app/templates/main/accept_terms.html:10
 msgid "Regulamin korzystania z plików"
-msgstr "Termos de Uso de Arquivos"
+msgstr ""
 
 #: app/templates/main/accept_terms.html:16
 msgid "Przed pobraniem plików musisz zaakceptować poniższy regulamin."
 msgstr ""
 
 #: app/templates/main/accept_terms.html:20
-#, fuzzy
 msgid "Regulamin korzystania z plików PDF"
-msgstr "Termos de Uso de Arquivos"
+msgstr ""
 
 #: app/templates/main/accept_terms.html:23
 msgid "1. Przeznaczenie plików"
@@ -1536,7 +1450,7 @@ msgstr ""
 
 #: app/templates/main/accept_terms.html:69
 msgid "Powrót"
-msgstr "Voltar"
+msgstr ""
 
 #: app/templates/main/accept_terms.html:79
 msgid "Twoje pobrania są zabezpieczone znakiem wodnym"
@@ -1546,20 +1460,17 @@ msgstr ""
 msgid "Ostatnia aktualizacja"
 msgstr ""
 
-# Common actions
 #: app/templates/main/file_view.html:53
-#, fuzzy
 msgid "Opis"
-msgstr "Salvar"
+msgstr ""
 
 #: app/templates/main/file_view.html:69
 msgid "Powrót do listy"
 msgstr ""
 
 #: app/templates/main/index.html:12
-#, fuzzy
 msgid "Wszystkie pliki w systemie"
-msgstr "Todos os direitos reservados."
+msgstr ""
 
 #: app/templates/main/index.html:14
 msgid "Pliki, do których masz dostęp"
@@ -1576,61 +1487,4 @@ msgid ""
 "Nie masz jeszcze dostępu do żadnych plików. Skontaktuj się z "
 "administratorem."
 msgstr ""
-
-#~ msgid "Nie masz konta?"
-#~ msgstr "Não tem conta?"
-
-#~ msgid "Zarejestruj się"
-#~ msgstr "Cadastre-se"
-
-#~ msgid "Nieprawidłowy email lub hasło."
-#~ msgstr "Email ou senha inválidos."
-
-#~ msgid "Zalogowano pomyślnie."
-#~ msgstr "Login realizado com sucesso."
-
-#~ msgid "Wylogowano pomyślnie."
-#~ msgstr "Logout realizado com sucesso."
-
-#~ msgid "Szukaj"
-#~ msgstr "Pesquisar"
-
-#~ msgid "Plik został przesłany pomyślnie."
-#~ msgstr "Arquivo enviado com sucesso."
-
-#~ msgid "Plik został usunięty."
-#~ msgstr "Arquivo excluído."
-
-#~ msgid "Aktywny"
-#~ msgstr "Ativo"
-
-#~ msgid "Użytkownik został dodany."
-#~ msgstr "Usuário adicionado."
-
-#~ msgid "Użytkownik został zaktualizowany."
-#~ msgstr "Usuário atualizado."
-
-#~ msgid "Użytkownik został usunięty."
-#~ msgstr "Usuário excluído."
-
-#~ msgid "Usuń dostęp"
-#~ msgstr "Remover Acesso"
-
-#~ msgid "Uprawnienia zostały zaktualizowane."
-#~ msgstr "Permissões atualizadas."
-
-#~ msgid "Backup został utworzony."
-#~ msgstr "Backup criado."
-
-#~ msgid "Backup został przywrócony."
-#~ msgstr "Backup restaurado."
-
-#~ msgid "Backup został usunięty."
-#~ msgstr "Backup excluído."
-
-#~ msgid "2FA zostało włączone."
-#~ msgstr "2FA ativado."
-
-#~ msgid "2FA zostało wyłączone."
-#~ msgstr "2FA desativado."
 

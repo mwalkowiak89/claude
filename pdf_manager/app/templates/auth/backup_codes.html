@@ -7,19 +7,17 @@
             <div class="card-header bg-success text-white">
                 <h4 class="mb-0">
                     <i class="bi bi-shield-check me-2"></i>
-                    Kody zapasowe
+                    {{ _('Kody zapasowe') }}
                 </h4>
             </div>
             <div class="card-body">
                 <div class="alert alert-warning">
                     <i class="bi bi-exclamation-triangle me-2"></i>
-                    <strong>Ważne!</strong> Zapisz te kody w bezpiecznym miejscu.
-                    Każdy kod może być użyty tylko raz.
+                    <strong>{{ _('Ważne!') }}</strong> {{ _('Zapisz te kody w bezpiecznym miejscu. Każdy kod może być użyty tylko raz.') }}
                 </div>
 
                 <p class="text-muted mb-4">
-                    Użyj tych kodów, jeśli stracisz dostęp do aplikacji uwierzytelniającej.
-                    Każdy kod działa tylko raz.
+                    {{ _('Użyj tych kodów, jeśli stracisz dostęp do aplikacji uwierzytelniającej. Każdy kod działa tylko raz.') }}
                 </p>
 
                 <div class="bg-light p-4 rounded mb-4" id="codesContainer">
@@ -36,10 +34,10 @@
 
                 <div class="d-flex gap-2 justify-content-center mb-4">
                     <button class="btn btn-outline-primary" onclick="copyAllCodes()">
-                        <i class="bi bi-clipboard me-1"></i> Kopiuj wszystkie
+                        <i class="bi bi-clipboard me-1"></i> {{ _('Kopiuj wszystkie') }}
                     </button>
                     <button class="btn btn-outline-secondary" onclick="printCodes()">
-                        <i class="bi bi-printer me-1"></i> Drukuj
+                        <i class="bi bi-printer me-1"></i> {{ _('Drukuj') }}
                     </button>
                 </div>
 
@@ -47,7 +45,7 @@
 
                 <div class="text-center">
                     <a href="{{ url_for('main.index') }}" class="btn btn-primary btn-lg">
-                        <i class="bi bi-check-circle me-1"></i> Zapisałem kody, kontynuuj
+                        <i class="bi bi-check-circle me-1"></i> {{ _('Zapisałem kody, kontynuuj') }}
                     </a>
                 </div>
             </div>
@@ -57,8 +55,8 @@
             <div class="card-body text-center">
                 <i class="bi bi-exclamation-octagon text-danger fs-1 mb-2 d-block"></i>
                 <p class="text-danger mb-0">
-                    <strong>Nigdy nie udostępniaj tych kodów!</strong><br>
-                    <small>Nikt z zespołu PDF Manager nigdy o nie nie poprosi.</small>
+                    <strong>{{ _('Nigdy nie udostępniaj tych kodów!') }}</strong><br>
+                    <small>{{ _('Nikt z zespołu PDF Manager nigdy o nie nie poprosi.') }}</small>
                 </p>
             </div>
         </div>

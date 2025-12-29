@@ -5,13 +5,13 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{ url_for('admin.dashboard') }}">
-                <i class="bi bi-speedometer2 me-1"></i> Panel administracyjny
+                <i class="bi bi-speedometer2 me-1"></i> {{ _('Panel administracyjny') }}
             </a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{ url_for('admin.backups') }}">Kopie zapasowe</a>
+            <a href="{{ url_for('admin.backups') }}">{{ _('Kopie zapasowe') }}</a>
         </li>
-        <li class="breadcrumb-item active">Przywracanie</li>
+        <li class="breadcrumb-item active">{{ _('Przywracanie') }}</li>
     </ol>
 </nav>
 
@@ -21,23 +21,23 @@
             <div class="card-header bg-danger text-white">
                 <h4 class="mb-0">
                     <i class="bi bi-exclamation-triangle me-2"></i>
-                    Przywracanie backupu
+                    {{ _('Przywracanie backupu') }}
                 </h4>
             </div>
             <div class="card-body">
                 <div class="alert alert-danger">
                     <h5 class="alert-heading">
                         <i class="bi bi-exclamation-octagon me-2"></i>
-                        Uwaga! Operacja nieodwracalna!
+                        {{ _('Uwaga! Operacja nieodwracalna!') }}
                     </h5>
                     <hr>
                     <p class="mb-0">
-                        Przywrócenie tego backupu <strong>nadpisze</strong> wszystkie obecne dane:
+                        {{ _('Przywrócenie tego backupu') }} <strong>{{ _('nadpisze') }}</strong> {{ _('wszystkie obecne dane:') }}
                     </p>
                     <ul class="mb-0 mt-2">
-                        <li>Baza danych zostanie zastąpiona</li>
-                        <li>Wszystkie pliki PDF zostaną nadpisane</li>
-                        <li>Zmiany wprowadzone po utworzeniu backupu będą utracone</li>
+                        <li>{{ _('Baza danych zostanie zastąpiona') }}</li>
+                        <li>{{ _('Wszystkie pliki PDF zostaną nadpisane') }}</li>
+                        <li>{{ _('Zmiany wprowadzone po utworzeniu backupu będą utracone') }}</li>
                     </ul>
                 </div>
 
@@ -45,19 +45,19 @@
                     <div class="card-body">
                         <h6 class="card-title">
                             <i class="bi bi-file-zip text-warning me-2"></i>
-                            Wybrany backup:
+                            {{ _('Wybrany backup:') }}
                         </h6>
                         <p class="mb-1">
-                            <strong>Plik:</strong> <code>{{ backup.filename }}</code>
+                            <strong>{{ _('Plik:') }}</strong> <code>{{ backup.filename }}</code>
                         </p>
                         <p class="mb-1">
-                            <strong>Data utworzenia:</strong> {{ backup.created.strftime('%Y-%m-%d %H:%M:%S') }}
+                            <strong>{{ _('Data utworzenia:') }}</strong> {{ backup.created.strftime('%Y-%m-%d %H:%M:%S') }}
                         </p>
                         <p class="mb-1">
-                            <strong>Rozmiar:</strong> {{ backup.size_mb }} MB
+                            <strong>{{ _('Rozmiar:') }}</strong> {{ backup.size_mb }} MB
                         </p>
                         <p class="mb-0">
-                            <strong>Plików:</strong> {{ backup.file_count }}
+                            <strong>{{ _('Plików:') }}</strong> {{ backup.file_count }}
                         </p>
                     </div>
                 </div>
@@ -67,10 +67,10 @@
 
                     <div class="mb-3">
                         <label for="password" class="form-label">
-                            <i class="bi bi-lock me-1"></i> Hasło administratora
+                            <i class="bi bi-lock me-1"></i> {{ _('Hasło administratora') }}
                         </label>
                         {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""),
-                                         placeholder="Wpisz swoje hasło") }}
+                                         placeholder=_('Wpisz swoje hasło')) }}
                         {% if form.password.errors %}
                         <div class="invalid-feedback">
                             {% for error in form.password.errors %}{{ error }}{% endfor %}
@@ -80,12 +80,12 @@
 
                     <div class="mb-4">
                         <label for="confirmation" class="form-label">
-                            <i class="bi bi-check2-square me-1"></i> Potwierdzenie
+                            <i class="bi bi-check2-square me-1"></i> {{ _('Potwierdzenie') }}
                         </label>
                         {{ form.confirmation(class="form-control text-center font-monospace" + (" is-invalid" if form.confirmation.errors else ""),
-                                             placeholder="Wpisz PRZYWRÓĆ") }}
+                                             placeholder=_('Wpisz PRZYWRÓĆ')) }}
                         <div class="form-text">
-                            Wpisz słowo <strong>PRZYWRÓĆ</strong> aby potwierdzić operację.
+                            {{ _('Wpisz słowo') }} <strong>{{ _('PRZYWRÓĆ') }}</strong> {{ _('aby potwierdzić operację.') }}
                         </div>
                         {% if form.confirmation.errors %}
                         <div class="invalid-feedback">
@@ -97,7 +97,7 @@
                     <div class="d-grid gap-2">
                         {{ form.submit(class="btn btn-danger btn-lg") }}
                         <a href="{{ url_for('admin.backups') }}" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left me-1"></i> Anuluj
+                            <i class="bi bi-arrow-left me-1"></i> {{ _('Anuluj') }}
                         </a>
                     </div>
                 </form>
@@ -106,7 +106,7 @@
 
         <div class="alert alert-info mt-4">
             <i class="bi bi-lightbulb me-2"></i>
-            <strong>Wskazówka:</strong> Przed przywróceniem backupu zalecamy utworzenie nowego backupu obecnego stanu aplikacji.
+            <strong>{{ _('Wskazówka:') }}</strong> {{ _('Przed przywróceniem backupu zalecamy utworzenie nowego backupu obecnego stanu aplikacji.') }}
         </div>
     </div>
 </div>

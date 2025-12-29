@@ -8,14 +8,14 @@
                 <i class="bi bi-speedometer2 me-1"></i> {{ _('Dashboard') }}
             </a>
         </li>
-        <li class="breadcrumb-item active">Historia pobrań</li>
+        <li class="breadcrumb-item active">{{ _('Historia pobrań') }}</li>
     </ol>
 </nav>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4>
         <i class="bi bi-clock-history me-2"></i>
-        Historia pobrań
+        {{ _('Historia pobrań') }}
     </h4>
     <a href="{{ url_for('admin.export_download_logs',
                         user_id=filter_user_id,
@@ -23,21 +23,21 @@
                         date_from=filter_date_from,
                         date_to=filter_date_to) }}"
        class="btn btn-outline-primary">
-        <i class="bi bi-download me-1"></i> Eksport CSV
+        <i class="bi bi-download me-1"></i> {{ _('Eksport CSV') }}
     </a>
 </div>
 
 <!-- Filters -->
 <div class="card mb-4">
     <div class="card-header">
-        <i class="bi bi-funnel me-2"></i> Filtry
+        <i class="bi bi-funnel me-2"></i> {{ _('Filtry') }}
     </div>
     <div class="card-body">
         <form method="GET" class="row g-3">
             <div class="col-md-3">
-                <label class="form-label">Użytkownik</label>
+                <label class="form-label">{{ _('Użytkownik') }}</label>
                 <select name="user_id" class="form-select">
-                    <option value="">-- Wszyscy --</option>
+                    <option value="">{{ _('-- Wszyscy --') }}</option>
                     {% for user in users %}
                     <option value="{{ user.id }}" {% if filter_user_id == user.id %}selected{% endif %}>
                         {{ user.email }}
@@ -46,9 +46,9 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <label class="form-label">Plik</label>
+                <label class="form-label">{{ _('Plik') }}</label>
                 <select name="file_id" class="form-select">
-                    <option value="">-- Wszystkie --</option>
+                    <option value="">{{ _('-- Wszystkie --') }}</option>
                     {% for file in files %}
                     <option value="{{ file.id }}" {% if filter_file_id == file.id %}selected{% endif %}>
                         {{ file.original_filename }}
@@ -57,16 +57,16 @@
                 </select>
             </div>
             <div class="col-md-2">
-                <label class="form-label">Data od</label>
+                <label class="form-label">{{ _('Data od') }}</label>
                 <input type="date" name="date_from" class="form-control" value="{{ filter_date_from or '' }}">
             </div>
             <div class="col-md-2">
-                <label class="form-label">Data do</label>
+                <label class="form-label">{{ _('Data do') }}</label>
                 <input type="date" name="date_to" class="form-control" value="{{ filter_date_to or '' }}">
             </div>
             <div class="col-md-2 d-flex align-items-end">
                 <button type="submit" class="btn btn-primary me-2">
-                    <i class="bi bi-search me-1"></i> Filtruj
+                    <i class="bi bi-search me-1"></i> {{ _('Filtruj') }}
                 </button>
                 <a href="{{ url_for('admin.download_logs') }}" class="btn btn-outline-secondary">
                     <i class="bi bi-x-lg"></i>
@@ -82,7 +82,7 @@
         <div class="card bg-light">
             <div class="card-body text-center">
                 <h3 class="mb-0">{{ downloads.total }}</h3>
-                <small class="text-muted">Łącznie pobrań</small>
+                <small class="text-muted">{{ _('Łącznie pobrań') }}</small>
             </div>
         </div>
     </div>
@@ -90,7 +90,7 @@
         <div class="card bg-light">
             <div class="card-body text-center">
                 <h3 class="mb-0">{{ downloads.pages }}</h3>
-                <small class="text-muted">Stron</small>
+                <small class="text-muted">{{ _('Stron') }}</small>
             </div>
         </div>
     </div>
@@ -100,7 +100,7 @@
                 <h3 class="mb-0 {% if suspicious_downloads|selectattr('1')|list|length > 0 %}text-danger{% endif %}">
                     {{ suspicious_downloads.values()|selectattr('')|list|length }}
                 </h3>
-                <small class="text-muted">Podejrzane aktywności</small>
+                <small class="text-muted">{{ _('Podejrzane aktywności') }}</small>
             </div>
         </div>
     </div>
@@ -115,11 +115,11 @@
                 <thead class="table-light">
                     <tr>
                         <th>ID</th>
-                        <th>Użytkownik</th>
-                        <th>Plik</th>
-                        <th>Data/Czas</th>
-                        <th>Adres IP</th>
-                        <th>Status</th>
+                        <th>{{ _('Użytkownik') }}</th>
+                        <th>{{ _('Plik') }}</th>
+                        <th>{{ _('Data/Czas') }}</th>
+                        <th>{{ _('Adres IP') }}</th>
+                        <th>{{ _('Status') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -135,7 +135,7 @@
                                 {{ download.user.email }}
                             </a>
                             {% else %}
-                            <span class="text-muted">Usunięty</span>
+                            <span class="text-muted">{{ _('Usunięty') }}</span>
                             {% endif %}
                         </td>
                         <td>
@@ -144,7 +144,7 @@
                                 {{ download.file.original_filename|truncate(30) }}
                             </a>
                             {% else %}
-                            <span class="text-muted">Usunięty</span>
+                            <span class="text-muted">{{ _('Usunięty') }}</span>
                             {% endif %}
                         </td>
                         <td>
@@ -157,10 +157,10 @@
                             {% if is_suspicious %}
                             <span class="badge bg-danger">
                                 <i class="bi bi-exclamation-triangle me-1"></i>
-                                Podejrzane
+                                {{ _('Podejrzane') }}
                             </span>
                             {% else %}
-                            <span class="badge bg-success">OK</span>
+                            <span class="badge bg-success">{{ _('OK') }}</span>
                             {% endif %}
                         </td>
                     </tr>
@@ -226,7 +226,7 @@
         {% else %}
         <div class="text-center py-5">
             <i class="bi bi-inbox text-muted" style="font-size: 3rem;"></i>
-            <p class="text-muted mt-3 mb-0">Brak pobrań do wyświetlenia</p>
+            <p class="text-muted mt-3 mb-0">{{ _('Brak pobrań do wyświetlenia') }}</p>
         </div>
         {% endif %}
     </div>
@@ -235,7 +235,7 @@
 <!-- Legend -->
 <div class="mt-3">
     <small class="text-muted">
-        <span class="badge bg-danger me-1">Podejrzane</span> = więcej niż 5 pobrań tego samego pliku w ciągu ostatniej godziny
+        <span class="badge bg-danger me-1">{{ _('Podejrzane') }}</span> = {{ _('więcej niż 5 pobrań tego samego pliku w ciągu ostatniej godziny') }}
     </small>
 </div>
 {% endblock %}

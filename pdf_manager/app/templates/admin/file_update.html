@@ -5,13 +5,13 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{ url_for('admin.dashboard') }}">
-                <i class="bi bi-speedometer2 me-1"></i> Panel administracyjny
+                <i class="bi bi-speedometer2 me-1"></i> {{ _('Panel administracyjny') }}
             </a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{ url_for('admin.files') }}">Pliki</a>
+            <a href="{{ url_for('admin.files') }}">{{ _('Pliki') }}</a>
         </li>
-        <li class="breadcrumb-item active">Aktualizuj</li>
+        <li class="breadcrumb-item active">{{ _('Aktualizuj') }}</li>
     </ol>
 </nav>
 
@@ -21,7 +21,7 @@
             <div class="card-header bg-white">
                 <h5 class="mb-0">
                     <i class="bi bi-upload me-2"></i>
-                    Aktualizuj plik
+                    {{ _('Aktualizuj plik') }}
                 </h5>
             </div>
             <div class="card-body">
@@ -31,15 +31,15 @@
                         <div>
                             <strong>{{ file.filename }}</strong>
                             <br>
-                            <small>Aktualna wersja: {{ file.version }}</small>
+                            <small>{{ _('Aktualna wersja:') }} {{ file.version }}</small>
                         </div>
                     </div>
                 </div>
 
                 <div class="alert alert-warning mb-4">
                     <i class="bi bi-envelope me-2"></i>
-                    <strong>Powiadomienie email:</strong> Po aktualizacji wszyscy użytkownicy z dostępem
-                    ({{ file.user_access.count() }} osób) otrzymają powiadomienie o nowej wersji.
+                    <strong>{{ _('Powiadomienie email:') }}</strong> {{ _('Po aktualizacji wszyscy użytkownicy z dostępem') }}
+                    ({{ file.user_access.count() }} {{ _('osób') }}) {{ _('otrzymają powiadomienie o nowej wersji.') }}
                 </div>
 
                 <form method="POST" enctype="multipart/form-data" novalidate>
@@ -47,7 +47,7 @@
 
                     <div class="mb-4">
                         <label for="file" class="form-label">
-                            <i class="bi bi-file-earmark-pdf me-1"></i> Nowa wersja pliku PDF
+                            <i class="bi bi-file-earmark-pdf me-1"></i> {{ _('Nowa wersja pliku PDF') }}
                         </label>
                         <div class="input-group">
                             {{ form.file(class="form-control" + (" is-invalid" if form.file.errors else ""),
@@ -62,11 +62,11 @@
 
                     <div class="mb-4">
                         <label for="description" class="form-label">
-                            <i class="bi bi-text-left me-1"></i> Opis zmian (opcjonalnie)
+                            <i class="bi bi-text-left me-1"></i> {{ _('Opis zmian (opcjonalnie)') }}
                         </label>
                         {{ form.description(class="form-control" + (" is-invalid" if form.description.errors else ""),
                                             rows=3,
-                                            placeholder="Co zostało zmienione w tej wersji...") }}
+                                            placeholder=_('Co zostało zmienione w tej wersji...')) }}
                         {% if form.description.errors %}
                         <div class="invalid-feedback">
                             {% for error in form.description.errors %}{{ error }}{% endfor %}
@@ -77,7 +77,7 @@
                     <div class="d-flex gap-2">
                         {{ form.submit(class="btn btn-warning") }}
                         <a href="{{ url_for('admin.files') }}" class="btn btn-outline-secondary">
-                            Anuluj
+                            {{ _('Anuluj') }}
                         </a>
                     </div>
                 </form>
