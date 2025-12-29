@@ -5,11 +5,11 @@ from functools import wraps
 from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app, abort, jsonify, send_file
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
-from app.models import db, User, File, UserFileAccess, EmailTemplate, LANGUAGES, TEMPLATE_TYPES
+from app.models import db, User, File, UserFileAccess, EmailTemplate, LANGUAGES, TEMPLATE_TYPES, AppSettings, FileDownload
 from app.forms import (
     RegistrationForm, FileUploadForm, FileUpdateForm,
     FileAccessForm, EditUserForm, ChangePasswordForm, EmailTemplateForm,
-    BackupRestoreForm
+    BackupRestoreForm, AppSettingsForm
 )
 from app.email import send_file_update_notification, send_bulk_access_notifications
 from app import limiter
@@ -856,4 +856,269 @@ def restore_backup(filename):
         form=form,
         backup=backup_info,
         filename=filename
+    )
+
+
+# ===== APP SETTINGS (BRANDING) =====
+
+@admin_bp.route('/settings', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def settings():
+    """Application branding settings."""
+    settings = AppSettings.get_settings()
+    form = AppSettingsForm(obj=settings)
+
+    if form.validate_on_submit():
+        settings.app_name = form.app_name.data
+        settings.primary_color = form.primary_color.data
+        settings.navbar_color = form.navbar_color.data
+        settings.enable_custom_branding = form.enable_custom_branding.data
+
+        # Handle logo upload
+        if form.logo.data:
+            from app.utils import resize_logo
+
+            file = form.logo.data
+            # Validate file size (2MB max)
+            file.seek(0, 2)  # Seek to end
+            size = file.tell()
+            file.seek(0)  # Reset
+
+            if size > 2 * 1024 * 1024:
+                flash('Logo jest za duże. Maksymalny rozmiar: 2MB.', 'danger')
+                return render_template(
+                    'admin/settings.html',
+                    title='Ustawienia aplikacji',
+                    form=form,
+                    settings=settings
+                )
+
+            # Save logo
+            original_filename = secure_filename(file.filename)
+            ext = original_filename.rsplit('.', 1)[-1].lower()
+            logo_filename = f"logo_{uuid.uuid4().hex[:8]}.{ext}"
+
+            branding_dir = os.path.join(current_app.static_folder, 'uploads', 'branding')
+            os.makedirs(branding_dir, exist_ok=True)
+
+            # Save original first
+            temp_path = os.path.join(branding_dir, f"temp_{logo_filename}")
+            file.save(temp_path)
+
+            # Resize if not SVG
+            final_path = os.path.join(branding_dir, logo_filename)
+            if ext != 'svg':
+                try:
+                    resize_logo(temp_path, final_path, max_width=200)
+                    os.remove(temp_path)
+                except Exception as e:
+                    flash(f'Błąd przetwarzania logo: {str(e)}', 'danger')
+                    if os.path.exists(temp_path):
+                        os.remove(temp_path)
+                    return render_template(
+                        'admin/settings.html',
+                        title='Ustawienia aplikacji',
+                        form=form,
+                        settings=settings
+                    )
+            else:
+                os.rename(temp_path, final_path)
+
+            # Remove old logo if exists
+            if settings.logo_filename:
+                old_logo_path = os.path.join(branding_dir, settings.logo_filename)
+                if os.path.exists(old_logo_path):
+                    os.remove(old_logo_path)
+
+            settings.logo_filename = logo_filename
+
+        db.session.commit()
+        flash('Ustawienia zostały zapisane.', 'success')
+        return redirect(url_for('admin.settings'))
+
+    return render_template(
+        'admin/settings.html',
+        title='Ustawienia aplikacji',
+        form=form,
+        settings=settings
+    )
+
+
+@admin_bp.route('/settings/delete-logo', methods=['POST'])
+@login_required
+@admin_required
+def delete_logo():
+    """Delete the current logo."""
+    settings = AppSettings.get_settings()
+
+    if settings.logo_filename:
+        logo_path = os.path.join(
+            current_app.static_folder, 'uploads', 'branding', settings.logo_filename
+        )
+        if os.path.exists(logo_path):
+            os.remove(logo_path)
+
+        settings.logo_filename = None
+        db.session.commit()
+        flash('Logo zostało usunięte.', 'success')
+
+    return redirect(url_for('admin.settings'))
+
+
+@admin_bp.route('/settings/reset', methods=['POST'])
+@login_required
+@admin_required
+def reset_settings():
+    """Reset all settings to defaults."""
+    settings = AppSettings.get_settings()
+
+    # Delete logo file if exists
+    if settings.logo_filename:
+        logo_path = os.path.join(
+            current_app.static_folder, 'uploads', 'branding', settings.logo_filename
+        )
+        if os.path.exists(logo_path):
+            os.remove(logo_path)
+
+    AppSettings.reset_to_defaults()
+    flash('Przywrócono domyślne ustawienia.', 'success')
+    return redirect(url_for('admin.settings'))
+
+
+# ===== DOWNLOAD LOGS =====
+
+@admin_bp.route('/download-logs')
+@login_required
+@admin_required
+@admin_limiter
+def download_logs():
+    """View file download audit logs."""
+    page = request.args.get('page', 1, type=int)
+    per_page = 50
+
+    # Filters
+    user_id = request.args.get('user_id', type=int)
+    file_id = request.args.get('file_id', type=int)
+    date_from = request.args.get('date_from')
+    date_to = request.args.get('date_to')
+
+    # Build query
+    query = FileDownload.query
+
+    if user_id:
+        query = query.filter(FileDownload.user_id == user_id)
+    if file_id:
+        query = query.filter(FileDownload.file_id == file_id)
+    if date_from:
+        try:
+            from_date = datetime.strptime(date_from, '%Y-%m-%d')
+            query = query.filter(FileDownload.downloaded_at >= from_date)
+        except ValueError:
+            pass
+    if date_to:
+        try:
+            to_date = datetime.strptime(date_to, '%Y-%m-%d')
+            to_date = to_date.replace(hour=23, minute=59, second=59)
+            query = query.filter(FileDownload.downloaded_at <= to_date)
+        except ValueError:
+            pass
+
+    # Order by most recent first
+    query = query.order_by(FileDownload.downloaded_at.desc())
+
+    # Paginate
+    downloads = query.paginate(page=page, per_page=per_page, error_out=False)
+
+    # Get all users and files for filter dropdowns
+    users = User.query.order_by(User.email).all()
+    files = File.query.order_by(File.filename).all()
+
+    # Calculate suspicious users (more than 5 downloads of same file in last hour)
+    from datetime import timedelta
+    suspicious_downloads = {}
+    recent_cutoff = datetime.utcnow() - timedelta(hours=1)
+
+    for download in downloads.items:
+        key = f"{download.user_id}:{download.file_id}"
+        if key not in suspicious_downloads:
+            count = FileDownload.query.filter(
+                FileDownload.user_id == download.user_id,
+                FileDownload.file_id == download.file_id,
+                FileDownload.downloaded_at > recent_cutoff
+            ).count()
+            suspicious_downloads[key] = count > 5
+
+    return render_template(
+        'admin/download_logs.html',
+        title='Historia pobrań',
+        downloads=downloads,
+        users=users,
+        files=files,
+        suspicious_downloads=suspicious_downloads,
+        filter_user_id=user_id,
+        filter_file_id=file_id,
+        filter_date_from=date_from,
+        filter_date_to=date_to
+    )
+
+
+@admin_bp.route('/download-logs/export')
+@login_required
+@admin_required
+def export_download_logs():
+    """Export download logs to CSV."""
+    import csv
+    from io import StringIO
+
+    # Get all downloads (with filters)
+    user_id = request.args.get('user_id', type=int)
+    file_id = request.args.get('file_id', type=int)
+    date_from = request.args.get('date_from')
+    date_to = request.args.get('date_to')
+
+    query = FileDownload.query
+
+    if user_id:
+        query = query.filter(FileDownload.user_id == user_id)
+    if file_id:
+        query = query.filter(FileDownload.file_id == file_id)
+    if date_from:
+        try:
+            from_date = datetime.strptime(date_from, '%Y-%m-%d')
+            query = query.filter(FileDownload.downloaded_at >= from_date)
+        except ValueError:
+            pass
+    if date_to:
+        try:
+            to_date = datetime.strptime(date_to, '%Y-%m-%d')
+            to_date = to_date.replace(hour=23, minute=59, second=59)
+            query = query.filter(FileDownload.downloaded_at <= to_date)
+        except ValueError:
+            pass
+
+    downloads = query.order_by(FileDownload.downloaded_at.desc()).all()
+
+    # Create CSV
+    output = StringIO()
+    writer = csv.writer(output)
+    writer.writerow(['ID Pobrania', 'Użytkownik', 'Plik', 'Data/Czas', 'Adres IP', 'User Agent'])
+
+    for download in downloads:
+        writer.writerow([
+            download.download_id,
+            download.user.email if download.user else 'N/A',
+            download.file.original_filename if download.file else 'N/A',
+            download.downloaded_at.strftime('%Y-%m-%d %H:%M:%S'),
+            download.ip_address or 'N/A',
+            download.user_agent or 'N/A'
+        ])
+
+    output.seek(0)
+
+    from flask import Response
+    return Response(
+        output.getvalue(),
+        mimetype='text/csv',
+        headers={'Content-Disposition': f'attachment; filename=download_logs_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'}
     )

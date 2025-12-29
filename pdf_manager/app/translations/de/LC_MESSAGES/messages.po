@@ -232,3 +232,13 @@ msgstr "Serverfehler"
 
 msgid "Wystąpił błąd. Spróbuj ponownie."
 msgstr "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+
+# Branding & Settings
+msgid "Ustawienia"
+msgstr "Einstellungen"
+
+msgid "Historia pobrań"
+msgstr "Download-Verlauf"
+
+msgid "Regulamin korzystania z plików"
+msgstr "Nutzungsbedingungen für Dateien"

@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+    .color-preview {
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        border: 1px solid #dee2e6;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .preview-button {
+        padding: 8px 16px;
+        border-radius: 4px;
+        color: white;
+        border: none;
+        cursor: default;
+    }
+    .preview-navbar {
+        height: 50px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        color: white;
+    }
+    .current-logo {
+        max-height: 60px;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 5px;
+        background: #f8f9fa;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ url_for('admin.dashboard') }}">
+                <i class="bi bi-speedometer2 me-1"></i> {{ _('Dashboard') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active">{{ _('Ustawienia') }}</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-palette me-2"></i>
+                    Branding aplikacji
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data" novalidate>
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-4">
+                        <label for="app_name" class="form-label">
+                            <i class="bi bi-type me-1"></i> Nazwa aplikacji
+                        </label>
+                        {{ form.app_name(class="form-control" + (" is-invalid" if form.app_name.errors else ""),
+                                         placeholder="PDF Manager") }}
+                        {% if form.app_name.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.app_name.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="form-text">Nazwa wyświetlana w navbar i tytule strony</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">
+                            <i class="bi bi-image me-1"></i> Logo (navbar)
+                        </label>
+
+                        {% if settings.logo_filename %}
+                        <div class="mb-2">
+                            <img src="{{ url_for('static', filename='uploads/branding/' + settings.logo_filename) }}"
+                                 alt="Current logo" class="current-logo">
+                            <form action="{{ url_for('admin.delete_logo') }}" method="POST" class="d-inline ms-2">
+                                {{ form.hidden_tag() }}
+                                <button type="submit" class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Usunąć logo?')">
+                                    <i class="bi bi-x-lg me-1"></i> Usuń logo
+                                </button>
+                            </form>
+                        </div>
+                        {% endif %}
+
+                        {{ form.logo(class="form-control" + (" is-invalid" if form.logo.errors else "")) }}
+                        {% if form.logo.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.logo.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="form-text">PNG, JPG lub SVG, max 2MB, zalecana szerokość: 200px</div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="primary_color" class="form-label">
+                                <i class="bi bi-brush me-1"></i> Kolor główny (przyciski)
+                            </label>
+                            <div class="input-group">
+                                <input type="color" class="form-control form-control-color" id="primary_color_picker"
+                                       value="{{ settings.primary_color or '#0d6efd' }}"
+                                       title="Wybierz kolor">
+                                {{ form.primary_color(class="form-control" + (" is-invalid" if form.primary_color.errors else ""),
+                                                      id="primary_color") }}
+                            </div>
+                            {% if form.primary_color.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.primary_color.errors %}{{ error }}{% endfor %}
+                            </div>
+                            {% endif %}
+                            <div class="mt-2">
+                                <span class="preview-button" id="preview_button" style="background-color: {{ settings.primary_color or '#0d6efd' }}">
+                                    Przykładowy przycisk
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="navbar_color" class="form-label">
+                                <i class="bi bi-menu-button-wide me-1"></i> Kolor navbar
+                            </label>
+                            <div class="input-group">
+                                <input type="color" class="form-control form-control-color" id="navbar_color_picker"
+                                       value="{{ settings.navbar_color or '#212529' }}"
+                                       title="Wybierz kolor">
+                                {{ form.navbar_color(class="form-control" + (" is-invalid" if form.navbar_color.errors else ""),
+                                                     id="navbar_color") }}
+                            </div>
+                            {% if form.navbar_color.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.navbar_color.errors %}{{ error }}{% endfor %}
+                            </div>
+                            {% endif %}
+                            <div class="mt-2">
+                                <div class="preview-navbar" id="preview_navbar" style="background-color: {{ settings.navbar_color or '#212529' }}">
+                                    <i class="bi bi-file-earmark-pdf me-2"></i> Podgląd navbar
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="form-check form-switch">
+                            {{ form.enable_custom_branding(class="form-check-input", id="enable_custom_branding") }}
+                            <label class="form-check-label" for="enable_custom_branding">
+                                <strong>Włącz niestandardowy branding</strong>
+                            </label>
+                        </div>
+                        <div class="form-text">
+                            Gdy włączone, aplikacja używa niestandardowego logo, nazwy i kolorów
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+                        {{ form.submit(class="btn btn-primary") }}
+                        <form action="{{ url_for('admin.reset_settings') }}" method="POST" class="d-inline">
+                            {{ form.hidden_tag() }}
+                            <button type="submit" class="btn btn-outline-secondary"
+                                    onclick="return confirm('Przywrócić domyślne ustawienia?')">
+                                <i class="bi bi-arrow-counterclockwise me-1"></i> Przywróć domyślne
+                            </button>
+                        </form>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="bi bi-info-circle me-2"></i> Informacje
+                </h6>
+            </div>
+            <div class="card-body">
+                <p class="small text-muted mb-2">
+                    <strong>Status:</strong>
+                    {% if settings.enable_custom_branding %}
+                    <span class="badge bg-success">Branding włączony</span>
+                    {% else %}
+                    <span class="badge bg-secondary">Domyślny</span>
+                    {% endif %}
+                </p>
+                <p class="small text-muted mb-2">
+                    <strong>Nazwa:</strong> {{ settings.app_name }}
+                </p>
+                <p class="small text-muted mb-2">
+                    <strong>Logo:</strong>
+                    {% if settings.logo_filename %}
+                    {{ settings.logo_filename }}
+                    {% else %}
+                    Brak
+                    {% endif %}
+                </p>
+                <p class="small text-muted mb-0">
+                    <strong>Ostatnia zmiana:</strong>
+                    {% if settings.updated_at %}
+                    {{ settings.updated_at.strftime('%Y-%m-%d %H:%M') }}
+                    {% else %}
+                    -
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="bi bi-lightbulb me-2"></i> Wskazówki
+                </h6>
+            </div>
+            <div class="card-body">
+                <ul class="small text-muted mb-0">
+                    <li class="mb-2">Logo powinno mieć przezroczyste tło (PNG)</li>
+                    <li class="mb-2">Zalecana szerokość logo: 150-200px</li>
+                    <li class="mb-2">Używaj kontrastowych kolorów dla lepszej czytelności</li>
+                    <li>Zmiany są widoczne natychmiast po zapisaniu</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Color picker sync
+    const primaryColorPicker = document.getElementById('primary_color_picker');
+    const primaryColorInput = document.getElementById('primary_color');
+    const previewButton = document.getElementById('preview_button');
+
+    const navbarColorPicker = document.getElementById('navbar_color_picker');
+    const navbarColorInput = document.getElementById('navbar_color');
+    const previewNavbar = document.getElementById('preview_navbar');
+
+    // Sync color picker with input
+    primaryColorPicker.addEventListener('input', function() {
+        primaryColorInput.value = this.value;
+        previewButton.style.backgroundColor = this.value;
+    });
+
+    primaryColorInput.addEventListener('input', function() {
+        if (/^#[0-9A-Fa-f]{6}$/.test(this.value)) {
+            primaryColorPicker.value = this.value;
+            previewButton.style.backgroundColor = this.value;
+        }
+    });
+
+    navbarColorPicker.addEventListener('input', function() {
+        navbarColorInput.value = this.value;
+        previewNavbar.style.backgroundColor = this.value;
+    });
+
+    navbarColorInput.addEventListener('input', function() {
+        if (/^#[0-9A-Fa-f]{6}$/.test(this.value)) {
+            navbarColorPicker.value = this.value;
+            previewNavbar.style.backgroundColor = this.value;
+        }
+    });
+</script>
+{% endblock %}

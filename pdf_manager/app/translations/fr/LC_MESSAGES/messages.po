@@ -232,3 +232,13 @@ msgstr "Erreur Serveur"
 
 msgid "Wystąpił błąd. Spróbuj ponownie."
 msgstr "Une erreur s'est produite. Veuillez réessayer."
+
+# Branding & Settings
+msgid "Ustawienia"
+msgstr "Paramètres"
+
+msgid "Historia pobrań"
+msgstr "Historique des téléchargements"
+
+msgid "Regulamin korzystania z plików"
+msgstr "Conditions d'utilisation des fichiers"

@@ -232,3 +232,13 @@ msgstr "Erro do Servidor"
 
 msgid "Wystąpił błąd. Spróbuj ponownie."
 msgstr "Ocorreu um erro. Tente novamente."
+
+# Branding & Settings
+msgid "Ustawienia"
+msgstr "Configurações"
+
+msgid "Historia pobrań"
+msgstr "Histórico de Downloads"
+
+msgid "Regulamin korzystania z plików"
+msgstr "Termos de Uso de Arquivos"

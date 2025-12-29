@@ -43,6 +43,9 @@ class User(UserMixin, db.Model):
     otp_enabled = db.Column(db.Boolean, default=False, nullable=False)
     backup_codes = db.Column(db.Text, nullable=True)  # JSON array of hashed codes
 
+    # Terms acceptance
+    terms_accepted_at = db.Column(db.DateTime, nullable=True)
+
     # Relationship to files through access table
     accessible_files = db.relationship(
         'File',
@@ -157,6 +160,14 @@ class User(UserMixin, db.Model):
     def requires_2fa_setup(self):
         """Check if admin user needs to set up 2FA."""
         return self.is_admin and not self.otp_enabled
+
+    def has_accepted_terms(self):
+        """Check if user has accepted terms of use."""
+        return self.terms_accepted_at is not None
+
+    def accept_terms(self):
+        """Mark terms as accepted."""
+        self.terms_accepted_at = datetime.utcnow()
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -529,3 +540,80 @@ def seed_email_templates():
             db.session.add(template)
 
     db.session.commit()
+
+
+class AppSettings(db.Model):
+    """Application branding and settings (singleton)."""
+    __tablename__ = 'app_settings'
+
+    id = db.Column(db.Integer, primary_key=True)
+    app_name = db.Column(db.String(50), default='PDF Manager', nullable=False)
+    logo_filename = db.Column(db.String(255), nullable=True)
+    primary_color = db.Column(db.String(7), default='#0d6efd', nullable=False)  # Bootstrap blue
+    navbar_color = db.Column(db.String(7), default='#212529', nullable=False)  # Bootstrap dark
+    enable_custom_branding = db.Column(db.Boolean, default=False, nullable=False)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    @staticmethod
+    def get_settings():
+        """Get the singleton settings instance, create if not exists."""
+        settings = AppSettings.query.first()
+        if not settings:
+            settings = AppSettings()
+            db.session.add(settings)
+            db.session.commit()
+        return settings
+
+    @staticmethod
+    def reset_to_defaults():
+        """Reset all settings to defaults."""
+        settings = AppSettings.get_settings()
+        settings.app_name = 'PDF Manager'
+        settings.logo_filename = None
+        settings.primary_color = '#0d6efd'
+        settings.navbar_color = '#212529'
+        settings.enable_custom_branding = False
+        db.session.commit()
+        return settings
+
+    def __repr__(self):
+        return f'<AppSettings {self.app_name}>'
+
+
+class FileDownload(db.Model):
+    """Audit log for file downloads with watermark tracking."""
+    __tablename__ = 'file_downloads'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    file_id = db.Column(db.Integer, db.ForeignKey('files.id', ondelete='CASCADE'), nullable=False)
+    download_id = db.Column(db.String(8), unique=True, nullable=False, index=True)  # UUID short
+    ip_address = db.Column(db.String(45), nullable=True)  # IPv6 can be up to 45 chars
+    user_agent = db.Column(db.String(512), nullable=True)
+    downloaded_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False, index=True)
+
+    # Relationships
+    user = db.relationship('User', backref=db.backref('downloads', lazy='dynamic'))
+    file = db.relationship('File', backref=db.backref('downloads', lazy='dynamic'))
+
+    @staticmethod
+    def get_user_download_count(user_id, file_id):
+        """Get number of times a user has downloaded a specific file."""
+        return FileDownload.query.filter_by(
+            user_id=user_id,
+            file_id=file_id
+        ).count()
+
+    @staticmethod
+    def get_recent_downloads(user_id, file_id, hours=1):
+        """Get downloads in the last N hours."""
+        from datetime import timedelta
+        cutoff = datetime.utcnow() - timedelta(hours=hours)
+        return FileDownload.query.filter(
+            FileDownload.user_id == user_id,
+            FileDownload.file_id == file_id,
+            FileDownload.downloaded_at > cutoff
+        ).count()
+
+    def __repr__(self):
+        return f'<FileDownload {self.download_id}>'

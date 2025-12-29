@@ -8,7 +8,7 @@ from flask_limiter.util import get_remote_address
 from flask_migrate import Migrate
 from flask_babel import Babel, gettext as _
 from config import Config
-from app.models import db, User, seed_email_templates
+from app.models import db, User, seed_email_templates, AppSettings
 from app.email import mail
 
 # Configure logging
@@ -92,10 +92,16 @@ def create_app(config_class=Config):
     # Context processor for templates
     @app.context_processor
     def utility_processor():
+        # Get app settings for branding
+        try:
+            settings = AppSettings.get_settings()
+        except:
+            settings = None
         return {
             'now': datetime.utcnow,
             'get_locale': get_locale,
-            'languages': app.config.get('LANGUAGES', {})
+            'languages': app.config.get('LANGUAGES', {}),
+            'app_settings': settings
         }
 
     # Enforce 2FA setup for admins

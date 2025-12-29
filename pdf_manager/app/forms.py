@@ -155,3 +155,50 @@ class BackupRestoreForm(FlaskForm):
         DataRequired(message='Potwierdzenie jest wymagane')
     ])
     submit = SubmitField('Przywróć backup')
+
+
+# ===== Branding Forms =====
+
+class AppSettingsForm(FlaskForm):
+    """Form for application branding settings."""
+    app_name = StringField('Nazwa aplikacji', validators=[
+        DataRequired(message='Nazwa jest wymagana'),
+        Length(min=3, max=50, message='Nazwa musi mieć 3-50 znaków')
+    ])
+    logo = FileField('Logo (PNG/JPG, max 2MB)', validators=[
+        FileAllowed(['png', 'jpg', 'jpeg', 'svg'], message='Dozwolone: PNG, JPG, SVG')
+    ])
+    primary_color = StringField('Kolor główny (przyciski)', validators=[
+        DataRequired(message='Kolor jest wymagany'),
+        Length(min=7, max=7, message='Format: #RRGGBB')
+    ])
+    navbar_color = StringField('Kolor navbar', validators=[
+        DataRequired(message='Kolor jest wymagany'),
+        Length(min=7, max=7, message='Format: #RRGGBB')
+    ])
+    enable_custom_branding = BooleanField('Włącz niestandardowy branding')
+    submit = SubmitField('Zapisz ustawienia')
+
+    def validate_primary_color(self, field):
+        """Validate hex color format."""
+        from app.utils import validate_hex_color
+        if not validate_hex_color(field.data):
+            raise ValidationError('Nieprawidłowy format koloru. Użyj #RRGGBB')
+
+    def validate_navbar_color(self, field):
+        """Validate hex color format."""
+        from app.utils import validate_hex_color
+        if not validate_hex_color(field.data):
+            raise ValidationError('Nieprawidłowy format koloru. Użyj #RRGGBB')
+
+
+# ===== Terms of Use Forms =====
+
+class TermsAcceptanceForm(FlaskForm):
+    """Form for accepting terms of use."""
+    accept_terms = BooleanField(
+        'Oświadczam, że pliki pobrane z systemu są wyłącznie do użytku osobistego '
+        'i zobowiązuję się nie rozpowszechniać ich bez autoryzacji.',
+        validators=[DataRequired(message='Musisz zaakceptować regulamin')]
+    )
+    submit = SubmitField('Akceptuję regulamin')
