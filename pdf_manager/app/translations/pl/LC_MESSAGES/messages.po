@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDF Manager 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 15:18+0000\n"
+"POT-Creation-Date: 2025-12-30 09:13+0000\n"
 "PO-Revision-Date: 2024-01-01 00:00+0000\n"
 "Last-Translator: \n"
 "Language: pl\n"
@@ -115,7 +115,8 @@ msgstr "Administracja"
 msgid "Zarządzaj dostępem"
 msgstr "Przyznaj dostęp"
 
-#: app/templates/admin/access_form.html:34 app/templates/admin/files.html:25
+#: app/templates/admin/access_form.html:34
+#: app/templates/admin/file_upload.html:49 app/templates/admin/files.html:25
 #: app/templates/main/file_view.html:23
 msgid "Wersja"
 msgstr ""
@@ -133,8 +134,8 @@ msgstr ""
 #: app/templates/admin/backup_restore.html:100
 #: app/templates/admin/change_password.html:65
 #: app/templates/admin/email_template_edit.html:63
-#: app/templates/admin/file_update.html:80
-#: app/templates/admin/file_upload.html:64 app/templates/admin/files.html:96
+#: app/templates/admin/file_update.html:93
+#: app/templates/admin/file_upload.html:78 app/templates/admin/files.html:96
 #: app/templates/admin/user_form.html:104 app/templates/admin/users.html:98
 #: app/templates/auth/disable_2fa.html:56 app/templates/auth/setup_2fa.html:92
 msgid "Anuluj"
@@ -142,7 +143,7 @@ msgstr "Anuluj"
 
 #: app/templates/admin/access_form.html:66
 #: app/templates/admin/email_templates.html:154
-#: app/templates/admin/file_upload.html:75
+#: app/templates/admin/file_upload.html:89
 #: app/templates/admin/settings.html:186
 msgid "Informacje"
 msgstr ""
@@ -927,10 +928,19 @@ msgid "Nowa wersja pliku PDF"
 msgstr "Nazwa pliku"
 
 #: app/templates/admin/file_update.html:65
+#, fuzzy
+msgid "Nowa wersja"
+msgstr "Nazwa pliku"
+
+#: app/templates/admin/file_update.html:73
+msgid "Np. 2, v2.1, 2024-12-30"
+msgstr ""
+
+#: app/templates/admin/file_update.html:78
 msgid "Opis zmian (opcjonalnie)"
 msgstr ""
 
-#: app/templates/admin/file_update.html:69
+#: app/templates/admin/file_update.html:82
 msgid "Co zostało zmienione w tej wersji..."
 msgstr ""
 
@@ -947,23 +957,27 @@ msgstr "Pliki"
 msgid "Maksymalny rozmiar pliku: 50 MB"
 msgstr ""
 
-#: app/templates/admin/file_upload.html:49
+#: app/templates/admin/file_upload.html:58
+msgid "Np. 1, v2.0, 2024-12-30"
+msgstr ""
+
+#: app/templates/admin/file_upload.html:63
 msgid "Opis (opcjonalnie)"
 msgstr ""
 
-#: app/templates/admin/file_upload.html:53
+#: app/templates/admin/file_upload.html:67
 msgid "Krótki opis zawartości pliku..."
 msgstr ""
 
-#: app/templates/admin/file_upload.html:78
+#: app/templates/admin/file_upload.html:92
 msgid "Po przesłaniu pliku, możesz przypisać dostęp użytkownikom."
 msgstr ""
 
-#: app/templates/admin/file_upload.html:79
+#: app/templates/admin/file_upload.html:93
 msgid "Aktualizacja pliku do nowej wersji automatycznie powiadomi użytkowników."
 msgstr ""
 
-#: app/templates/admin/file_upload.html:80
+#: app/templates/admin/file_upload.html:94
 msgid "Dozwolone są tylko pliki w formacie PDF."
 msgstr ""
 

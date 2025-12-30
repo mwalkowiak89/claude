@@ -180,7 +180,7 @@ class File(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(255), nullable=False)
     original_filename = db.Column(db.String(255), nullable=False)
-    version = db.Column(db.Integer, default=1, nullable=False)
+    version = db.Column(db.String(50), default='1', nullable=False)  # Manual version like "v1", "v2.1", "2024-12-30"
     upload_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     file_path = db.Column(db.String(512), nullable=False)
     description = db.Column(db.Text)
@@ -200,7 +200,7 @@ class File(db.Model):
         ).all()
 
     def __repr__(self):
-        return f'<File {self.filename} v{self.version}>'
+        return f'<File {self.filename} {self.version}>'
 
 
 class UserFileAccess(db.Model):

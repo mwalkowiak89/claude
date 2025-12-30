@@ -180,7 +180,7 @@ def upload_file():
         new_file = File(
             filename=original_filename,
             original_filename=original_filename,
-            version=1,
+            version=form.version.data or '1',
             file_path=unique_filename,
             description=form.description.data
         )
@@ -201,6 +201,22 @@ def update_file(file_id):
     existing_file = File.query.get_or_404(file_id)
     form = FileUpdateForm()
 
+    # Pre-populate version field with suggested next version
+    if not form.version.data:
+        # Try to increment numeric version, otherwise suggest same
+        try:
+            current_ver = existing_file.version.lstrip('v').lstrip('V')
+            if '.' in current_ver:
+                # Handle versions like "1.0" -> "1.1"
+                parts = current_ver.rsplit('.', 1)
+                next_minor = int(parts[-1]) + 1
+                form.version.data = parts[0] + '.' + str(next_minor)
+            else:
+                # Handle simple versions like "1" -> "2"
+                form.version.data = str(int(current_ver) + 1)
+        except (ValueError, AttributeError):
+            form.version.data = existing_file.version
+
     if form.validate_on_submit():
         file = form.file.data
 
@@ -214,7 +230,7 @@ def update_file(file_id):
         # Update database record
         old_path = os.path.join(current_app.config['UPLOAD_FOLDER'], existing_file.file_path)
         existing_file.file_path = unique_filename
-        existing_file.version += 1
+        existing_file.version = form.version.data
         existing_file.upload_date = datetime.utcnow()
         if form.description.data:
             existing_file.description = form.description.data

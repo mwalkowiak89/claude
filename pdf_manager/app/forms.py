@@ -50,6 +50,9 @@ class FileUploadForm(FlaskForm):
         FileRequired(message='Plik jest wymagany'),
         FileAllowed(['pdf'], message='Dozwolone tylko pliki PDF')
     ])
+    version = StringField('Wersja', validators=[
+        Length(max=50, message='Wersja może mieć maksymalnie 50 znaków')
+    ], default='1')
     description = TextAreaField('Opis', validators=[
         Length(max=500, message='Opis może mieć maksymalnie 500 znaków')
     ])
@@ -61,6 +64,10 @@ class FileUpdateForm(FlaskForm):
     file = FileField('Nowa wersja pliku PDF', validators=[
         FileRequired(message='Plik jest wymagany'),
         FileAllowed(['pdf'], message='Dozwolone tylko pliki PDF')
+    ])
+    version = StringField('Nowa wersja', validators=[
+        DataRequired(message='Wersja jest wymagana'),
+        Length(max=50, message='Wersja może mieć maksymalnie 50 znaków')
     ])
     description = TextAreaField('Opis zmian', validators=[
         Length(max=500, message='Opis może mieć maksymalnie 500 znaków')

@@ -45,6 +45,20 @@
                     </div>
 
                     <div class="mb-4">
+                        <label for="version" class="form-label">
+                            <i class="bi bi-tag me-1"></i> {{ _('Wersja') }}
+                        </label>
+                        {{ form.version(class="form-control" + (" is-invalid" if form.version.errors else ""),
+                                        placeholder="1") }}
+                        {% if form.version.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.version.errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+                        <small class="text-muted">{{ _('Np. 1, v2.0, 2024-12-30') }}</small>
+                    </div>
+
+                    <div class="mb-4">
                         <label for="description" class="form-label">
                             <i class="bi bi-text-left me-1"></i> {{ _('Opis (opcjonalnie)') }}
                         </label>
